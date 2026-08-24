@@ -8,14 +8,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
-      /* Mengembalikan warna gradasi biru cerah & segar seperti semula */
       background: radial-gradient(circle at center, #3a8ebd 0%, #246393 60%, #1e4f7c 100%);
       min-height: 100vh;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow-x: hidden;
     }
 
-    /* Overlay Peta Indonesia Futuristik (Cerah & User Friendly) */
     .futuristic-bg {
       position: absolute;
       inset: 0;
@@ -26,23 +23,11 @@
       background-repeat: repeat, no-repeat;
       background-position: center center;
       opacity: 0.22;
-      filter: invert(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+      filter: invert(1);
       pointer-events: none;
     }
 
-    /* Efek Partikel Cahaya Soft */
-    .glow-effect {
-      position: absolute;
-      width: 650px;
-      height: 650px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
-
-    /* Container Orbit Circle (TETAP DIPERBESAR) */
+    /* Portal Hub Styling */
     .portal-container {
       position: relative;
       width: 540px;
@@ -52,13 +37,12 @@
       align-items: center;
     }
 
-    /* Logo Pusat (TETAP DIPERBESAR) */
     .center-logo {
       width: 210px;
       height: 210px;
       border-radius: 50%;
       background: #ffffff;
-      box-shadow: 0 0 45px rgba(255, 255, 255, 0.8), inset 0 0 15px rgba(0,0,0,0.05);
+      box-shadow: 0 0 45px rgba(255, 255, 255, 0.8);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -69,19 +53,14 @@
       border: 4px solid #e2e8f0;
     }
 
-    .center-logo:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 60px rgba(255, 255, 255, 1), inset 0 0 20px rgba(58, 142, 189, 0.3);
-    }
+    .center-logo:hover { transform: scale(1.08); }
 
-    /* Menu Orbit (TETAP DIPERBESAR & JELAS) */
     .orbit-item {
       position: absolute;
       width: 140px;
       height: 140px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(8px);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
       display: flex;
       flex-direction: column;
@@ -96,83 +75,77 @@
       padding: 12px;
     }
 
-    .orbit-item:hover {
-      background: #ffffff;
-      transform: scale(1.18) !important;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-    }
-
-    /* Posisi Node Mengorbit */
     .portal-container.active .orbit-top { top: 0; opacity: 1; transform: scale(1); }
     .portal-container.active .orbit-left { left: 0; opacity: 1; transform: scale(1); }
     .portal-container.active .orbit-right { right: 0; opacity: 1; transform: scale(1); }
     .portal-container.active .orbit-bottom { bottom: -10px; opacity: 1; transform: scale(1); }
   </style>
 </head>
-<body class="relative text-white min-h-screen flex flex-col justify-between items-center">
+<body class="relative text-gray-800 min-h-screen flex flex-col justify-between">
 
   <div class="futuristic-bg"></div>
-  <div class="glow-effect"></div>
 
-  <!-- HEADER -->
-  <header class="text-center mt-6 z-10 px-4">
-    <h1 class="text-3xl md:text-5xl font-extrabold tracking-wide drop-shadow-md">
-      Selamat Datang di <span class="bg-white text-blue-900 px-4 py-1 rounded-xl shadow-2xl">ALL-I</span>
-    </h1>
-    <p class="text-base md:text-xl mt-3 font-light text-blue-100 tracking-wider">
-      Learning Hub for Indonesia Civil Servant
-    </p>
-    <div class="mt-2">
-      <span class="inline-block bg-blue-900/60 backdrop-blur-md text-white text-xs md:text-sm px-5 py-1.5 rounded-full border border-blue-300/30 shadow-lg">
-        <i class="fa-solid fa-building-columns mr-1.5 text-blue-200"></i> MOHAMMAD ALI NUR SIDIQ: Widyaiswara BPSDM Kementerian Dalam Negeri RI
-      </span>
-    </div>
-  </header>
+  <!-- LANDING PAGE VIEW (SEBELUM LOGIN) -->
+  <div id="landingView" class="min-h-screen flex flex-col justify-between items-center relative z-10">
+    <header class="text-center mt-6 px-4">
+      <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-wide drop-shadow-md">
+        Selamat Datang di <span class="bg-white text-blue-900 px-4 py-1 rounded-xl shadow-2xl">ALL-I</span>
+      </h1>
+      <p class="text-base md:text-xl mt-3 font-light text-blue-100 tracking-wider">
+        Learning Hub for Indonesia Civil Servant
+      </p>
+      <div class="mt-2">
+        <span class="inline-block bg-blue-900/60 backdrop-blur-md text-white text-xs md:text-sm px-5 py-1.5 rounded-full border border-blue-300/30">
+          <i class="fa-solid fa-building-columns mr-1.5 text-blue-200"></i> MOHAMMAD ALI NUR SIDIQ: WIDYAISWARA KEMENTERIAN DALAM NEGERI RI
+        </span>
+      </div>
+    </header>
 
-  <!-- LANDING HUB (PORTAL UTAMA DIPERBESAR) -->
-  <main id="landingView" class="my-auto z-10 py-4 flex justify-center items-center">
-    <div class="portal-container" id="portalContainer">
-      
-      <!-- Central Trigger Logo -->
-      <div class="center-logo" id="centerLogo">
-        <div class="w-16 h-16 bg-blue-700 text-white rounded-full flex items-center justify-center text-3xl font-bold mb-2 shadow-inner">
-          <i class="fa-solid fa-graduation-cap"></i>
+    <main class="my-auto py-4 flex justify-center items-center">
+      <div class="portal-container" id="portalContainer">
+        <div class="center-logo" id="centerLogo">
+          <div class="w-16 h-16 bg-blue-700 text-white rounded-full flex items-center justify-center text-3xl font-bold mb-2">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <span class="font-black text-blue-950 text-xl tracking-wider">ALL-I</span>
+          <span class="text-[10px] text-gray-500 font-bold tracking-widest mt-0.5">KEMENDAGRI</span>
         </div>
-        <span class="font-black text-blue-950 text-xl tracking-wider">ALL-I</span>
-        <span class="text-[10px] text-gray-500 font-bold tracking-widest mt-0.5">KEMENDAGRI</span>
+
+        <div onclick="openModal('loginModal')" class="orbit-item orbit-top border-4 border-red-500/80">
+          <i class="fa-solid fa-right-to-bracket text-red-600 text-3xl mb-1.5"></i>
+          <span class="text-xs font-bold text-gray-900 leading-tight">Login Portal</span>
+        </div>
+
+        <div onclick="openModal('loginModal')" class="orbit-item orbit-left border-4 border-blue-500/80">
+          <i class="fa-solid fa-book-open text-blue-600 text-3xl mb-1.5"></i>
+          <span class="text-xs font-bold text-gray-900 leading-tight">Bahan Ajar & Modul</span>
+        </div>
+
+        <div onclick="openModal('loginModal')" class="orbit-item orbit-right border-4 border-emerald-500/80">
+          <i class="fa-solid fa-comments text-emerald-600 text-3xl mb-1.5"></i>
+          <span class="text-xs font-bold text-gray-900 leading-tight">Layanan CBM</span>
+        </div>
+
+        <div onclick="openModal('loginModal')" class="orbit-item orbit-bottom border-4 border-purple-500/80">
+          <i class="fa-solid fa-robot text-purple-600 text-3xl mb-1.5"></i>
+          <span class="text-xs font-bold text-gray-900 leading-tight">AI Widyaiswara</span>
+        </div>
       </div>
+    </main>
 
-      <!-- Orbit 1: Login Portal -->
-      <div onclick="openModal('loginModal')" class="orbit-item orbit-top border-4 border-red-500/80">
-        <i class="fa-solid fa-right-to-bracket text-red-600 text-3xl mb-1.5"></i>
-        <span class="text-xs font-bold text-gray-900 leading-tight">Login Portal</span>
+    <footer class="mb-6 text-center px-4 w-full max-w-2xl mx-auto">
+      <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl py-3 px-6 shadow-xl">
+        <p class="text-xs md:text-sm font-medium italic text-blue-100">
+          "Bersama ASN Membangun Indonesia yang Lebih Maju, Adaptif, dan Ber-AKHLAK."
+        </p>
       </div>
+    </footer>
+  </div>
 
-      <!-- Orbit 2: Bahan Ajar -->
-      <div onclick="alert('Silakan login terlebih dahulu untuk mengakses Bahan Ajar')" class="orbit-item orbit-left border-4 border-blue-500/80">
-        <i class="fa-solid fa-book-open text-blue-600 text-3xl mb-1.5"></i>
-        <span class="text-xs font-bold text-gray-900 leading-tight">Bahan Ajar & Modul</span>
-      </div>
-
-      <!-- Orbit 3: Layanan CBM -->
-      <div onclick="alert('Silakan login terlebih dahulu untuk mengakses Layanan CBM')" class="orbit-item orbit-right border-4 border-emerald-500/80">
-        <i class="fa-solid fa-comments text-emerald-600 text-3xl mb-1.5"></i>
-        <span class="text-xs font-bold text-gray-900 leading-tight">Layanan CBM</span>
-      </div>
-
-      <!-- Orbit 4: AI Widyaiswara -->
-      <div onclick="alert('Silakan login terlebih dahulu untuk menggunakan AI Assistant')" class="orbit-item orbit-bottom border-4 border-purple-500/80">
-        <i class="fa-solid fa-robot text-purple-600 text-3xl mb-1.5"></i>
-        <span class="text-xs font-bold text-gray-900 leading-tight">AI Widyaiswara</span>
-      </div>
-
-    </div>
-  </main>
-
-  <!-- MODAL LOGIN (MYASN BKN STYLE) -->
+  <!-- MODAL LOGIN -->
   <div id="loginModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center px-4">
-    <div class="bg-white text-gray-800 rounded-2xl max-w-md w-full p-7 shadow-2xl relative border border-gray-100">
-      <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition">
+    <div class="bg-white text-gray-800 rounded-2xl max-w-md w-full p-7 shadow-2xl relative">
+      <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
         <i class="fa-solid fa-xmark text-2xl"></i>
       </button>
 
@@ -180,19 +153,19 @@
         <div class="w-14 h-14 bg-blue-900 text-white rounded-full flex items-center justify-center mx-auto mb-3 text-2xl font-bold shadow-md">
           <i class="fa-solid fa-user-lock"></i>
         </div>
-        <h2 class="text-2xl font-black text-blue-950 tracking-tight">Login Portal ALL-I</h2>
+        <h2 class="text-2xl font-black text-blue-950">Login Portal ALL-I</h2>
         <p class="text-xs text-gray-500 mt-1">Gunakan NIP dan Password Anda yang terdaftar</p>
       </div>
 
       <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="space-y-4">
         <div>
           <label class="block text-xs font-bold text-gray-700 mb-1">NIP (Nomor Induk Pegawai)</label>
-          <input type="text" id="loginNip" required placeholder="Masukkan NIP Anda" class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none transition">
+          <input type="text" id="loginNip" required placeholder="Masukkan NIP Anda" class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none">
         </div>
 
         <div>
           <label class="block text-xs font-bold text-gray-700 mb-1">Password</label>
-          <input type="password" id="loginPassword" required placeholder="Masukkan Password" class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none transition">
+          <input type="password" id="loginPassword" required placeholder="Masukkan Password" class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none">
         </div>
 
         <button type="submit" id="btnLogin" class="w-full bg-blue-900 hover:bg-blue-950 text-white font-bold py-3 rounded-lg shadow-lg text-sm transition-all flex justify-center items-center gap-2">
@@ -202,30 +175,186 @@
     </div>
   </div>
 
-  <!-- FOOTER BANNER -->
-  <footer class="mb-6 z-10 text-center px-4 w-full max-w-2xl mx-auto">
-    <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl py-3 px-6 shadow-xl">
-      <p class="text-xs md:text-sm font-medium italic text-blue-100">
-        "Bersama ASN Membangun Indonesia yang Lebih Maju, Adaptif, dan Ber-AKHLAK."
-      </p>
+  <!-- DASHBOARD VIEW (SETELAH LOGIN SUKSES) -->
+  <div id="dashboardView" class="hidden min-h-screen bg-gray-100 flex relative z-20">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-blue-950 text-white flex flex-col justify-between p-4 shadow-xl">
+      <div>
+        <div class="flex items-center gap-3 px-2 py-4 border-b border-blue-800">
+          <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center font-bold text-lg">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <div>
+            <h2 class="font-bold text-base tracking-wider">ALL-I HUB</h2>
+            <p class="text-[10px] text-blue-300">Widyaiswara Kemendagri</p>
+          </div>
+        </div>
+
+        <nav class="mt-6 space-y-1 text-sm">
+          <button onclick="switchMenu('dashboard')" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-900 text-left transition font-medium">
+            <i class="fa-solid fa-chart-line text-blue-400"></i> Executive Summary
+          </button>
+          <button onclick="switchMenu('materials')" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-900 text-left transition font-medium">
+            <i class="fa-solid fa-folder-open text-amber-400"></i> Repositori Bahan Ajar
+          </button>
+          <button onclick="switchMenu('sharing')" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-900 text-left transition font-medium">
+            <i class="fa-solid fa-cloud-arrow-up text-emerald-400"></i> Sharing Bahan Ajar
+          </button>
+          <button onclick="switchMenu('cbm')" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-900 text-left transition font-medium">
+            <i class="fa-solid fa-calendar-check text-purple-400"></i> Layanan CBM
+          </button>
+          <button onclick="switchMenu('feedback')" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-900 text-left transition font-medium">
+            <i class="fa-solid fa-comments text-rose-400"></i> Diskusi & Alumni
+          </button>
+        </nav>
+      </div>
+
+      <div class="border-t border-blue-800 pt-4">
+        <button onclick="handleLogout()" class="w-full flex items-center justify-center gap-2 bg-red-600/80 hover:bg-red-700 text-white py-2 rounded-lg text-xs font-bold transition">
+          <i class="fa-solid fa-right-from-bracket"></i> Keluar (Logout)
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col overflow-y-auto h-screen">
+      <!-- Top Header -->
+      <header class="bg-white shadow-sm px-8 py-4 flex justify-between items-center border-b">
+        <div>
+          <h1 id="menuTitle" class="text-xl font-bold text-gray-800">Executive Summary Profil</h1>
+          <p class="text-xs text-gray-500">Selamat datang di Platform Kediklatan Widyaiswara</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-right">
+            <p id="userName" class="text-sm font-bold text-gray-800">Mohammad Ali</p>
+            <p id="userRole" class="text-xs text-blue-600 font-semibold">Widyaiswara Ahli</p>
+          </div>
+          <div class="w-10 h-10 bg-blue-900 text-white rounded-full flex items-center justify-center font-bold">
+            <i class="fa-solid fa-user-shield"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dynamic Content Sections -->
+      <div class="p-8">
+        
+        <!-- SECTION 1: DASHBOARD EXECUTIVE SUMMARY -->
+        <section id="sec-dashboard" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+              <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-clock"></i></div>
+              <div><p class="text-xs text-gray-500 font-medium">Total Jam Pelajaran</p><h3 class="text-2xl font-bold text-gray-800">1,240 JP</h3></div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+              <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-users"></i></div>
+              <div><p class="text-xs text-gray-500 font-medium">Alumni Bimbingan</p><h3 class="text-2xl font-bold text-gray-800">850 ASN</h3></div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+              <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-handshake"></i></div>
+              <div><p class="text-xs text-gray-500 font-medium">Sesi CBM Selesai</p><h3 class="text-2xl font-bold text-gray-800">142 Sesi</h3></div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+              <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-star"></i></div>
+              <div><p class="text-xs text-gray-500 font-medium">Rating Kepuasan</p><h3 class="text-2xl font-bold text-gray-800">4.95 / 5.0</h3></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 2: REPOSITORI BAHAN AJAR -->
+        <section id="sec-materials" class="hidden bg-white rounded-2xl p-6 shadow-sm border">
+          <h3 class="text-lg font-bold text-gray-800 mb-4">Unduh Modul & Bahan Ajar Widyaiswara</h3>
+          <p class="text-xs text-gray-500 mb-6">Materi resmi kediklatan terintegrasi Google Drive.</p>
+          <div id="materialsList" class="space-y-3">
+            <p class="text-sm text-gray-400 italic">Memuat daftar bahan ajar...</p>
+          </div>
+        </section>
+
+        <!-- SECTION 3: SHARING BAHAN AJAR USER -->
+        <section id="sec-sharing" class="hidden bg-white rounded-2xl p-6 shadow-sm border">
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Sharing Bahan Ajar dari Peserta</h3>
+          <p class="text-xs text-gray-500 mb-6">Unggah draf atau referensi materi Anda langsung ke Google Drive Widyaiswara.</p>
+          
+          <form onsubmit="handleUserUploadSubmit(event)" class="max-w-xl space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Judul Dokumen/Materi</label>
+              <input type="text" id="uploadTitle" required class="w-full px-4 py-2 text-sm border rounded-lg">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Deskripsi Ringkas</label>
+              <textarea id="uploadDesc" rows="3" required class="w-full px-4 py-2 text-sm border rounded-lg"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Pilih File (PDF, PPT, DOCX)</label>
+              <input type="file" id="uploadFile" required class="w-full text-sm border p-2 rounded-lg">
+            </div>
+            <button type="submit" id="btnUpload" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-lg text-sm shadow">
+              Unggah File Sekarang
+            </button>
+          </form>
+        </section>
+
+        <!-- SECTION 4: LAYANAN CBM -->
+        <section id="sec-cbm" class="hidden bg-white rounded-2xl p-6 shadow-sm border">
+          <h3 class="text-lg font-bold text-gray-800 mb-4">Reservasi Sesi Coaching, Mentoring & Konsultasi</h3>
+          <p class="text-xs text-gray-500 mb-6">Ajukan konsultasi aktualisasi atau aksi perubahan Anda.</p>
+          <p class="text-sm text-gray-600">Formulir booking terintegrasi langsung ke tabel Google Sheets Widyaiswara.</p>
+        </section>
+
+        <!-- SECTION 5: DISKUSI ALUMNI -->
+        <section id="sec-feedback" class="hidden bg-white rounded-2xl p-6 shadow-sm border">
+          <h3 class="text-lg font-bold text-gray-800 mb-4">Ruang Ulasan & Feedback Alumni</h3>
+          <p class="text-xs text-gray-500 mb-6">Testimoni dan jejaring alumni diklat.</p>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- FLOATING CHATBOT WIDGET -->
+    <div class="fixed bottom-6 right-6 z-50">
+      <button onclick="toggleChatbot()" class="w-14 h-14 bg-purple-600 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl hover:bg-purple-700 transition">
+        <i class="fa-solid fa-robot"></i>
+      </button>
+
+      <div id="chatbotBox" class="hidden fixed bottom-24 right-6 w-96 bg-white rounded-2xl shadow-2xl border flex flex-col h-[480px] overflow-hidden">
+        <div class="bg-purple-900 text-white p-4 flex justify-between items-center">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-robot text-purple-300"></i>
+            <span class="font-bold text-sm">ALL-I Assistant (Widyaiswara AI)</span>
+          </div>
+          <button onclick="toggleChatbot()" class="text-purple-200 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+        </div>
+
+        <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs">
+          <div class="bg-purple-50 text-purple-900 p-3 rounded-xl max-w-[85%] border border-purple-100">
+            Halo! Saya **ALL-I Assistant**. Ada yang bisa saya bantu terkait regulasi ASN, materi diklat, atau konsultasi aktualisasi?
+          </div>
+        </div>
+
+        <div class="p-3 border-t bg-gray-50 flex gap-2">
+          <input type="text" id="chatInput" placeholder="Ketik pertanyaan Anda..." class="flex-1 px-3 py-2 text-xs border rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-600">
+          <button onclick="sendChatMessage()" class="bg-purple-700 text-white px-3 py-2 rounded-lg text-xs font-bold hover:bg-purple-800">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
     </div>
-  </footer>
+  </div>
 
   <script>
     // MASUKKAN URL WEB APP APPS SCRIPT ANDA DI SINI
     const API_URL = "https://script.google.com/macros/s/AKfycbwmSzT7Q4eW_z65IHHYlTPDL6osCOhFdj2BxJ9PAWy6LzjzDeFIkSkVnzREwFWiqIGX/exec";
 
-    // Portal Hover Interaction
     const portalContainer = document.getElementById('portalContainer');
     const centerLogo = document.getElementById('centerLogo');
-
-    centerLogo.addEventListener('mouseenter', () => portalContainer.classList.add('active'));
-    portalContainer.addEventListener('mouseleave', () => portalContainer.classList.remove('active'));
+    if (centerLogo) {
+      centerLogo.addEventListener('mouseenter', () => portalContainer.classList.add('active'));
+      portalContainer.addEventListener('mouseleave', () => portalContainer.classList.remove('active'));
+    }
 
     function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
     function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-    // Handle Login Submit to Apps Script Backend
+    // AUTHENTICATION LOGIC
     async function handleLoginSubmit(e) {
       e.preventDefault();
       const nip = document.getElementById('loginNip').value;
@@ -248,9 +377,9 @@
         const result = await response.json();
 
         if (result.status === "success") {
-          alert(`Selamat Datang, ${result.user.nama}!`);
           localStorage.setItem("user_all_i", JSON.stringify(result.user));
           closeModal('loginModal');
+          initDashboard(result.user);
         } else {
           alert(result.message || "Login gagal, periksa NIP dan Password Anda.");
         }
@@ -261,6 +390,162 @@
         btnLogin.innerHTML = `<span>Masuk Aplikasi</span>`;
       }
     }
+
+    function initDashboard(user) {
+      document.getElementById('landingView').classList.add('hidden');
+      document.getElementById('dashboardView').classList.remove('hidden');
+      document.getElementById('userName').innerText = user.nama || "User ALL-I";
+      document.getElementById('userRole').innerText = user.instansi || "ASN Kemendagri";
+      fetchMaterials();
+    }
+
+    function handleLogout() {
+      localStorage.removeItem("user_all_i");
+      location.reload();
+    }
+
+    // NAVIGATION SYSTEM
+    function switchMenu(menuKey) {
+      const sections = ['dashboard', 'materials', 'sharing', 'cbm', 'feedback'];
+      const titles = {
+        dashboard: "Executive Summary Profil",
+        materials: "Repositori Bahan Ajar & Modul",
+        sharing: "Sharing Bahan Ajar Pengguna",
+        cbm: "Layanan CBM (Coaching, Mentoring, Konsultasi)",
+        feedback: "Ruang Diskusi & Alumni"
+      };
+
+      sections.forEach(s => {
+        const el = document.getElementById(`sec-${s}`);
+        if (el) el.classList.add('hidden');
+      });
+
+      document.getElementById(`sec-${menuKey}`).classList.remove('hidden');
+      document.getElementById('menuTitle').innerText = titles[menuKey];
+    }
+
+    // FETCH MATERIALS FROM GOOGLE SHEETS VIA GAS
+    async function fetchMaterials() {
+      const listContainer = document.getElementById('materialsList');
+      try {
+        const res = await fetch(`${API_URL}?action=getMaterials`);
+        const json = await res.json();
+        
+        if (json.status === "success" && json.data.length > 0) {
+          listContainer.innerHTML = json.data.map(m => `
+            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl border">
+              <div>
+                <h4 class="font-bold text-sm text-gray-800">${m.Judul}</h4>
+                <p class="text-xs text-gray-500">${m.Kategori} • ${m.Deskripsi}</p>
+              </div>
+              <a href="${m.File_URL}" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2 rounded-lg">
+                <i class="fa-solid fa-download mr-1"></i> Unduh
+              </a>
+            </div>
+          `).join('');
+        } else {
+          listContainer.innerHTML = `<p class="text-xs text-gray-400 italic">Belum ada bahan ajar yang diunggah.</p>`;
+        }
+      } catch (err) {
+        listContainer.innerHTML = `<p class="text-xs text-red-400">Gagal memuat bahan ajar.</p>`;
+      }
+    }
+
+    // USER UPLOAD MATERIAL TO GOOGLE DRIVE
+    async function handleUserUploadSubmit(e) {
+      e.preventDefault();
+      const user = JSON.parse(localStorage.getItem("user_all_i") || "{}");
+      const title = document.getElementById('uploadTitle').value;
+      const desc = document.getElementById('uploadDesc').value;
+      const fileInput = document.getElementById('uploadFile').files[0];
+      const btn = document.getElementById('btnUpload');
+
+      if (!fileInput) return;
+
+      btn.disabled = true;
+      btn.innerText = "Mengunggah file...";
+
+      const reader = new FileReader();
+      reader.onload = async function() {
+        const base64 = reader.result.split(',')[1];
+        const payload = {
+          action: "uploadSharedMaterial",
+          judul: title,
+          deskripsi: desc,
+          namaPengirim: user.nama || "Anonim",
+          nip: user.nip || "-",
+          fileName: fileInput.name,
+          mimeType: fileInput.type,
+          fileBase64: base64
+        };
+
+        try {
+          const res = await fetch(API_URL, { method: "POST", body: JSON.stringify(payload) });
+          const json = await res.json();
+          if (json.status === "success") {
+            alert("Bahan ajar berhasil diunggah ke Google Drive Widyaiswara!");
+            document.getElementById('uploadTitle').value = "";
+            document.getElementById('uploadDesc').value = "";
+            document.getElementById('uploadFile').value = "";
+          } else {
+            alert("Gagal mengunggah file.");
+          }
+        } catch (err) {
+          alert("Terjadi kesalahan server.");
+        } finally {
+          btn.disabled = false;
+          btn.innerText = "Unggah File Sekarang";
+        }
+      };
+      reader.readAsDataURL(fileInput);
+    }
+
+    // FLOATING CHATBOT AI LOGIC
+    function toggleChatbot() {
+      document.getElementById('chatbotBox').classList.toggle('hidden');
+    }
+
+    async function sendChatMessage() {
+      const input = document.getElementById('chatInput');
+      const container = document.getElementById('chatMessages');
+      const prompt = input.value.trim();
+      if (!prompt) return;
+
+      container.innerHTML += `<div class="bg-blue-600 text-white p-3 rounded-xl max-w-[85%] ml-auto">${prompt}</div>`;
+      input.value = "";
+      container.scrollTop = container.scrollHeight;
+
+      const loadingId = "load-" + Date.now();
+      container.innerHTML += `<div id="${loadingId}" class="bg-gray-100 text-gray-500 p-3 rounded-xl max-w-[85%]"><i class="fa-solid fa-spinner animate-spin"></i> Mengetik...</div>`;
+      container.scrollTop = container.scrollHeight;
+
+      try {
+        const res = await fetch(API_URL, {
+          method: "POST",
+          body: JSON.stringify({ action: "askGeminiAI", prompt: prompt })
+        });
+        const json = await res.json();
+        document.getElementById(loadingId).remove();
+
+        if (json.status === "success") {
+          container.innerHTML += `<div class="bg-purple-50 text-purple-900 p-3 rounded-xl max-w-[85%] border border-purple-100">${json.reply}</div>`;
+        } else {
+          container.innerHTML += `<div class="bg-red-50 text-red-600 p-3 rounded-xl max-w-[85%]">${json.message || "Gagal mendapatkan respon AI."}</div>`;
+        }
+      } catch (err) {
+        document.getElementById(loadingId).remove();
+        container.innerHTML += `<div class="bg-red-50 text-red-600 p-3 rounded-xl max-w-[85%]">Kesalahan koneksi AI.</div>`;
+      }
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // Auto Check Login Status on Load
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedUser = localStorage.getItem("user_all_i");
+      if (savedUser) {
+        initDashboard(JSON.parse(savedUser));
+      }
+    });
   </script>
 </body>
 </html>
