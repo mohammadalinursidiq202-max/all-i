@@ -8,40 +8,41 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
-      background: radial-gradient(circle at center, #1e5799 0%, #1a365d 60%, #0f172a 100%);
+      /* Mengembalikan warna gradasi biru cerah & segar seperti semula */
+      background: radial-gradient(circle at center, #3a8ebd 0%, #246393 60%, #1e4f7c 100%);
       min-height: 100vh;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       overflow-x: hidden;
     }
 
-    /* Overlay Peta Indonesia Futuristik (Digital Grid Overlay) */
+    /* Overlay Peta Indonesia Futuristik (Cerah & User Friendly) */
     .futuristic-bg {
       position: absolute;
       inset: 0;
       background-image: 
-        radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
         url('https://upload.wikimedia.org/wikipedia/commons/a/a7/Indonesia_location_map.svg');
-      background-size: 40px 40px, contain;
+      background-size: 35px 35px, contain;
       background-repeat: repeat, no-repeat;
       background-position: center center;
-      opacity: 0.2;
-      filter: invert(1) drop-shadow(0 0 12px rgba(56, 189, 248, 0.5));
+      opacity: 0.22;
+      filter: invert(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
       pointer-events: none;
     }
 
-    /* Efek Partikel Cahaya Futuristik */
+    /* Efek Partikel Cahaya Soft */
     .glow-effect {
       position: absolute;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
     }
 
-    /* Container Orbit Circle (DIPERBESAR) */
+    /* Container Orbit Circle (TETAP DIPERBESAR) */
     .portal-container {
       position: relative;
       width: 540px;
@@ -51,13 +52,13 @@
       align-items: center;
     }
 
-    /* Logo Pusat (DIPERBESAR) */
+    /* Logo Pusat (TETAP DIPERBESAR) */
     .center-logo {
       width: 210px;
       height: 210px;
       border-radius: 50%;
       background: #ffffff;
-      box-shadow: 0 0 40px rgba(56, 189, 248, 0.6), inset 0 0 15px rgba(0,0,0,0.05);
+      box-shadow: 0 0 45px rgba(255, 255, 255, 0.8), inset 0 0 15px rgba(0,0,0,0.05);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -70,10 +71,10 @@
 
     .center-logo:hover {
       transform: scale(1.08);
-      box-shadow: 0 0 55px rgba(255, 255, 255, 0.9), inset 0 0 20px rgba(56, 189, 248, 0.2);
+      box-shadow: 0 0 60px rgba(255, 255, 255, 1), inset 0 0 20px rgba(58, 142, 189, 0.3);
     }
 
-    /* Menu Orbit (DIPERBESAR & TULISAN LEBIH JELAS) */
+    /* Menu Orbit (TETAP DIPERBESAR & JELAS) */
     .orbit-item {
       position: absolute;
       width: 140px;
@@ -81,7 +82,7 @@
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(8px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -98,10 +99,10 @@
     .orbit-item:hover {
       background: #ffffff;
       transform: scale(1.18) !important;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
     }
 
-    /* Posisi Node Mengorbit (Jarak diperlebar pas proporsi) */
+    /* Posisi Node Mengorbit */
     .portal-container.active .orbit-top { top: 0; opacity: 1; transform: scale(1); }
     .portal-container.active .orbit-left { left: 0; opacity: 1; transform: scale(1); }
     .portal-container.active .orbit-right { right: 0; opacity: 1; transform: scale(1); }
@@ -116,14 +117,14 @@
   <!-- HEADER -->
   <header class="text-center mt-6 z-10 px-4">
     <h1 class="text-3xl md:text-5xl font-extrabold tracking-wide drop-shadow-md">
-      Selamat Datang di <span class="bg-white text-blue-950 px-4 py-1 rounded-xl shadow-2xl">ALL-I</span>
+      Selamat Datang di <span class="bg-white text-blue-900 px-4 py-1 rounded-xl shadow-2xl">ALL-I</span>
     </h1>
     <p class="text-base md:text-xl mt-3 font-light text-blue-100 tracking-wider">
       Learning Hub for Indonesia Civil Servant
     </p>
     <div class="mt-2">
-      <span class="inline-block bg-blue-950/70 backdrop-blur-md text-blue-200 text-xs md:text-sm px-5 py-1.5 rounded-full border border-blue-400/30 shadow-lg">
-        <i class="fa-solid fa-building-columns mr-1.5 text-blue-400"></i> MOHAMMAD ALI NUR SIDIQ: Widyaiswara BPSDM Kementerian Dalam Negeri RI
+      <span class="inline-block bg-blue-900/60 backdrop-blur-md text-white text-xs md:text-sm px-5 py-1.5 rounded-full border border-blue-300/30 shadow-lg">
+        <i class="fa-solid fa-building-columns mr-1.5 text-blue-200"></i> MOHAMMAD ALI NUR SIDIQ: Widyaiswara BPSDM Kementerian Dalam Negeri RI
       </span>
     </div>
   </header>
@@ -169,7 +170,7 @@
   </main>
 
   <!-- MODAL LOGIN (MYASN BKN STYLE) -->
-  <div id="loginModal" class="hidden fixed inset-0 bg-black/65 backdrop-blur-md z-50 flex items-center justify-center px-4">
+  <div id="loginModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center px-4">
     <div class="bg-white text-gray-800 rounded-2xl max-w-md w-full p-7 shadow-2xl relative border border-gray-100">
       <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition">
         <i class="fa-solid fa-xmark text-2xl"></i>
