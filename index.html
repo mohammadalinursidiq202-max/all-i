@@ -8,58 +8,80 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
-      background: radial-gradient(circle at center, #3a8ebd 0%, #1e4f7c 100%);
+      background: radial-gradient(circle at center, #1e5799 0%, #1a365d 60%, #0f172a 100%);
       min-height: 100vh;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    .map-bg {
-      background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a7/Indonesia_location_map.svg');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      opacity: 0.15;
-      filter: invert(1);
+      overflow-x: hidden;
     }
 
-    /* Portal Hub Animations */
+    /* Overlay Peta Indonesia Futuristik (Digital Grid Overlay) */
+    .futuristic-bg {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        url('https://upload.wikimedia.org/wikipedia/commons/a/a7/Indonesia_location_map.svg');
+      background-size: 40px 40px, contain;
+      background-repeat: repeat, no-repeat;
+      background-position: center center;
+      opacity: 0.2;
+      filter: invert(1) drop-shadow(0 0 12px rgba(56, 189, 248, 0.5));
+      pointer-events: none;
+    }
+
+    /* Efek Partikel Cahaya Futuristik */
+    .glow-effect {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    /* Container Orbit Circle (DIPERBESAR) */
     .portal-container {
       position: relative;
-      width: 420px;
-      height: 420px;
+      width: 540px;
+      height: 540px;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
+    /* Logo Pusat (DIPERBESAR) */
     .center-logo {
-      width: 160px;
-      height: 160px;
+      width: 210px;
+      height: 210px;
       border-radius: 50%;
       background: #ffffff;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 40px rgba(56, 189, 248, 0.6), inset 0 0 15px rgba(0,0,0,0.05);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       cursor: pointer;
       z-index: 10;
-      transition: all 0.4s ease;
-      border: 3px solid #e2e8f0;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 4px solid #e2e8f0;
     }
 
     .center-logo:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 35px rgba(255, 255, 255, 0.9);
+      transform: scale(1.08);
+      box-shadow: 0 0 55px rgba(255, 255, 255, 0.9), inset 0 0 20px rgba(56, 189, 248, 0.2);
     }
 
+    /* Menu Orbit (DIPERBESAR & TULISAN LEBIH JELAS) */
     .orbit-item {
       position: absolute;
-      width: 105px;
-      height: 105px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -67,114 +89,122 @@
       text-align: center;
       opacity: 0;
       transform: scale(0);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       cursor: pointer;
       z-index: 5;
-      padding: 6px;
+      padding: 12px;
     }
 
     .orbit-item:hover {
       background: #ffffff;
-      transform: scale(1.15) !important;
+      transform: scale(1.18) !important;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.35);
     }
 
+    /* Posisi Node Mengorbit (Jarak diperlebar pas proporsi) */
     .portal-container.active .orbit-top { top: 0; opacity: 1; transform: scale(1); }
     .portal-container.active .orbit-left { left: 0; opacity: 1; transform: scale(1); }
     .portal-container.active .orbit-right { right: 0; opacity: 1; transform: scale(1); }
     .portal-container.active .orbit-bottom { bottom: -10px; opacity: 1; transform: scale(1); }
   </style>
 </head>
-<body class="relative text-white min-h-screen flex flex-col justify-between overflow-x-hidden">
+<body class="relative text-white min-h-screen flex flex-col justify-between items-center">
 
-  <div class="absolute inset-0 map-bg pointer-events-none"></div>
+  <div class="futuristic-bg"></div>
+  <div class="glow-effect"></div>
 
   <!-- HEADER -->
-  <header class="text-center mt-8 z-10 px-4">
-    <h1 class="text-3xl md:text-5xl font-bold tracking-wide">
-      Selamat Datang di <span class="bg-white text-blue-900 px-3 py-1 rounded-md shadow-lg">ALL-I</span>
+  <header class="text-center mt-6 z-10 px-4">
+    <h1 class="text-3xl md:text-5xl font-extrabold tracking-wide drop-shadow-md">
+      Selamat Datang di <span class="bg-white text-blue-950 px-4 py-1 rounded-xl shadow-2xl">ALL-I</span>
     </h1>
-    <p class="text-base md:text-xl mt-2 font-light text-blue-100">
+    <p class="text-base md:text-xl mt-3 font-light text-blue-100 tracking-wider">
       Learning Hub for Indonesia Civil Servant
     </p>
     <div class="mt-2">
-      <span class="inline-block bg-blue-900/60 backdrop-blur-md text-white text-xs md:text-sm px-4 py-1 rounded-full border border-blue-300/30">
-        BPSDM Kementerian Dalam Negeri RI
+      <span class="inline-block bg-blue-950/70 backdrop-blur-md text-blue-200 text-xs md:text-sm px-5 py-1.5 rounded-full border border-blue-400/30 shadow-lg">
+        <i class="fa-solid fa-building-columns mr-1.5 text-blue-400"></i> MOHAMMAD ALI NUR SIDIQ: Widyaiswara BPSDM Kementerian Dalam Negeri RI
       </span>
     </div>
   </header>
 
-  <!-- LANDING HUB (PORTAL UTAMA) -->
-  <main id="landingView" class="my-auto z-10 py-6 flex justify-center items-center">
+  <!-- LANDING HUB (PORTAL UTAMA DIPERBESAR) -->
+  <main id="landingView" class="my-auto z-10 py-4 flex justify-center items-center">
     <div class="portal-container" id="portalContainer">
       
+      <!-- Central Trigger Logo -->
       <div class="center-logo" id="centerLogo">
-        <div class="w-12 h-12 bg-blue-700 text-white rounded-full flex items-center justify-center text-xl font-bold mb-1">
+        <div class="w-16 h-16 bg-blue-700 text-white rounded-full flex items-center justify-center text-3xl font-bold mb-2 shadow-inner">
           <i class="fa-solid fa-graduation-cap"></i>
         </div>
-        <span class="font-extrabold text-blue-950 text-base tracking-wider">ALL-I</span>
-        <span class="text-[9px] text-gray-500 font-semibold">KEMENDAGRI</span>
+        <span class="font-black text-blue-950 text-xl tracking-wider">ALL-I</span>
+        <span class="text-[10px] text-gray-500 font-bold tracking-widest mt-0.5">KEMENDAGRI</span>
       </div>
 
-      <div onclick="openModal('loginModal')" class="orbit-item orbit-top border-2 border-red-500">
-        <i class="fa-solid fa-right-to-bracket text-red-600 text-xl mb-1"></i>
-        <span class="text-[11px] font-bold text-gray-800">Login Portal</span>
+      <!-- Orbit 1: Login Portal -->
+      <div onclick="openModal('loginModal')" class="orbit-item orbit-top border-4 border-red-500/80">
+        <i class="fa-solid fa-right-to-bracket text-red-600 text-3xl mb-1.5"></i>
+        <span class="text-xs font-bold text-gray-900 leading-tight">Login Portal</span>
       </div>
 
-      <div onclick="alert('Silakan login terlebih dahulu untuk mengakses Bahan Ajar')" class="orbit-item orbit-left border-2 border-blue-500">
-        <i class="fa-solid fa-book-open text-blue-600 text-xl mb-1"></i>
-        <span class="text-[10px] font-bold text-gray-800 leading-tight">Bahan Ajar & Modul</span>
+      <!-- Orbit 2: Bahan Ajar -->
+      <div onclick="alert('Silakan login terlebih dahulu untuk mengakses Bahan Ajar')" class="orbit-item orbit-left border-4 border-blue-500/80">
+        <i class="fa-solid fa-book-open text-blue-600 text-3xl mb-1.5"></i>
+        <span class="text-xs font-bold text-gray-900 leading-tight">Bahan Ajar & Modul</span>
       </div>
 
-      <div onclick="alert('Silakan login terlebih dahulu untuk mengakses Layanan CBM')" class="orbit-item orbit-right border-2 border-green-500">
-        <i class="fa-solid fa-comments text-green-600 text-xl mb-1"></i>
-        <span class="text-[10px] font-bold text-gray-800 leading-tight">Layanan CBM</span>
+      <!-- Orbit 3: Layanan CBM -->
+      <div onclick="alert('Silakan login terlebih dahulu untuk mengakses Layanan CBM')" class="orbit-item orbit-right border-4 border-emerald-500/80">
+        <i class="fa-solid fa-comments text-emerald-600 text-3xl mb-1.5"></i>
+        <span class="text-xs font-bold text-gray-900 leading-tight">Layanan CBM</span>
       </div>
 
-      <div onclick="alert('Silakan login terlebih dahulu untuk menggunakan AI Assistant')" class="orbit-item orbit-bottom border-2 border-purple-500">
-        <i class="fa-solid fa-robot text-purple-600 text-xl mb-1"></i>
-        <span class="text-[10px] font-bold text-gray-800 leading-tight">AI Widyaiswara</span>
+      <!-- Orbit 4: AI Widyaiswara -->
+      <div onclick="alert('Silakan login terlebih dahulu untuk menggunakan AI Assistant')" class="orbit-item orbit-bottom border-4 border-purple-500/80">
+        <i class="fa-solid fa-robot text-purple-600 text-3xl mb-1.5"></i>
+        <span class="text-xs font-bold text-gray-900 leading-tight">AI Widyaiswara</span>
       </div>
 
     </div>
   </main>
 
   <!-- MODAL LOGIN (MYASN BKN STYLE) -->
-  <div id="loginModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center px-4">
-    <div class="bg-white text-gray-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
-      <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-        <i class="fa-solid fa-xmark text-xl"></i>
+  <div id="loginModal" class="hidden fixed inset-0 bg-black/65 backdrop-blur-md z-50 flex items-center justify-center px-4">
+    <div class="bg-white text-gray-800 rounded-2xl max-w-md w-full p-7 shadow-2xl relative border border-gray-100">
+      <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition">
+        <i class="fa-solid fa-xmark text-2xl"></i>
       </button>
 
       <div class="text-center mb-6">
-        <div class="w-12 h-12 bg-blue-900 text-white rounded-full flex items-center justify-center mx-auto mb-2 text-xl font-bold">
+        <div class="w-14 h-14 bg-blue-900 text-white rounded-full flex items-center justify-center mx-auto mb-3 text-2xl font-bold shadow-md">
           <i class="fa-solid fa-user-lock"></i>
         </div>
-        <h2 class="text-2xl font-bold text-blue-950">Login ALL-I</h2>
+        <h2 class="text-2xl font-black text-blue-950 tracking-tight">Login Portal ALL-I</h2>
         <p class="text-xs text-gray-500 mt-1">Gunakan NIP dan Password Anda yang terdaftar</p>
       </div>
 
       <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="space-y-4">
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1">NIP (Nomor Induk Pegawai)</label>
-          <input type="text" id="loginNip" required placeholder="Masukkan NIP" class="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+          <label class="block text-xs font-bold text-gray-700 mb-1">NIP (Nomor Induk Pegawai)</label>
+          <input type="text" id="loginNip" required placeholder="Masukkan NIP Anda" class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none transition">
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1">Password</label>
-          <input type="password" id="loginPassword" required placeholder="Masukkan Password" class="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+          <label class="block text-xs font-bold text-gray-700 mb-1">Password</label>
+          <input type="password" id="loginPassword" required placeholder="Masukkan Password" class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none transition">
         </div>
 
-        <button type="submit" id="btnLogin" class="w-full bg-blue-800 hover:bg-blue-900 text-white font-semibold py-2.5 rounded-lg shadow-md text-sm transition-all flex justify-center items-center gap-2">
+        <button type="submit" id="btnLogin" class="w-full bg-blue-900 hover:bg-blue-950 text-white font-bold py-3 rounded-lg shadow-lg text-sm transition-all flex justify-center items-center gap-2">
           <span>Masuk Aplikasi</span>
         </button>
       </form>
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer class="mb-6 z-10 text-center px-4 w-full max-w-xl mx-auto">
-    <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl py-2.5 px-6 shadow-lg">
-      <p class="text-xs italic text-blue-100">
+  <!-- FOOTER BANNER -->
+  <footer class="mb-6 z-10 text-center px-4 w-full max-w-2xl mx-auto">
+    <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl py-3 px-6 shadow-xl">
+      <p class="text-xs md:text-sm font-medium italic text-blue-100">
         "Bersama ASN Membangun Indonesia yang Lebih Maju, Adaptif, dan Ber-AKHLAK."
       </p>
     </div>
@@ -220,7 +250,6 @@
           alert(`Selamat Datang, ${result.user.nama}!`);
           localStorage.setItem("user_all_i", JSON.stringify(result.user));
           closeModal('loginModal');
-          // Nanti di sini kita hubungkan ke tampilan Dashboard utama
         } else {
           alert(result.message || "Login gagal, periksa NIP dan Password Anda.");
         }
