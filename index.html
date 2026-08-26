@@ -1,4771 +1,1500 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>ALL-I | Learning Hub for Indonesia Civil Servant</title>
+  <title>ALL-I HUB</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  >
-
   <style>
-
     body {
-      background:
-        radial-gradient(
-          circle at center,
-          #3a8ebd 0%,
-          #246393 60%,
-          #1e4f7c 100%
-        );
-
-      min-height: 100vh;
-
-      font-family:
-        'Segoe UI',
-        Tahoma,
-        Geneva,
-        Verdana,
-        sans-serif;
+      font-family: Inter, Arial, sans-serif;
+      background: #f8fafc;
     }
 
-
-    .futuristic-bg {
-
-      position: absolute;
-
-      inset: 0;
-
-      background-image:
-
-        radial-gradient(
-          rgba(255, 255, 255, 0.12) 1px,
-          transparent 1px
-        ),
-
-        url(
-          'https://upload.wikimedia.org/wikipedia/commons/a/a7/Indonesia_location_map.svg'
-        );
-
-      background-size:
-        35px 35px,
-        contain;
-
-      background-repeat:
-        repeat,
-        no-repeat;
-
-      background-position:
-        center center;
-
-      opacity: 0.22;
-
-      filter: invert(1);
-
-      pointer-events: none;
-
+    .hidden {
+      display: none !important;
     }
 
-
-    /* =========================================
-       PORTAL HUB STYLING
-    ========================================= */
-
-    .portal-container {
-
-      position: relative;
-
-      width: 540px;
-
-      height: 540px;
-
-      display: flex;
-
-      justify-content: center;
-
-      align-items: center;
-
+    .sidebar-item {
+      transition: all 0.2s ease;
     }
 
-
-    .center-logo {
-
-      width: 210px;
-
-      height: 210px;
-
-      border-radius: 50%;
-
-      background: #ffffff;
-
-      box-shadow:
-        0 0 45px
-        rgba(255, 255, 255, 0.8);
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: center;
-
-      align-items: center;
-
-      cursor: pointer;
-
-      z-index: 10;
-
-      transition:
-        all 0.4s
-        cubic-bezier(
-          0.175,
-          0.885,
-          0.32,
-          1.275
-        );
-
-      border:
-        4px solid
-        #e2e8f0;
-
+    .sidebar-item:hover {
+      background: #eff6ff;
+      color: #2563eb;
     }
 
-
-    .center-logo:hover {
-
-      transform:
-        scale(1.08);
-
+    .sidebar-item.active {
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-weight: 600;
     }
 
-
-    .orbit-item {
-
-      position: absolute;
-
-      width: 140px;
-
-      height: 140px;
-
-      border-radius: 50%;
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          0.96
-        );
-
-      box-shadow:
-        0 10px 25px
-        rgba(
-          0,
-          0,
-          0,
-          0.2
-        );
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: center;
-
-      align-items: center;
-
-      text-align: center;
-
-      opacity: 0;
-
-      transform:
-        scale(0);
-
-      transition:
-
-        all 0.45s
-
-        cubic-bezier(
-          0.175,
-          0.885,
-          0.32,
-          1.275
-        );
-
-      cursor: pointer;
-
-      z-index: 5;
-
-      padding: 12px;
-
+    .stat-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-
-    .portal-container.active
-    .orbit-top {
-
-      top: 0;
-
-      opacity: 1;
-
-      transform:
-        scale(1);
-
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
     }
 
-
-    .portal-container.active
-    .orbit-left {
-
-      left: 0;
-
-      opacity: 1;
-
-      transform:
-        scale(1);
-
+    .chat-messages {
+      max-height: 430px;
+      overflow-y: auto;
     }
 
-
-    .portal-container.active
-    .orbit-right {
-
-      right: 0;
-
-      opacity: 1;
-
-      transform:
-        scale(1);
-
+    .message-user {
+      background: #2563eb;
+      color: white;
+      border-radius: 16px 16px 4px 16px;
     }
 
-
-    .portal-container.active
-    .orbit-bottom {
-
-      bottom: -10px;
-
-      opacity: 1;
-
-      transform:
-        scale(1);
-
+    .message-bot {
+      background: #f1f5f9;
+      color: #1e293b;
+      border-radius: 16px 16px 16px 4px;
     }
 
-
-    /* =========================================
-       ALL-I CHATBOT PREMIUM
-    ========================================= */
-
-    #chatMessages {
-
-      scroll-behavior:
-        smooth;
-
+    .progress-bar {
+      transition: width 0.5s ease;
     }
 
-
-    #chatMessages::-webkit-scrollbar {
-
-      width:
-        6px;
-
-    }
-
-
-    #chatMessages::-webkit-scrollbar-track {
-
-      background:
-        transparent;
-
-    }
-
-
-    #chatMessages::-webkit-scrollbar-thumb {
-
-      background:
-        #cbd5e1;
-
-      border-radius:
-        999px;
-
-    }
-
-
-    #chatMessages::-webkit-scrollbar-thumb:hover {
-
-      background:
-        #94a3b8;
-
-    }
-
-
-    .chat-bubble {
-
-      animation:
-        chatFadeIn
-        0.25s
-        ease-out;
-
-    }
-
-
-    @keyframes chatFadeIn {
-
-      from {
-
-        opacity: 0;
-
-        transform:
-          translateY(8px);
-
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        z-index: 50;
+        left: -280px;
+        transition: left 0.25s ease;
       }
 
-      to {
-
-        opacity: 1;
-
-        transform:
-          translateY(0);
-
+      .sidebar.open {
+        left: 0;
       }
 
-    }
-
-
-    .typing-dot {
-
-      width:
-        6px;
-
-      height:
-        6px;
-
-      border-radius:
-        50%;
-
-      background:
-        #8b5cf6;
-
-      display:
-        inline-block;
-
-      animation:
-        typingBounce
-        1.2s
-        infinite ease-in-out;
-
-    }
-
-
-    .typing-dot:nth-child(2) {
-
-      animation-delay:
-        0.15s;
-
-    }
-
-
-    .typing-dot:nth-child(3) {
-
-      animation-delay:
-        0.30s;
-
-    }
-
-
-    @keyframes typingBounce {
-
-      0%,
-      60%,
-      100% {
-
-        transform:
-          translateY(0);
-
-        opacity:
-          0.5;
-
+      .mobile-overlay {
+        background: rgba(15, 23, 42, 0.4);
       }
-
-      30% {
-
-        transform:
-          translateY(-5px);
-
-        opacity:
-          1;
-
-      }
-
     }
-
-
-    .ai-markdown {
-
-      line-height:
-        1.6;
-
-      word-break:
-        break-word;
-
-    }
-
-
-    .ai-markdown p {
-
-      margin-bottom:
-        0.65rem;
-
-    }
-
-
-    .ai-markdown p:last-child {
-
-      margin-bottom:
-        0;
-
-    }
-
-
-    .ai-markdown ul {
-
-      list-style:
-        disc;
-
-      padding-left:
-        1.25rem;
-
-      margin:
-        0.45rem 0;
-
-    }
-
-
-    .ai-markdown ol {
-
-      list-style:
-        decimal;
-
-      padding-left:
-        1.25rem;
-
-      margin:
-        0.45rem 0;
-
-    }
-
-
-    .ai-markdown li {
-
-      margin-bottom:
-        0.3rem;
-
-    }
-
-
-    .ai-markdown h3 {
-
-      font-weight:
-        700;
-
-      font-size:
-        0.95rem;
-
-      margin:
-        0.7rem 0 0.35rem;
-
-    }
-
-
-    .ai-markdown code {
-
-      background:
-        rgba(
-          0,
-          0,
-          0,
-          0.08
-        );
-
-      padding:
-        0.1rem 0.3rem;
-
-      border-radius:
-        0.25rem;
-
-      font-family:
-        monospace;
-
-    }
-
-
-    #chatInput {
-
-      resize:
-        none;
-
-      min-height:
-        40px;
-
-      max-height:
-        110px;
-
-      overflow-y:
-        auto;
-
-    }
-
-
-    @media (
-      max-width: 640px
-    ) {
-
-      .portal-container {
-
-        transform:
-          scale(0.72);
-
-      }
-
-
-      #chatbotBox {
-
-        width:
-          calc(
-            100vw - 24px
-          ) !important;
-
-        right:
-          12px !important;
-
-        bottom:
-          82px !important;
-
-        height:
-          min(
-            70vh,
-            560px
-          ) !important;
-
-      }
-
-    }
-
   </style>
 </head>
 
+<body class="text-slate-800">
 
-<body
-  class="
-    relative
-    text-gray-800
-    min-h-screen
-    flex
-    flex-col
-    justify-between
-  "
->
-
-  <div
-    class="
-      futuristic-bg
-    "
-  ></div>
-
-
-  <!-- =====================================
-       LANDING PAGE VIEW
-       SEBELUM LOGIN
-  ====================================== -->
-
-  <div
-    id="landingView"
-
-    class="
-      min-h-screen
-      flex
-      flex-col
-      justify-between
-      items-center
-      relative
-      z-10
-    "
-  >
-
-    <header
-      class="
-        text-center
-        mt-6
-        px-4
-      "
-    >
-
-      <h1
-        class="
-          text-3xl
-          md:text-5xl
-          font-extrabold
-          text-white
-          tracking-wide
-          drop-shadow-md
-        "
-      >
-
-        Selamat Datang di
-
-        <span
-          class="
-            bg-white
-            text-blue-900
-            px-4
-            py-1
-            rounded-xl
-            shadow-2xl
-          "
-        >
-          ALL-I
-        </span>
-
-      </h1>
-
-
-      <p
-        class="
-          text-base
-          md:text-xl
-          mt-3
-          font-light
-          text-blue-100
-          tracking-wider
-        "
-      >
-
-        Learning Hub for Indonesia Civil Servant
-
-      </p>
-
-
-      <div
-        class="
-          mt-2
-        "
-      >
-
-        <span
-          class="
-            inline-block
-            bg-blue-900/60
-            backdrop-blur-md
-            text-white
-            text-xs
-            md:text-sm
-            px-5
-            py-1.5
-            rounded-full
-            border
-            border-blue-300/30
-          "
-        >
-
-          <i
-            class="
-              fa-solid
-              fa-building-columns
-              mr-1.5
-              text-blue-200
-            "
-          ></i>
-
-          MOHAMMAD ALI NUR SIDIQ:
-          WIDYAISWARA
-          KEMENTERIAN DALAM NEGERI RI
-
-        </span>
-
-      </div>
-
-    </header>
-
-
-    <main
-      class="
-        my-auto
-        py-4
-        flex
-        justify-center
-        items-center
-      "
-    >
-
-      <div
-        class="
-          portal-container
-        "
-
-        id="portalContainer"
-      >
-
-        <div
-          class="
-            center-logo
-          "
-
-          id="centerLogo"
-        >
-
-          <div
-            class="
-              w-16
-              h-16
-              bg-blue-700
-              text-white
-              rounded-full
-              flex
-              items-center
-              justify-center
-              text-3xl
-              font-bold
-              mb-2
-            "
-          >
-
-            <i
-              class="
-                fa-solid
-                fa-graduation-cap
-              "
-            ></i>
-
+  <!-- LOGIN VIEW -->
+  <section id="loginView" class="min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+      <div class="bg-white rounded-3xl shadow-xl p-8 border border-slate-100">
+        <div class="text-center mb-8">
+          <div class="mx-auto mb-4 w-16 h-16 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-2xl font-bold">
+            AI
           </div>
 
-
-          <span
-            class="
-              font-black
-              text-blue-950
-              text-xl
-              tracking-wider
-            "
-          >
-            ALL-I
-          </span>
-
-
-          <span
-            class="
-              text-[10px]
-              text-gray-500
-              font-bold
-              tracking-widest
-              mt-0.5
-            "
-          >
-            KEMENDAGRI
-          </span>
-
-        </div>
-
-
-        <div
-          onclick="openModal('loginModal')"
-
-          class="
-            orbit-item
-            orbit-top
-            border-4
-            border-red-500/80
-          "
-        >
-
-          <i
-            class="
-              fa-solid
-              fa-right-to-bracket
-              text-red-600
-              text-3xl
-              mb-1.5
-            "
-          ></i>
-
-          <span
-            class="
-              text-xs
-              font-bold
-              text-gray-900
-              leading-tight
-            "
-          >
-            Login Portal
-          </span>
-
-        </div>
-
-
-        <div
-          onclick="openModal('loginModal')"
-
-          class="
-            orbit-item
-            orbit-left
-            border-4
-            border-blue-500/80
-          "
-        >
-
-          <i
-            class="
-              fa-solid
-              fa-book-open
-              text-blue-600
-              text-3xl
-              mb-1.5
-            "
-          ></i>
-
-          <span
-            class="
-              text-xs
-              font-bold
-              text-gray-900
-              leading-tight
-            "
-          >
-            Bahan Ajar & Modul
-          </span>
-
-        </div>
-
-
-        <div
-          onclick="openModal('loginModal')"
-
-          class="
-            orbit-item
-            orbit-right
-            border-4
-            border-emerald-500/80
-          "
-        >
-
-          <i
-            class="
-              fa-solid
-              fa-comments
-              text-emerald-600
-              text-3xl
-              mb-1.5
-            "
-          ></i>
-
-          <span
-            class="
-              text-xs
-              font-bold
-              text-gray-900
-              leading-tight
-            "
-          >
-            Layanan CBM
-          </span>
-
-        </div>
-
-
-        <div
-          onclick="openModal('loginModal')"
-
-          class="
-            orbit-item
-            orbit-bottom
-            border-4
-            border-purple-500/80
-          "
-        >
-
-          <i
-            class="
-              fa-solid
-              fa-robot
-              text-purple-600
-              text-3xl
-              mb-1.5
-            "
-          ></i>
-
-          <span
-            class="
-              text-xs
-              font-bold
-              text-gray-900
-              leading-tight
-            "
-          >
-            AI Widyaiswara
-          </span>
-
-        </div>
-
-      </div>
-
-    </main>
-
-
-    <footer
-      class="
-        mb-6
-        text-center
-        px-4
-        w-full
-        max-w-2xl
-        mx-auto
-      "
-    >
-
-      <div
-        class="
-          bg-white/10
-          backdrop-blur-md
-          border
-          border-white/20
-          rounded-xl
-          py-3
-          px-6
-          shadow-xl
-        "
-      >
-
-        <p
-          class="
-            text-xs
-            md:text-sm
-            font-medium
-            italic
-            text-blue-100
-          "
-        >
-
-          "Bersama ASN Membangun Indonesia yang Lebih Maju,
-          Adaptif, dan Ber-AKHLAK."
-
-        </p>
-
-      </div>
-
-    </footer>
-
-  </div>
-
-
-  <!-- =====================================
-       MODAL LOGIN
-  ====================================== -->
-
-  <div
-    id="loginModal"
-
-    class="
-      hidden
-      fixed
-      inset-0
-      bg-black/60
-      backdrop-blur-md
-      z-50
-      flex
-      items-center
-      justify-center
-      px-4
-    "
-  >
-
-    <div
-      class="
-        bg-white
-        text-gray-800
-        rounded-2xl
-        max-w-md
-        w-full
-        p-7
-        shadow-2xl
-        relative
-      "
-    >
-
-      <button
-        onclick="closeModal('loginModal')"
-
-        class="
-          absolute
-          top-4
-          right-4
-          text-gray-400
-          hover:text-gray-600
-        "
-      >
-
-        <i
-          class="
-            fa-solid
-            fa-xmark
-            text-2xl
-          "
-        ></i>
-
-      </button>
-
-
-      <div
-        class="
-          text-center
-          mb-6
-        "
-      >
-
-        <div
-          class="
-            w-14
-            h-14
-            bg-blue-900
-            text-white
-            rounded-full
-            flex
-            items-center
-            justify-center
-            mx-auto
-            mb-3
-            text-2xl
-            font-bold
-            shadow-md
-          "
-        >
-
-          <i
-            class="
-              fa-solid
-              fa-user-lock
-            "
-          ></i>
-
-        </div>
-
-
-        <h2
-          class="
-            text-2xl
-            font-black
-            text-blue-950
-          "
-        >
-          Login Portal ALL-I
-        </h2>
-
-
-        <p
-          class="
-            text-xs
-            text-gray-500
-            mt-1
-          "
-        >
-
-          Gunakan NIP dan Password Anda yang terdaftar
-
-        </p>
-
-      </div>
-
-
-      <form
-        id="loginForm"
-
-        onsubmit="handleLoginSubmit(event)"
-
-        class="
-          space-y-4
-        "
-      >
-
-        <div>
-
-          <label
-            class="
-              block
-              text-xs
-              font-bold
-              text-gray-700
-              mb-1
-            "
-          >
-
-            NIP
-            (Nomor Induk Pegawai)
-
-          </label>
-
-
-          <input
-
-            type="text"
-
-            id="loginNip"
-
-            required
-
-            placeholder="Masukkan NIP Anda"
-
-            class="
-              w-full
-              px-4
-              py-2.5
-              text-sm
-              border
-              border-gray-300
-              rounded-lg
-              focus:ring-2
-              focus:ring-blue-600
-              focus:outline-none
-            "
-
-          >
-
-        </div>
-
-
-        <div>
-
-          <label
-            class="
-              block
-              text-xs
-              font-bold
-              text-gray-700
-              mb-1
-            "
-          >
-
-            Password
-
-          </label>
-
-
-          <input
-
-            type="password"
-
-            id="loginPassword"
-
-            required
-
-            placeholder="Masukkan Password Anda"
-
-            class="
-              w-full
-              px-4
-              py-2.5
-              text-sm
-              border
-              border-gray-300
-              rounded-lg
-              focus:ring-2
-              focus:ring-blue-600
-              focus:outline-none
-            "
-
-          >
-
-        </div>
-
-
-        <button
-
-          type="submit"
-
-          id="btnLogin"
-
-          class="
-            w-full
-            bg-blue-900
-            hover:bg-blue-950
-            text-white
-            font-bold
-            py-3
-            rounded-lg
-            shadow-lg
-            text-sm
-            transition-all
-            flex
-            justify-center
-            items-center
-            gap-2
-          "
-        >
-
-          <span>
-            Masuk Aplikasi
-          </span>
-
-        </button>
-
-      </form>
-
-    </div>
-
-  </div>
-
-
-  <!-- =====================================
-       DASHBOARD VIEW
-       SETELAH LOGIN SUKSES
-  ====================================== -->
-
-  <div
-    id="dashboardView"
-
-    class="
-      hidden
-      min-h-screen
-      bg-gray-100
-      flex
-      relative
-      z-20
-    "
-  >
-
-
-    <!-- SIDEBAR -->
-
-    <aside
-      class="
-        w-64
-        bg-blue-950
-        text-white
-        flex
-        flex-col
-        justify-between
-        p-4
-        shadow-xl
-      "
-    >
-
-      <div>
-
-        <div
-          class="
-            flex
-            items-center
-            gap-3
-            px-2
-            py-4
-            border-b
-            border-blue-800
-          "
-        >
-
-          <div
-            class="
-              w-10
-              h-10
-              bg-blue-600
-              rounded-full
-              flex
-              items-center
-              justify-center
-              font-bold
-              text-lg
-            "
-          >
-
-            <i
-              class="
-                fa-solid
-                fa-graduation-cap
-              "
-            ></i>
-
-          </div>
-
-
-          <div>
-
-            <h2
-              class="
-                font-bold
-                text-base
-                tracking-wider
-              "
-            >
-              ALL-I HUB
-            </h2>
-
-
-            <p
-              class="
-                text-[10px]
-                text-blue-300
-              "
-            >
-              Widyaiswara Kemendagri
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <nav
-          class="
-            mt-6
-            space-y-1
-            text-sm
-          "
-        >
-
-          <button
-
-            onclick="switchMenu('dashboard')"
-
-            class="
-              w-full
-              flex
-              items-center
-              gap-3
-              px-4
-              py-3
-              rounded-lg
-              hover:bg-blue-900
-              text-left
-              transition
-              font-medium
-            "
-          >
-
-            <i
-              class="
-                fa-solid
-                fa-chart-line
-                text-blue-400
-              "
-            ></i>
-
-            Executive Summary
-
-          </button>
-
-
-          <button
-
-            onclick="switchMenu('materials')"
-
-            class="
-              w-full
-              flex
-              items-center
-              gap-3
-              px-4
-              py-3
-              rounded-lg
-              hover:bg-blue-900
-              text-left
-              transition
-              font-medium
-            "
-          >
-
-            <i
-              class="
-                fa-solid
-                fa-folder-open
-                text-amber-400
-              "
-            ></i>
-
-            Repositori Bahan Ajar
-
-          </button>
-
-
-          <button
-
-            onclick="switchMenu('sharing')"
-
-            class="
-              w-full
-              flex
-              items-center
-              gap-3
-              px-4
-              py-3
-              rounded-lg
-              hover:bg-blue-900
-              text-left
-              transition
-              font-medium
-            "
-          >
-
-            <i
-              class="
-                fa-solid
-                fa-cloud-arrow-up
-                text-emerald-400
-              "
-            ></i>
-
-            Sharing Bahan Ajar
-
-          </button>
-
-
-          <button
-
-            onclick="switchMenu('cbm')"
-
-            class="
-              w-full
-              flex
-              items-center
-              gap-3
-              px-4
-              py-3
-              rounded-lg
-              hover:bg-blue-900
-              text-left
-              transition
-              font-medium
-            "
-          >
-
-            <i
-              class="
-                fa-solid
-                fa-calendar-check
-                text-purple-400
-              "
-            ></i>
-
-            Layanan CBM
-
-          </button>
-
-
-          <button
-
-            onclick="switchMenu('feedback')"
-
-            class="
-              w-full
-              flex
-              items-center
-              gap-3
-              px-4
-              py-3
-              rounded-lg
-              hover:bg-blue-900
-              text-left
-              transition
-              font-medium
-            "
-          >
-
-            <i
-              class="
-                fa-solid
-                fa-comments
-                text-rose-400
-              "
-            ></i>
-
-            Diskusi & Alumni
-
-          </button>
-
-        </nav>
-
-      </div>
-
-
-      <div
-        class="
-          border-t
-          border-blue-800
-          pt-4
-        "
-      >
-
-        <button
-
-          onclick="handleLogout()"
-
-          class="
-            w-full
-            flex
-            items-center
-            justify-center
-            gap-2
-            bg-red-600/80
-            hover:bg-red-700
-            text-white
-            py-2
-            rounded-lg
-            text-xs
-            font-bold
-            transition
-          "
-        >
-
-          <i
-            class="
-              fa-solid
-              fa-right-from-bracket
-            "
-          ></i>
-
-          Keluar (Logout)
-
-        </button>
-
-      </div>
-
-    </aside>
-
-
-    <!-- MAIN CONTENT -->
-
-    <main
-      class="
-        flex-1
-        flex
-        flex-col
-        overflow-y-auto
-        h-screen
-      "
-    >
-
-
-      <!-- TOP HEADER -->
-
-      <header
-        class="
-          bg-white
-          shadow-sm
-          px-8
-          py-4
-          flex
-          justify-between
-          items-center
-          border-b
-        "
-      >
-
-        <div>
-
-          <h1
-            id="menuTitle"
-
-            class="
-              text-xl
-              font-bold
-              text-gray-800
-            "
-          >
-            Executive Summary Profil
+          <h1 class="text-2xl font-bold text-slate-800">
+            ALL-I HUB
           </h1>
 
+          <p class="text-sm text-slate-500 mt-2">
+            Pusat layanan pembelajaran dan pengembangan kompetensi
+          </p>
+        </div>
 
-          <p
-            class="
-              text-xs
-              text-gray-500
-            "
+        <form id="loginForm" class="space-y-5">
+          <div>
+            <label for="loginNip" class="block text-sm font-medium text-slate-700 mb-2">
+              NIP
+            </label>
+
+            <input
+              id="loginNip"
+              type="text"
+              autocomplete="username"
+              placeholder="Masukkan NIP"
+              required
+              class="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            />
+          </div>
+
+          <div>
+            <label for="loginPassword" class="block text-sm font-medium text-slate-700 mb-2">
+              Password
+            </label>
+
+            <input
+              id="loginPassword"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Masukkan password"
+              required
+              class="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            />
+          </div>
+
+          <button
+            id="loginButton"
+            type="submit"
+            class="w-full rounded-xl bg-blue-600 px-4 py-3 font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Selamat datang di Platform Kediklatan Widyaiswara
+            Masuk
+          </button>
+
+          <p id="loginMessage" class="text-center text-sm"></p>
+        </form>
+      </div>
+
+      <p class="text-center text-xs text-slate-400 mt-6">
+        ALL-I HUB &copy; 2026
+      </p>
+    </div>
+  </section>
+
+  <!-- APPLICATION VIEW -->
+  <section id="appView" class="hidden min-h-screen">
+
+    <!-- MOBILE OVERLAY -->
+    <div
+      id="mobileOverlay"
+      class="mobile-overlay hidden fixed inset-0 z-40 md:hidden"
+      onclick="closeSidebar()"
+    ></div>
+
+    <!-- SIDEBAR -->
+    <aside
+      id="sidebar"
+      class="sidebar w-72 bg-white border-r border-slate-200 min-h-screen fixed top-0 bottom-0 md:left-0 z-50"
+    >
+      <div class="p-6 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold">
+            AI
+          </div>
+
+          <div>
+            <h1 class="font-bold text-slate-800">
+              ALL-I HUB
+            </h1>
+
+            <p class="text-xs text-slate-500">
+              Learning Platform
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <nav class="p-4 space-y-2">
+        <button
+          class="sidebar-item active w-full text-left rounded-xl px-4 py-3 flex items-center gap-3"
+          data-page="executiveSummary"
+          onclick="showPage('executiveSummary')"
+        >
+          <span>📊</span>
+          <span>Executive Summary</span>
+        </button>
+
+        <button
+          class="sidebar-item w-full text-left rounded-xl px-4 py-3 flex items-center gap-3"
+          data-page="materials"
+          onclick="showPage('materials')"
+        >
+          <span>📚</span>
+          <span>Materi Diklat</span>
+        </button>
+
+        <button
+          class="sidebar-item w-full text-left rounded-xl px-4 py-3 flex items-center gap-3"
+          data-page="chatbot"
+          onclick="showPage('chatbot')"
+        >
+          <span>🤖</span>
+          <span>AI Assistant</span>
+        </button>
+      </nav>
+
+      <div class="absolute bottom-0 left-0 right-0 p-4">
+        <div class="rounded-2xl bg-slate-50 p-4 mb-3">
+          <p class="text-xs text-slate-500">
+            Login sebagai
           </p>
 
+          <p id="sidebarUserName" class="font-semibold text-sm text-slate-800 mt-1">
+            -
+          </p>
+
+          <p id="sidebarUserRole" class="text-xs text-blue-600 mt-1">
+            -
+          </p>
         </div>
 
-
-        <div
-          class="
-            flex
-            items-center
-            gap-3
-          "
+        <button
+          onclick="logout()"
+          class="w-full rounded-xl border border-red-200 px-4 py-3 text-sm font-medium text-red-600 hover:bg-red-50"
         >
+          Keluar
+        </button>
+      </div>
+    </aside>
 
-          <div
-            class="
-              text-right
-            "
-          >
+    <!-- MAIN CONTENT -->
+    <main class="md:ml-72 min-h-screen">
 
-            <p
-              id="userName"
-
-              class="
-                text-sm
-                font-bold
-                text-gray-800
-              "
+      <!-- TOPBAR -->
+      <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+        <div class="px-4 md:px-8 py-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <button
+              id="menuButton"
+              onclick="toggleSidebar()"
+              class="md:hidden rounded-lg p-2 hover:bg-slate-100"
             >
-              Mohammad Ali
-            </p>
+              ☰
+            </button>
 
+            <div>
+              <h2 id="pageTitle" class="text-xl font-bold text-slate-800">
+                Executive Summary
+              </h2>
 
-            <p
-              id="userRole"
-
-              class="
-                text-xs
-                text-blue-600
-                font-semibold
-              "
-            >
-              Widyaiswara Ahli
-            </p>
-
+              <p class="text-sm text-slate-500">
+                Ringkasan data dan aktivitas ALL-I HUB
+              </p>
+            </div>
           </div>
 
+          <div class="text-right hidden sm:block">
+            <p id="headerUserName" class="text-sm font-semibold text-slate-800">
+              -
+            </p>
 
-          <div
-            class="
-              w-10
-              h-10
-              bg-blue-900
-              text-white
-              rounded-full
-              flex
-              items-center
-              justify-center
-              font-bold
-            "
-          >
-
-            <i
-              class="
-                fa-solid
-                fa-user-shield
-              "
-            ></i>
-
+            <p id="headerUserRole" class="text-xs text-slate-500">
+              -
+            </p>
           </div>
-
         </div>
-
       </header>
 
+      <!-- PAGE: EXECUTIVE SUMMARY -->
+      <div id="pageExecutiveSummary" class="page-content p-4 md:p-8">
 
-      <!-- DYNAMIC CONTENT -->
+        <!-- WELCOME -->
+        <div class="mb-6">
+          <h3 class="text-2xl font-bold text-slate-800">
+            Selamat datang, <span id="welcomeUserName">Pengguna</span>
+          </h3>
 
-      <div
-        class="
-          p-8
-        "
-      >
+          <p class="text-slate-500 mt-1">
+            Berikut adalah ringkasan data pembelajaran dan alumni.
+          </p>
+        </div>
 
+        <!-- STATISTICS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
 
-        <!-- =====================================
-             SECTION 1
-             EXECUTIVE SUMMARY
-        ====================================== -->
-
-        <section
-          id="sec-dashboard"
-
-          class="
-            space-y-6
-          "
-        >
-
-          <div
-            class="
-              grid
-              grid-cols-1
-              md:grid-cols-4
-              gap-6
-            "
-          >
-
-
-            <div
-              class="
-                bg-white
-                p-6
-                rounded-2xl
-                shadow-sm
-                border
-                border-gray-100
-                flex
-                items-center
-                gap-4
-              "
-            >
-
-              <div
-                class="
-                  w-12
-                  h-12
-                  bg-blue-100
-                  text-blue-600
-                  rounded-xl
-                  flex
-                  items-center
-                  justify-center
-                  text-xl
-                  font-bold
-                "
-              >
-
-                <i
-                  class="
-                    fa-solid
-                    fa-clock
-                  "
-                ></i>
-
-              </div>
-
-
+          <div class="stat-card bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+            <div class="flex items-center justify-between">
               <div>
-
-                <p
-                  class="
-                    text-xs
-                    text-gray-500
-                    font-medium
-                  "
-                >
-                  Total Jam Pelajaran
+                <p class="text-sm text-slate-500">
+                  Total JP
                 </p>
 
-
-                <h3
-                  class="
-                    text-2xl
-                    font-bold
-                    text-gray-800
-                  "
-                >
-                  1,240 JP
+                <h3 id="summaryTotalJP" class="text-2xl font-bold text-slate-800 mt-2">
+                  Memuat...
                 </h3>
-
               </div>
 
+              <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-2xl">
+                ⏱️
+              </div>
             </div>
 
+            <p class="text-xs text-slate-400 mt-4">
+              Dari sesi CBM selesai
+            </p>
+          </div>
 
-            <div
-              class="
-                bg-white
-                p-6
-                rounded-2xl
-                shadow-sm
-                border
-                border-gray-100
-                flex
-                items-center
-                gap-4
-              "
-            >
-
-              <div
-                class="
-                  w-12
-                  h-12
-                  bg-emerald-100
-                  text-emerald-600
-                  rounded-xl
-                  flex
-                  items-center
-                  justify-center
-                  text-xl
-                  font-bold
-                "
-              >
-
-                <i
-                  class="
-                    fa-solid
-                    fa-users
-                  "
-                ></i>
-
-              </div>
-
-
+          <div class="stat-card bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+            <div class="flex items-center justify-between">
               <div>
-
-                <p
-                  class="
-                    text-xs
-                    text-gray-500
-                    font-medium
-                  "
-                >
-                  Alumni Bimbingan
+                <p class="text-sm text-slate-500">
+                  Total Alumni
                 </p>
 
-
-                <h3
-                  class="
-                    text-2xl
-                    font-bold
-                    text-gray-800
-                  "
-                >
-                  850 ASN
+                <h3 id="summaryTotalAlumni" class="text-2xl font-bold text-slate-800 mt-2">
+                  Memuat...
                 </h3>
-
               </div>
 
+              <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-2xl">
+                👥
+              </div>
             </div>
 
+            <p class="text-xs text-slate-400 mt-4">
+              Alumni aktif terdaftar
+            </p>
+          </div>
 
-            <div
-              class="
-                bg-white
-                p-6
-                rounded-2xl
-                shadow-sm
-                border
-                border-gray-100
-                flex
-                items-center
-                gap-4
-              "
-            >
-
-              <div
-                class="
-                  w-12
-                  h-12
-                  bg-purple-100
-                  text-purple-600
-                  rounded-xl
-                  flex
-                  items-center
-                  justify-center
-                  text-xl
-                  font-bold
-                "
-              >
-
-                <i
-                  class="
-                    fa-solid
-                    fa-handshake
-                  "
-                ></i>
-
-              </div>
-
-
+          <div class="stat-card bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+            <div class="flex items-center justify-between">
               <div>
-
-                <p
-                  class="
-                    text-xs
-                    text-gray-500
-                    font-medium
-                  "
-                >
+                <p class="text-sm text-slate-500">
                   Sesi CBM Selesai
                 </p>
 
-
-                <h3
-                  class="
-                    text-2xl
-                    font-bold
-                    text-gray-800
-                  "
-                >
-                  142 Sesi
+                <h3 id="summaryCompletedCBM" class="text-2xl font-bold text-slate-800 mt-2">
+                  Memuat...
                 </h3>
-
               </div>
 
+              <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center text-2xl">
+                ✅
+              </div>
             </div>
 
+            <p class="text-xs text-slate-400 mt-4">
+              Sesi mentoring terselesaikan
+            </p>
+          </div>
 
-            <div
-              class="
-                bg-white
-                p-6
-                rounded-2xl
-                shadow-sm
-                border
-                border-gray-100
-                flex
-                items-center
-                gap-4
-              "
-            >
-
-              <div
-                class="
-                  w-12
-                  h-12
-                  bg-amber-100
-                  text-amber-600
-                  rounded-xl
-                  flex
-                  items-center
-                  justify-center
-                  text-xl
-                  font-bold
-                "
-              >
-
-                <i
-                  class="
-                    fa-solid
-                    fa-star
-                  "
-                ></i>
-
-              </div>
-
-
+          <div class="stat-card bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+            <div class="flex items-center justify-between">
               <div>
-
-                <p
-                  class="
-                    text-xs
-                    text-gray-500
-                    font-medium
-                  "
-                >
-                  Rating Kepuasan
+                <p class="text-sm text-slate-500">
+                  Rata-rata Rating
                 </p>
 
-
-                <h3
-                  class="
-                    text-2xl
-                    font-bold
-                    text-gray-800
-                  "
-                >
-                  4.95 / 5.0
+                <h3 id="summaryAverageRating" class="text-2xl font-bold text-slate-800 mt-2">
+                  Memuat...
                 </h3>
-
               </div>
 
+              <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-2xl">
+                ⭐
+              </div>
             </div>
 
+            <p class="text-xs text-slate-400 mt-4">
+              Berdasarkan feedback pengguna
+            </p>
           </div>
 
-        </section>
+        </div>
 
+        <!-- MAP / ALUMNI DISTRIBUTION -->
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 md:p-6 mt-6">
 
-        <!-- =====================================
-             SECTION 2
-             REPOSITORI BAHAN AJAR
-        ====================================== -->
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-5">
+            <div>
+              <h3 class="text-lg font-bold text-slate-800">
+                Peta Sebaran Alumni Diklat
+              </h3>
 
-        <section
-          id="sec-materials"
+              <p class="text-sm text-slate-500 mt-1">
+                Distribusi alumni aktif berdasarkan provinsi
+              </p>
+            </div>
 
-          class="
-            hidden
-            bg-white
-            rounded-2xl
-            p-6
-            shadow-sm
-            border
-          "
-        >
+            <div class="rounded-xl bg-blue-50 px-4 py-2">
+              <span class="text-xs text-blue-600">
+                Total provinsi:
+              </span>
 
-          <h3
-            class="
-              text-lg
-              font-bold
-              text-gray-800
-              mb-4
-            "
-          >
-            Unduh Modul & Bahan Ajar Widyaiswara
-          </h3>
-
-
-          <p
-            class="
-              text-xs
-              text-gray-500
-              mb-6
-            "
-          >
-            Materi resmi kediklatan terintegrasi Google Drive.
-          </p>
-
+              <strong id="summaryProvinceCount" class="text-blue-800 ml-1">
+                -
+              </strong>
+            </div>
+          </div>
 
           <div
-            id="materialsList"
-
-            class="
-              space-y-3
-            "
+            id="alumniMap"
+            class="w-full min-h-[420px] rounded-2xl bg-slate-50 p-4 flex items-center justify-center"
           >
-
-            <p
-              class="
-                text-sm
-                text-gray-400
-                italic
-              "
-            >
-              Memuat daftar bahan ajar...
-            </p>
-
+            <div class="text-center text-slate-400">
+              <div class="text-4xl mb-3">🗺️</div>
+              <p>Memuat data sebaran alumni...</p>
+            </div>
           </div>
 
-        </section>
+          <div class="mt-6">
+            <h4 class="font-semibold text-slate-700 mb-3">
+              Rekapitulasi per Provinsi
+            </h4>
 
+            <div
+              id="alumniProvinceLegend"
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
+            ></div>
+          </div>
+        </div>
 
-        <!-- =====================================
-             SECTION 3
-             SHARING BAHAN AJAR
-        ====================================== -->
+        <!-- ADDITIONAL SUMMARY -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
 
-        <section
-          id="sec-sharing"
+          <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+            <h3 class="text-lg font-bold text-slate-800">
+              Ringkasan Konten
+            </h3>
 
-          class="
-            hidden
-            bg-white
-            rounded-2xl
-            p-6
-            shadow-sm
-            border
-          "
-        >
+            <div class="mt-5 space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-slate-500">
+                  Materi internal
+                </span>
 
-          <h3
-            class="
-              text-lg
-              font-bold
-              text-gray-800
-              mb-2
-            "
-          >
-            Sharing Bahan Ajar dari Peserta
-          </h3>
+                <span id="summaryTotalMaterials" class="font-bold text-slate-800">
+                  -
+                </span>
+              </div>
 
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-slate-500">
+                  Materi sharing disetujui
+                </span>
 
-          <p
-            class="
-              text-xs
-              text-gray-500
-              mb-6
-            "
-          >
-            Unggah draf atau referensi materi Anda langsung ke
-            Google Drive Widyaiswara.
-          </p>
+                <span id="summaryTotalSharedMaterials" class="font-bold text-slate-800">
+                  -
+                </span>
+              </div>
 
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-slate-500">
+                  Total feedback
+                </span>
 
-          <form
-
-            onsubmit="handleUserUploadSubmit(event)"
-
-            class="
-              max-w-xl
-              space-y-4
-            "
-          >
-
-            <div>
-
-              <label
-                class="
-                  block
-                  text-xs
-                  font-bold
-                  text-gray-700
-                  mb-1
-                "
-              >
-                Judul Dokumen/Materi
-              </label>
-
-
-              <input
-
-                type="text"
-
-                id="uploadTitle"
-
-                required
-
-                class="
-                  w-full
-                  px-4
-                  py-2
-                  text-sm
-                  border
-                  rounded-lg
-                "
-
-              >
-
+                <span id="summaryTotalFeedback" class="font-bold text-slate-800">
+                  -
+                </span>
+              </div>
             </div>
+          </div>
 
+          <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-lg font-bold text-slate-800">
+                  Status Sistem
+                </h3>
 
-            <div>
+                <p class="text-sm text-slate-500 mt-1">
+                  Pemeriksaan koneksi backend
+                </p>
+              </div>
 
-              <label
-                class="
-                  block
-                  text-xs
-                  font-bold
-                  text-gray-700
-                  mb-1
-                "
+              <span
+                id="healthStatusBadge"
+                class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500"
               >
-                Deskripsi Ringkas
-              </label>
-
-
-              <textarea
-
-                id="uploadDesc"
-
-                rows="3"
-
-                required
-
-                class="
-                  w-full
-                  px-4
-                  py-2
-                  text-sm
-                  border
-                  rounded-lg
-                "
-
-              ></textarea>
-
+                Memeriksa...
+              </span>
             </div>
-
-
-            <div>
-
-              <label
-                class="
-                  block
-                  text-xs
-                  font-bold
-                  text-gray-700
-                  mb-1
-                "
-              >
-                Pilih File
-                (PDF, PPT, DOCX)
-              </label>
-
-
-              <input
-
-                type="file"
-
-                id="uploadFile"
-
-                required
-
-                class="
-                  w-full
-                  text-sm
-                  border
-                  p-2
-                  rounded-lg
-                "
-
-              >
-
-            </div>
-
 
             <button
-
-              type="submit"
-
-              id="btnUpload"
-
-              class="
-                bg-emerald-600
-                hover:bg-emerald-700
-                text-white
-                font-bold
-                py-2.5
-                px-6
-                rounded-lg
-                text-sm
-                shadow
-              "
+              onclick="checkHealth()"
+              class="mt-5 rounded-xl bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200"
             >
-
-              Unggah File Sekarang
-
+              Periksa ulang
             </button>
+          </div>
 
-          </form>
+        </div>
 
-        </section>
+      </div>
 
+      <!-- PAGE: MATERIALS -->
+      <div id="pageMaterials" class="page-content hidden p-4 md:p-8">
 
-        <!-- =====================================
-             SECTION 4
-             LAYANAN CBM
-        ====================================== -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+          <div>
+            <h3 class="text-2xl font-bold text-slate-800">
+              Materi Diklat
+            </h3>
 
-        <section
-          id="sec-cbm"
+            <p class="text-slate-500 mt-1">
+              Daftar materi pembelajaran yang tersedia.
+            </p>
+          </div>
 
-          class="
-            hidden
-            bg-white
-            rounded-2xl
-            p-6
-            shadow-sm
-            border
-          "
+          <button
+            onclick="fetchMaterials()"
+            class="rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            Muat Ulang
+          </button>
+        </div>
+
+        <div
+          id="materialsLoading"
+          class="bg-white rounded-2xl p-8 text-center text-slate-400"
         >
+          Memuat materi...
+        </div>
 
-          <h3
-            class="
-              text-lg
-              font-bold
-              text-gray-800
-              mb-4
-            "
-          >
-            Reservasi Sesi Coaching, Mentoring & Konsultasi
-          </h3>
-
-
-          <p
-            class="
-              text-xs
-              text-gray-500
-              mb-6
-            "
-          >
-            Ajukan konsultasi aktualisasi atau aksi perubahan Anda.
-          </p>
-
-
-          <p
-            class="
-              text-sm
-              text-gray-600
-            "
-          >
-            Formulir booking terintegrasi langsung ke tabel
-            Google Sheets Widyaiswara.
-          </p>
-
-        </section>
-
-
-        <!-- =====================================
-             SECTION 5
-             DISKUSI ALUMNI
-        ====================================== -->
-
-        <section
-          id="sec-feedback"
-
-          class="
-            hidden
-            bg-white
-            rounded-2xl
-            p-6
-            shadow-sm
-            border
-          "
+        <div
+          id="materialsEmpty"
+          class="hidden bg-white rounded-2xl p-8 text-center text-slate-400"
         >
+          Belum ada materi tersedia.
+        </div>
 
-          <h3
-            class="
-              text-lg
-              font-bold
-              text-gray-800
-              mb-4
-            "
-          >
-            Ruang Ulasan & Feedback Alumni
-          </h3>
+        <div
+          id="materialsGrid"
+          class="hidden grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5"
+        ></div>
+      </div>
 
+      <!-- PAGE: CHATBOT -->
+      <div id="pageChatbot" class="page-content hidden p-4 md:p-8">
 
-          <p
-            class="
-              text-xs
-              text-gray-500
-              mb-6
-            "
-          >
-            Testimoni dan jejaring alumni diklat.
-          </p>
+        <div class="max-w-4xl mx-auto">
+          <div class="mb-6">
+            <h3 class="text-2xl font-bold text-slate-800">
+              AI Assistant
+            </h3>
 
-        </section>
+            <p class="text-slate-500 mt-1">
+              Tanyakan seputar materi dan layanan ALL-I HUB.
+            </p>
+          </div>
 
+          <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+
+            <div
+              id="chatMessages"
+              class="chat-messages p-5 space-y-4"
+            >
+              <div class="flex justify-start">
+                <div class="message-bot max-w-[85%] px-4 py-3 text-sm">
+                  Halo! Saya AI Assistant ALL-I HUB. Ada yang dapat saya bantu?
+                </div>
+              </div>
+            </div>
+
+            <div class="border-t border-slate-100 p-4">
+              <form id="chatForm" class="flex gap-3">
+                <input
+                  id="chatInput"
+                  type="text"
+                  placeholder="Tulis pertanyaan Anda..."
+                  autocomplete="off"
+                  class="flex-1 rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                  required
+                />
+
+                <button
+                  id="chatButton"
+                  type="submit"
+                  class="rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  Kirim
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
 
     </main>
-
-
-    <!-- =====================================
-         FLOATING CHATBOT
-         ALL-I ASSISTANT PREMIUM
-    ====================================== -->
-
-    <div
-      class="
-        fixed
-        bottom-6
-        right-6
-        z-50
-      "
-    >
-
-      <!-- TOMBOL CHATBOT -->
-
-      <button
-
-        onclick="toggleChatbot()"
-
-        aria-label="Buka ALL-I Assistant"
-
-        class="
-          w-14
-          h-14
-          bg-purple-600
-          text-white
-          rounded-full
-          shadow-2xl
-          flex
-          items-center
-          justify-center
-          text-2xl
-          hover:bg-purple-700
-          hover:scale-105
-          transition
-        "
-      >
-
-        <i
-          class="
-            fa-solid
-            fa-robot
-          "
-        ></i>
-
-      </button>
-
-
-      <!-- CHATBOT BOX -->
-
-      <div
-
-        id="chatbotBox"
-
-        class="
-          hidden
-          fixed
-          bottom-24
-          right-6
-          w-96
-          bg-white
-          rounded-2xl
-          shadow-2xl
-          border
-          flex
-          flex-col
-          h-[560px]
-          overflow-hidden
-        "
-      >
-
-
-        <!-- HEADER CHATBOT -->
-
-        <div
-          class="
-            bg-gradient-to-r
-            from-purple-900
-            to-purple-700
-            text-white
-            p-4
-            flex
-            justify-between
-            items-center
-          "
-        >
-
-          <div
-            class="
-              flex
-              items-center
-              gap-3
-            "
-          >
-
-            <div
-              class="
-                w-9
-                h-9
-                bg-white/15
-                rounded-full
-                flex
-                items-center
-                justify-center
-              "
-            >
-
-              <i
-                class="
-                  fa-solid
-                  fa-robot
-                  text-purple-100
-                "
-              ></i>
-
-            </div>
-
-
-            <div>
-
-              <div
-                class="
-                  font-bold
-                  text-sm
-                "
-              >
-                ALL-I Assistant
-              </div>
-
-
-              <div
-                class="
-                  text-[10px]
-                  text-purple-200
-                  flex
-                  items-center
-                  gap-1
-                "
-              >
-
-                <span
-                  class="
-                    w-1.5
-                    h-1.5
-                    bg-green-400
-                    rounded-full
-                    inline-block
-                  "
-                ></span>
-
-                Widyaiswara AI • Online
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div
-            class="
-              flex
-              items-center
-              gap-1
-            "
-          >
-
-            <button
-
-              onclick="startNewChat()"
-
-              title="Percakapan Baru"
-
-              class="
-                w-8
-                h-8
-                rounded-lg
-                hover:bg-white/10
-                transition
-              "
-            >
-
-              <i
-                class="
-                  fa-solid
-                  fa-rotate-left
-                  text-xs
-                "
-              ></i>
-
-            </button>
-
-
-            <button
-
-              onclick="toggleChatbot()"
-
-              title="Tutup Chat"
-
-              class="
-                w-8
-                h-8
-                rounded-lg
-                hover:bg-white/10
-                transition
-              "
-            >
-
-              <i
-                class="
-                  fa-solid
-                  fa-xmark
-                  text-lg
-                "
-              ></i>
-
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <!-- CHAT MESSAGES -->
-
-        <div
-
-          id="chatMessages"
-
-          class="
-            flex-1
-            p-4
-            overflow-y-auto
-            space-y-4
-            text-xs
-            bg-slate-50
-          "
-        ></div>
-
-
-        <!-- CHAT INPUT -->
-
-        <div
-          class="
-            p-3
-            border-t
-            bg-white
-          "
-        >
-
-          <div
-            class="
-              flex
-              gap-2
-              items-end
-            "
-          >
-
-            <textarea
-
-              id="chatInput"
-
-              rows="1"
-
-              placeholder="Ketik pertanyaan Anda..."
-
-              class="
-                flex-1
-                px-3
-                py-2.5
-                text-xs
-                border
-                rounded-xl
-                focus:outline-none
-                focus:ring-2
-                focus:ring-purple-500
-                focus:border-transparent
-              "
-
-            ></textarea>
-
-
-            <button
-
-              id="chatSendButton"
-
-              onclick="sendChatMessage()"
-
-              aria-label="Kirim Pesan"
-
-              class="
-                bg-purple-700
-                text-white
-                w-10
-                h-10
-                rounded-xl
-                text-xs
-                font-bold
-                hover:bg-purple-800
-                transition
-                flex
-                items-center
-                justify-center
-                shrink-0
-              "
-            >
-
-              <i
-                class="
-                  fa-solid
-                  fa-paper-plane
-                "
-              ></i>
-
-            </button>
-
-          </div>
-
-
-          <div
-            class="
-              flex
-              justify-between
-              items-center
-              mt-2
-              px-1
-            "
-          >
-
-            <p
-              class="
-                text-[9px]
-                text-gray-400
-              "
-            >
-              Enter untuk kirim • Shift + Enter untuk baris baru
-            </p>
-
-
-            <p
-              class="
-                text-[9px]
-                text-purple-400
-                font-medium
-              "
-            >
-              ALL-I AI
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- =====================================
-       JAVASCRIPT
-  ====================================== -->
+  </section>
+
+  <!-- TOAST -->
+  <div
+    id="toast"
+    class="hidden fixed bottom-5 right-5 z-[100] max-w-sm rounded-xl px-5 py-4 text-sm font-medium shadow-lg"
+  ></div>
 
   <script>
-
-    // =========================================
-    // URL WEB APP GOOGLE APPS SCRIPT
-    // =========================================
-
+    /*
+     * GANTI DENGAN URL WEB APP GOOGLE APPS SCRIPT ANDA
+     */
     const API_URL =
       "https://script.google.com/macros/s/AKfycbwmSzT7Q4eW_z65IHHYlTPDL6osCOhFdj2BxJ9PAWy6LzjzDeFIkSkVnzREwFWiqIGX/exec";
 
+    let currentUser = null;
+    let summaryLoaded = false;
 
-    // =========================================
-    // PORTAL ANIMATION
-    // =========================================
-
-    const portalContainer =
-      document.getElementById(
-        'portalContainer'
-      );
-
-
-    const centerLogo =
-      document.getElementById(
-        'centerLogo'
-      );
-
-
-    if (centerLogo) {
-
-      centerLogo.addEventListener(
-
-        'mouseenter',
-
-        () => {
-
-          portalContainer.classList.add(
-            'active'
-          );
-
-        }
-
-      );
-
-
-      portalContainer.addEventListener(
-
-        'mouseleave',
-
-        () => {
-
-          portalContainer.classList.remove(
-            'active'
-          );
-
-        }
-
-      );
-
-    }
-
-
-    // =========================================
-    // MODAL SYSTEM
-    // =========================================
-
-    function openModal(id) {
+    document.addEventListener("DOMContentLoaded", function () {
+      initializeApplication();
 
       document
-        .getElementById(id)
-        .classList
-        .remove('hidden');
-
-    }
-
-
-    function closeModal(id) {
+        .getElementById("loginForm")
+        .addEventListener("submit", handleLoginSubmit);
 
       document
-        .getElementById(id)
-        .classList
-        .add('hidden');
+        .getElementById("chatForm")
+        .addEventListener("submit", handleChatSubmit);
+    });
 
+    function initializeApplication() {
+      const savedUser = localStorage.getItem("allihub_user");
+
+      if (savedUser) {
+        try {
+          const user = JSON.parse(savedUser);
+          initDashboard(user);
+        } catch (error) {
+          localStorage.removeItem("allihub_user");
+        }
+      }
     }
 
+    async function handleLoginSubmit(event) {
+      event.preventDefault();
 
-    // =========================================
-    // AUTHENTICATION LOGIC
-    // =========================================
+      const nip = document
+        .getElementById("loginNip")
+        .value
+        .trim();
 
-    async function handleLoginSubmit(e) {
+      const password = document
+        .getElementById("loginPassword")
+        .value;
 
-      e.preventDefault();
+      const button =
+        document.getElementById("loginButton");
 
+      const message =
+        document.getElementById("loginMessage");
 
-      const nip =
-        document
-          .getElementById(
-            'loginNip'
-          )
-          .value;
-
-
-      const password =
-        document
-          .getElementById(
-            'loginPassword'
-          )
-          .value;
-
-
-      const btnLogin =
-        document.getElementById(
-          'btnLogin'
-        );
-
-
-      if (
-        API_URL.includes(
-          "PASTE_URL"
-        )
-      ) {
-
-        alert(
-          "Silakan masukkan URL Web App Google Apps Script pada kode index.html terlebih dahulu!"
-        );
-
+      if (!API_URL || !API_URL.includes("/exec")) {
+        message.textContent =
+          "URL Web App belum valid.";
+        message.className =
+          "text-center text-sm text-red-600";
         return;
-
       }
 
-
-      btnLogin.disabled = true;
-
-
-      btnLogin.innerHTML =
-
-        `
-        <i
-          class="
-            fa-solid
-            fa-spinner
-            animate-spin
-          "
-        ></i>
-
-        Memverifikasi...
-        `;
-
+      button.disabled = true;
+      button.textContent = "Memproses...";
+      message.textContent = "";
 
       try {
+        const result = await postData({
+          action: "login",
+          nip: nip,
+          password: password
+        });
 
-        const response =
-          await fetch(
-
-            API_URL,
-
-            {
-
-              method:
-                "POST",
-
-              body:
-
-                JSON.stringify({
-
-                  action:
-                    "login",
-
-                  nip:
-                    nip,
-
-                  password:
-                    password
-
-                })
-
-            }
-
+        if (result.status !== "success") {
+          throw new Error(
+            result.message || "Login gagal."
           );
-
-
-        const result =
-          await response.json();
-
-
-        if (
-          result.status ===
-          "success"
-        ) {
-
-          localStorage.setItem(
-
-            "user_all_i",
-
-            JSON.stringify(
-              result.user
-            )
-
-          );
-
-
-          closeModal(
-            'loginModal'
-          );
-
-
-          initDashboard(
-            result.user
-          );
-
         }
 
-        else {
-
-          alert(
-
-            result.message ||
-
-            "Login gagal, periksa NIP dan Password Anda."
-
-          );
-
-        }
-
-      }
-
-      catch (err) {
-
-        alert(
-          "Terjadi kesalahan koneksi ke server Apps Script."
+        currentUser = result.user;
+        localStorage.setItem(
+          "allihub_user",
+          JSON.stringify(currentUser)
         );
 
+        initDashboard(currentUser);
+        showToast("Login berhasil.", "success");
+      } catch (error) {
+        message.textContent = error.message;
+        message.className =
+          "text-center text-sm text-red-600";
+      } finally {
+        button.disabled = false;
+        button.textContent = "Masuk";
       }
-
-      finally {
-
-        btnLogin.disabled =
-          false;
-
-
-        btnLogin.innerHTML =
-          `<span>Masuk Aplikasi</span>`;
-
-      }
-
     }
-
-
-    // =========================================
-    // INIT DASHBOARD
-    // =========================================
 
     function initDashboard(user) {
+      currentUser = user;
 
       document
-        .getElementById(
-          'landingView'
-        )
-        .classList
-        .add('hidden');
-
+        .getElementById("loginView")
+        .classList.add("hidden");
 
       document
-        .getElementById(
-          'dashboardView'
-        )
-        .classList
-        .remove('hidden');
+        .getElementById("appView")
+        .classList.remove("hidden");
 
+      const name =
+        user.nama ||
+        user.Nama ||
+        "Pengguna ALL-I HUB";
 
-      document
-        .getElementById(
-          'userName'
-        )
-        .innerText =
+      const role =
+        user.role ||
+        user.Role ||
+        user.instansi ||
+        user.Jabatan ||
+        "Pengguna";
 
-          user.nama ||
+      document.getElementById(
+        "welcomeUserName"
+      ).textContent = name;
 
-          "User ALL-I";
+      document.getElementById(
+        "sidebarUserName"
+      ).textContent = name;
 
+      document.getElementById(
+        "headerUserName"
+      ).textContent = name;
 
-      document
-        .getElementById(
-          'userRole'
-        )
-        .innerText =
+      document.getElementById(
+        "sidebarUserRole"
+      ).textContent = role;
 
-          user.instansi ||
+      document.getElementById(
+        "headerUserRole"
+      ).textContent = role;
 
-          "ASN Kemendagri";
-
-
+      fetchExecutiveSummary();
       fetchMaterials();
-
+      checkHealth();
     }
 
-
-    // =========================================
-    // LOGOUT
-    // =========================================
-
-    function handleLogout() {
-
-      localStorage.removeItem(
-        "user_all_i"
-      );
-
-
-      location.reload();
-
-    }
-
-
-    // =========================================
-    // NAVIGATION SYSTEM
-    // =========================================
-
-    function switchMenu(menuKey) {
-
-      const sections = [
-
-        'dashboard',
-
-        'materials',
-
-        'sharing',
-
-        'cbm',
-
-        'feedback'
-
-      ];
-
-
-      const titles = {
-
-        dashboard:
-          "Executive Summary Profil",
-
-        materials:
-          "Repositori Bahan Ajar & Modul",
-
-        sharing:
-          "Sharing Bahan Ajar Pengguna",
-
-        cbm:
-          "Layanan CBM (Coaching, Mentoring, Konsultasi)",
-
-        feedback:
-          "Ruang Diskusi & Alumni"
-
-      };
-
-
-      sections.forEach(
-
-        s => {
-
-          const el =
-            document.getElementById(
-              `sec-${s}`
-            );
-
-
-          if (el) {
-
-            el.classList.add(
-              'hidden'
-            );
-
-          }
-
-        }
-
-      );
-
+    function logout() {
+      localStorage.removeItem("allihub_user");
+      currentUser = null;
 
       document
-        .getElementById(
-          `sec-${menuKey}`
-        )
-        .classList
-        .remove('hidden');
-
+        .getElementById("appView")
+        .classList.add("hidden");
 
       document
-        .getElementById(
-          'menuTitle'
-        )
-        .innerText =
-          titles[menuKey];
+        .getElementById("loginView")
+        .classList.remove("hidden");
 
+      document
+        .getElementById("loginForm")
+        .reset();
+
+      showToast("Anda telah keluar.", "success");
     }
 
-
-    // =========================================
-    // FETCH MATERIALS
-    // =========================================
-
-    async function fetchMaterials() {
-
-      const listContainer =
-        document.getElementById(
-          'materialsList'
-        );
-
+    async function fetchExecutiveSummary() {
+      setSummaryLoading();
 
       try {
-
-        const res =
-          await fetch(
-
-            `${API_URL}?action=getMaterials`
-
-          );
-
-
-        const json =
-          await res.json();
-
+        const result = await getData(
+          "getExecutiveSummary"
+        );
 
         if (
-
-          json.status ===
-          "success"
-
-          &&
-
-          json.data.length > 0
-
+          result.status !== "success" ||
+          !result.data
         ) {
-
-          listContainer.innerHTML =
-
-            json.data.map(
-
-              m => `
-
-                <div
-                  class="
-                    flex
-                    justify-between
-                    items-center
-                    p-4
-                    bg-gray-50
-                    rounded-xl
-                    border
-                  "
-                >
-
-                  <div>
-
-                    <h4
-                      class="
-                        font-bold
-                        text-sm
-                        text-gray-800
-                      "
-                    >
-                      ${m.Judul}
-                    </h4>
-
-
-                    <p
-                      class="
-                        text-xs
-                        text-gray-500
-                      "
-                    >
-                      ${m.Kategori}
-                      •
-                      ${m.Deskripsi}
-                    </p>
-
-                  </div>
-
-
-                  <a
-
-                    href="${m.File_URL}"
-
-                    target="_blank"
-
-                    class="
-                      bg-blue-600
-                      hover:bg-blue-700
-                      text-white
-                      text-xs
-                      font-bold
-                      px-4
-                      py-2
-                      rounded-lg
-                    "
-                  >
-
-                    <i
-                      class="
-                        fa-solid
-                        fa-download
-                        mr-1
-                      "
-                    ></i>
-
-                    Unduh
-
-                  </a>
-
-                </div>
-
-              `
-
-            ).join('');
-
+          throw new Error(
+            result.message ||
+            "Data Executive Summary tidak tersedia."
+          );
         }
 
-        else {
+        const data = result.data;
 
-          listContainer.innerHTML =
+        document.getElementById(
+          "summaryTotalJP"
+        ).textContent =
+          formatNumber(data.totalJP) + " JP";
 
-            `
-            <p
-              class="
-                text-xs
-                text-gray-400
-                italic
-              "
-            >
-              Belum ada bahan ajar yang diunggah.
-            </p>
-            `;
+        document.getElementById(
+          "summaryTotalAlumni"
+        ).textContent =
+          formatNumber(data.totalAlumni) + " Alumni";
 
-        }
+        document.getElementById(
+          "summaryCompletedCBM"
+        ).textContent =
+          formatNumber(
+            data.completedCBMSessions
+          ) + " Sesi";
 
+        document.getElementById(
+          "summaryAverageRating"
+        ).textContent =
+          Number(data.averageRating || 0)
+            .toFixed(2) + " / 5.0";
+
+        document.getElementById(
+          "summaryTotalMaterials"
+        ).textContent =
+          formatNumber(data.totalMaterials);
+
+        document.getElementById(
+          "summaryTotalSharedMaterials"
+        ).textContent =
+          formatNumber(data.totalSharedMaterials);
+
+        document.getElementById(
+          "summaryTotalFeedback"
+        ).textContent =
+          formatNumber(data.totalFeedback);
+
+        const provinceData =
+          data.alumniByProvince || [];
+
+        document.getElementById(
+          "summaryProvinceCount"
+        ).textContent =
+          formatNumber(provinceData.length);
+
+        renderAlumniMap(provinceData);
+
+        summaryLoaded = true;
+      } catch (error) {
+        console.error(
+          "Gagal memuat Executive Summary:",
+          error
+        );
+
+        setSummaryError();
+
+        renderAlumniMap([]);
+
+        showToast(
+          "Executive Summary gagal dimuat.",
+          "error"
+        );
       }
-
-      catch (err) {
-
-        listContainer.innerHTML =
-
-          `
-          <p
-            class="
-              text-xs
-              text-red-400
-            "
-          >
-            Gagal memuat bahan ajar.
-          </p>
-          `;
-
-      }
-
     }
 
+    function setSummaryLoading() {
+      const loadingText = "Memuat...";
 
-    // =========================================
-    // USER UPLOAD MATERIAL
-    // =========================================
+      document.getElementById(
+        "summaryTotalJP"
+      ).textContent = loadingText;
 
-    async function handleUserUploadSubmit(e) {
+      document.getElementById(
+        "summaryTotalAlumni"
+      ).textContent = loadingText;
 
-      e.preventDefault();
+      document.getElementById(
+        "summaryCompletedCBM"
+      ).textContent = loadingText;
 
+      document.getElementById(
+        "summaryAverageRating"
+      ).textContent = loadingText;
+    }
 
-      const user =
-        JSON.parse(
+    function setSummaryError() {
+      document.getElementById(
+        "summaryTotalJP"
+      ).textContent = "-";
 
-          localStorage.getItem(
-            "user_all_i"
-          )
+      document.getElementById(
+        "summaryTotalAlumni"
+      ).textContent = "-";
 
-          ||
+      document.getElementById(
+        "summaryCompletedCBM"
+      ).textContent = "-";
 
-          "{}"
+      document.getElementById(
+        "summaryAverageRating"
+      ).textContent = "-";
 
-        );
+      document.getElementById(
+        "summaryTotalMaterials"
+      ).textContent = "-";
 
+      document.getElementById(
+        "summaryTotalSharedMaterials"
+      ).textContent = "-";
 
-      const title =
-        document
-          .getElementById(
-            'uploadTitle'
-          )
-          .value;
+      document.getElementById(
+        "summaryTotalFeedback"
+      ).textContent = "-";
 
+      document.getElementById(
+        "summaryProvinceCount"
+      ).textContent = "-";
+    }
 
-      const desc =
-        document
-          .getElementById(
-            'uploadDesc'
-          )
-          .value;
+    function renderAlumniMap(provinceData) {
+      const mapElement =
+        document.getElementById("alumniMap");
 
-
-      const fileInput =
-        document
-          .getElementById(
-            'uploadFile'
-          )
-          .files[0];
-
-
-      const btn =
+      const legendElement =
         document.getElementById(
-          'btnUpload'
+          "alumniProvinceLegend"
         );
 
-
-      if (!fileInput) {
-
-        return;
-
+      if (!Array.isArray(provinceData)) {
+        provinceData = [];
       }
 
-
-      btn.disabled = true;
-
-
-      btn.innerText =
-        "Mengunggah file...";
-
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload =
-        async function() {
-
-          const base64 =
-            reader.result
-              .split(',')[1];
-
-
-          const payload = {
-
-            action:
-              "uploadSharedMaterial",
-
-            judul:
-              title,
-
-            deskripsi:
-              desc,
-
-            namaPengirim:
-
-              user.nama ||
-
-              "Anonim",
-
-            nip:
-
-              user.nip ||
-
+      provinceData = provinceData
+        .map(function (item) {
+          return {
+            province:
+              item.province ||
+              item.Provinsi ||
+              item.name ||
               "-",
 
-            fileName:
-              fileInput.name,
-
-            mimeType:
-              fileInput.type,
-
-            fileBase64:
-              base64
-
+            total:
+              Number(
+                item.total ||
+                item.count ||
+                item.jumlah ||
+                0
+              ) || 0
           };
+        })
+        .filter(function (item) {
+          return item.province !== "-" &&
+            item.total > 0;
+        })
+        .sort(function (a, b) {
+          return b.total - a.total;
+        });
 
+      if (provinceData.length === 0) {
+        mapElement.innerHTML = `
+          <div class="text-center text-slate-400">
+            <div class="text-4xl mb-3">🗺️</div>
+            <p>Belum ada data provinsi alumni.</p>
+          </div>
+        `;
 
-          try {
+        legendElement.innerHTML = `
+          <div class="col-span-full text-sm text-slate-400">
+            Data akan tampil apabila kolom Provinsi pada sheet Users
+            telah terisi untuk alumni aktif.
+          </div>
+        `;
 
-            const res =
-              await fetch(
+        return;
+      }
 
-                API_URL,
+      const maxValue = Math.max.apply(
+        null,
+        provinceData.map(function (item) {
+          return item.total;
+        })
+      );
 
-                {
+      const topData =
+        provinceData.slice(0, 10);
 
-                  method:
-                    "POST",
+      mapElement.innerHTML = `
+        <div class="w-full">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <p class="text-sm font-semibold text-slate-700">
+                Top 10 Provinsi
+              </p>
 
-                  body:
-                    JSON.stringify(
-                      payload
-                    )
+              <p class="text-xs text-slate-400 mt-1">
+                Berdasarkan jumlah alumni aktif
+              </p>
+            </div>
 
+            <span class="text-xs text-slate-400">
+              ${formatNumber(
+                provinceData.reduce(function (sum, item) {
+                  return sum + item.total;
+                }, 0)
+              )} alumni
+            </span>
+          </div>
+
+          <div class="space-y-4">
+            ${topData.map(function (item) {
+              const width = maxValue > 0
+                ? Math.max(
+                    5,
+                    (item.total / maxValue) * 100
+                  )
+                : 0;
+
+              return `
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-sm font-medium text-slate-700">
+                      ${escapeHtml(item.province)}
+                    </span>
+
+                    <span class="text-sm font-bold text-blue-700">
+                      ${formatNumber(item.total)}
+                    </span>
+                  </div>
+
+                  <div class="h-3 w-full rounded-full bg-slate-200">
+                    <div
+                      class="progress-bar h-3 rounded-full bg-blue-600"
+                      style="width: ${width}%"
+                    ></div>
+                  </div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        </div>
+      `;
+
+      legendElement.innerHTML =
+        provinceData.map(function (item, index) {
+          return `
+            <div class="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-3">
+              <div class="flex items-center gap-3">
+                <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-100 text-xs font-bold text-blue-700">
+                  ${index + 1}
+                </span>
+
+                <span class="text-sm text-slate-600">
+                  ${escapeHtml(item.province)}
+                </span>
+              </div>
+
+              <span class="text-sm font-bold text-slate-800">
+                ${formatNumber(item.total)}
+              </span>
+            </div>
+          `;
+        }).join("");
+    }
+
+    async function fetchMaterials() {
+      const loading =
+        document.getElementById(
+          "materialsLoading"
+        );
+
+      const empty =
+        document.getElementById(
+          "materialsEmpty"
+        );
+
+      const grid =
+        document.getElementById(
+          "materialsGrid"
+        );
+
+      loading.classList.remove("hidden");
+      empty.classList.add("hidden");
+      grid.classList.add("hidden");
+      grid.innerHTML = "";
+
+      try {
+        const result = await getData(
+          "getMaterials"
+        );
+
+        if (result.status !== "success") {
+          throw new Error(
+            result.message ||
+            "Materi gagal dimuat."
+          );
+        }
+
+        const materials =
+          Array.isArray(result.data)
+            ? result.data
+            : [];
+
+        loading.classList.add("hidden");
+
+        if (materials.length === 0) {
+          empty.classList.remove("hidden");
+          return;
+        }
+
+        grid.classList.remove("hidden");
+
+        grid.innerHTML =
+          materials.map(function (material) {
+            const title =
+              material.Judul ||
+              material.Title ||
+              material.Nama_Materi ||
+              material.nama ||
+              "Materi Diklat";
+
+            const description =
+              material.Deskripsi ||
+              material.Description ||
+              material.Keterangan ||
+              "Tidak ada deskripsi materi.";
+
+            const category =
+              material.Kategori ||
+              material.Category ||
+              "Materi";
+
+            const link =
+              material.Link ||
+              material.URL ||
+              material.File_URL ||
+              material.File_Link ||
+              "";
+
+            return `
+              <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+                <div class="flex items-start justify-between gap-3">
+                  <div class="w-11 h-11 rounded-xl bg-blue-100 flex items-center justify-center text-xl">
+                    📘
+                  </div>
+
+                  <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+                    ${escapeHtml(category)}
+                  </span>
+                </div>
+
+                <h4 class="font-bold text-slate-800 mt-4">
+                  ${escapeHtml(title)}
+                </h4>
+
+                <p class="text-sm text-slate-500 mt-2 line-clamp-3">
+                  ${escapeHtml(description)}
+                </p>
+
+                ${
+                  link
+                    ? `
+                      <a
+                        href="${escapeAttribute(link)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-block mt-5 rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+                      >
+                        Buka Materi
+                      </a>
+                    `
+                    : `
+                      <span class="inline-block mt-5 rounded-xl bg-slate-100 px-4 py-2 text-sm text-slate-400">
+                        Link belum tersedia
+                      </span>
+                    `
                 }
-
-              );
-
-
-            const json =
-              await res.json();
-
-
-            if (
-
-              json.status ===
-              "success"
-
-            ) {
-
-              alert(
-                "Bahan ajar berhasil diunggah ke Google Drive Widyaiswara!"
-              );
-
-
-              document
-                .getElementById(
-                  'uploadTitle'
-                )
-                .value = "";
-
-
-              document
-                .getElementById(
-                  'uploadDesc'
-                )
-                .value = "";
-
-
-              document
-                .getElementById(
-                  'uploadFile'
-                )
-                .value = "";
-
-            }
-
-            else {
-
-              alert(
-                "Gagal mengunggah file."
-              );
-
-            }
-
-          }
-
-          catch (err) {
-
-            alert(
-              "Terjadi kesalahan server."
-            );
-
-          }
-
-          finally {
-
-            btn.disabled =
-              false;
-
-
-            btn.innerText =
-              "Unggah File Sekarang";
-
-          }
-
-        };
-
-
-      reader.readAsDataURL(
-        fileInput
-      );
-
-    }
-
-
-    // =========================================
-    // ALL-I CHATBOT PREMIUM
-    // =========================================
-
-    const CHAT_STORAGE_KEY =
-      "all_i_chat_history";
-
-
-    let chatSending =
-      false;
-
-
-    // -----------------------------------------
-    // ESCAPE HTML
-    // -----------------------------------------
-
-    function escapeHtml(text) {
-
-      return String(text)
-
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-
-        .replace(
-          /</g,
-          "&lt;"
-        )
-
-        .replace(
-          />/g,
-          "&gt;"
-        )
-
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-
-        .replace(
-          /'/g,
-          "&#039;"
+              </div>
+            `;
+          }).join("");
+      } catch (error) {
+        console.error(
+          "Gagal memuat materi:",
+          error
         );
 
-    }
-
-
-    // -----------------------------------------
-    // FORMAT MARKDOWN SEDERHANA
-    // -----------------------------------------
-
-    function formatInlineMarkdown(text) {
-
-      let html =
-        escapeHtml(text);
-
-
-      // INLINE CODE
-
-      html = html.replace(
-
-        /`([^`]+)`/g,
-
-        '<code>$1</code>'
-
-      );
-
-
-      // BOLD
-
-      html = html.replace(
-
-        /\*\*(.+?)\*\*/g,
-
-        '<strong>$1</strong>'
-
-      );
-
-
-      // ITALIC
-
-      html = html.replace(
-
-        /(?<!\*)\*([^*]+)\*(?!\*)/g,
-
-        '<em>$1</em>'
-
-      );
-
-
-      return html;
-
-    }
-
-
-    function renderMarkdown(text) {
-
-      const lines =
-        String(text)
-          .replace(
-            /\r\n/g,
-            "\n"
-          )
-          .split(
-            "\n"
-          );
-
-
-      let html = "";
-
-      let inUl =
-        false;
-
-      let inOl =
-        false;
-
-
-      function closeLists() {
-
-        if (inUl) {
-
-          html += "</ul>";
-
-          inUl = false;
-
-        }
-
-
-        if (inOl) {
-
-          html += "</ol>";
-
-          inOl = false;
-
-        }
-
+        loading.classList.add("hidden");
+        empty.classList.remove("hidden");
+        empty.textContent =
+          "Materi gagal dimuat.";
       }
-
-
-      lines.forEach(
-
-        rawLine => {
-
-          const line =
-            rawLine.trim();
-
-
-          // BARIS KOSONG
-
-          if (!line) {
-
-            closeLists();
-
-            return;
-
-          }
-
-
-          // HEADING
-
-          if (
-            /^###\s+/.test(line)
-          ) {
-
-            closeLists();
-
-            html +=
-
-              "<h3>" +
-
-              formatInlineMarkdown(
-
-                line.replace(
-                  /^###\s+/,
-                  ""
-                )
-
-              )
-
-              +
-
-              "</h3>";
-
-            return;
-
-          }
-
-
-          // BULLET
-
-          if (
-            /^[-*•]\s+/.test(line)
-          ) {
-
-            if (!inUl) {
-
-              closeLists();
-
-              html += "<ul>";
-
-              inUl = true;
-
-            }
-
-
-            html +=
-
-              "<li>" +
-
-              formatInlineMarkdown(
-
-                line.replace(
-                  /^[-*•]\s+/,
-                  ""
-                )
-
-              )
-
-              +
-
-              "</li>";
-
-            return;
-
-          }
-
-
-          // NUMBERED LIST
-
-          if (
-            /^\d+\.\s+/.test(line)
-          ) {
-
-            if (!inOl) {
-
-              closeLists();
-
-              html += "<ol>";
-
-              inOl = true;
-
-            }
-
-
-            html +=
-
-              "<li>" +
-
-              formatInlineMarkdown(
-
-                line.replace(
-                  /^\d+\.\s+/,
-                  ""
-                )
-
-              )
-
-              +
-
-              "</li>";
-
-            return;
-
-          }
-
-
-          // PARAGRAF BIASA
-
-          closeLists();
-
-
-          html +=
-
-            "<p>" +
-
-            formatInlineMarkdown(
-              line
-            )
-
-            +
-
-            "</p>";
-
-        }
-
-      );
-
-
-      closeLists();
-
-
-      return html;
-
     }
 
+    async function handleChatSubmit(event) {
+      event.preventDefault();
 
-    // -----------------------------------------
-    // GET CHAT HISTORY
-    // -----------------------------------------
+      const input =
+        document.getElementById("chatInput");
 
-    function getChatHistory() {
+      const button =
+        document.getElementById("chatButton");
+
+      const prompt = input.value.trim();
+
+      if (!prompt) return;
+
+      addChatMessage(prompt, "user");
+      input.value = "";
+
+      button.disabled = true;
+      button.textContent = "⏳";
+
+      const loadingId =
+        addChatMessage(
+          "Sedang memproses pertanyaan...",
+          "bot"
+        );
 
       try {
+        const result = await postData({
+          action: "askGeminiAI",
+          prompt: prompt
+        });
 
-        const saved =
-          localStorage.getItem(
-            CHAT_STORAGE_KEY
+        removeChatMessage(loadingId);
+
+        if (result.status !== "success") {
+          throw new Error(
+            result.message ||
+            "AI Assistant gagal memberikan jawaban."
           );
-
-
-        if (!saved) {
-
-          return [];
-
         }
 
+        const answer =
+          result.answer ||
+          result.response ||
+          result.text ||
+          result.message ||
+          "Tidak ada jawaban.";
 
-        const history =
-          JSON.parse(saved);
+        addChatMessage(answer, "bot");
+      } catch (error) {
+        removeChatMessage(loadingId);
 
-
-        return Array.isArray(history)
-
-          ? history
-
-          : [];
-
+        addChatMessage(
+          "Maaf, terjadi kendala: " +
+          error.message,
+          "bot"
+        );
+      } finally {
+        button.disabled = false;
+        button.textContent = "Kirim";
+        input.focus();
       }
-
-      catch (err) {
-
-        return [];
-
-      }
-
     }
 
-
-    // -----------------------------------------
-    // SAVE CHAT HISTORY
-    // -----------------------------------------
-
-    function saveChatHistory(history) {
-
-      localStorage.setItem(
-
-        CHAT_STORAGE_KEY,
-
-        JSON.stringify(
-          history
-        )
-
-      );
-
-    }
-
-
-    // -----------------------------------------
-    // ADD MESSAGE TO STORAGE
-    // -----------------------------------------
-
-    function addMessageToHistory(
-      role,
-      text
-    ) {
-
-      const history =
-        getChatHistory();
-
-
-      history.push({
-
-        role:
-          role,
-
-        text:
-          text,
-
-        time:
-          new Date().toISOString()
-
-      });
-
-
-      saveChatHistory(
-        history
-      );
-
-    }
-
-
-    // -----------------------------------------
-    // FORMAT TIME
-    // -----------------------------------------
-
-    function formatChatTime(time) {
-
-      try {
-
-        return new Date(time)
-
-          .toLocaleTimeString(
-
-            "id-ID",
-
-            {
-
-              hour:
-                "2-digit",
-
-              minute:
-                "2-digit"
-
-            }
-
-          );
-
-      }
-
-      catch (err) {
-
-        return "";
-
-      }
-
-    }
-
-
-    // -----------------------------------------
-    // AUTO SCROLL
-    // -----------------------------------------
-
-    function scrollChatToBottom() {
-
+    function addChatMessage(message, sender) {
       const container =
         document.getElementById(
-          'chatMessages'
+          "chatMessages"
         );
 
-
-      if (!container) {
-
-        return;
-
-      }
-
-
-      setTimeout(
-
-        () => {
-
-          container.scrollTop =
-            container.scrollHeight;
-
-        },
-
-        50
-
-      );
-
-    }
-
-
-    // -----------------------------------------
-    // RENDER SINGLE MESSAGE
-    // -----------------------------------------
-
-    function renderChatMessage(
-      message
-    ) {
-
-      const container =
-        document.getElementById(
-          'chatMessages'
-        );
-
-
-      if (!container) {
-
-        return;
-
-      }
-
+      const id =
+        "message-" +
+        Date.now() +
+        "-" +
+        Math.random()
+          .toString(36)
+          .slice(2);
 
       const wrapper =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
-
+      wrapper.id = id;
       wrapper.className =
-        "chat-bubble flex flex-col";
-
-
-      const isUser =
-        message.role ===
-        "user";
-
-
-      wrapper.classList.add(
-
-        isUser
-
-          ? "items-end"
-
-          : "items-start"
-
-      );
-
+        sender === "user"
+          ? "flex justify-end"
+          : "flex justify-start";
 
       const bubble =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
+      bubble.className =
+        sender === "user"
+          ? "message-user max-w-[85%] px-4 py-3 text-sm whitespace-pre-wrap"
+          : "message-bot max-w-[85%] px-4 py-3 text-sm whitespace-pre-wrap";
 
-      if (isUser) {
+      bubble.textContent = message;
+      wrapper.appendChild(bubble);
+      container.appendChild(wrapper);
 
-        bubble.className =
+      container.scrollTop =
+        container.scrollHeight;
 
-          `
-          bg-blue-600
-          text-white
-          p-3
-          rounded-2xl
-          rounded-br-md
-          max-w-[85%]
-          shadow-sm
-          whitespace-pre-wrap
-          `;
-
-
-        bubble.textContent =
-          message.text;
-
-      }
-
-      else {
-
-        bubble.className =
-
-          `
-          bg-purple-50
-          text-purple-950
-          p-3
-          rounded-2xl
-          rounded-bl-md
-          max-w-[90%]
-          border
-          border-purple-100
-          shadow-sm
-          ai-markdown
-          `;
-
-
-        bubble.innerHTML =
-          renderMarkdown(
-            message.text
-          );
-
-      }
-
-
-      const meta =
-        document.createElement(
-          "div"
-        );
-
-
-      meta.className =
-
-        `
-        flex
-        items-center
-        gap-1
-        mt-1
-        px-1
-        text-[9px]
-        text-gray-400
-        `;
-
-
-      if (!isUser) {
-
-        meta.innerHTML =
-          `
-          <i
-            class="
-              fa-solid
-              fa-robot
-              text-purple-400
-            "
-          ></i>
-          ALL-I
-          •
-          ${formatChatTime(message.time)}
-          `;
-
-      }
-
-      else {
-
-        meta.textContent =
-          formatChatTime(
-            message.time
-          );
-
-      }
-
-
-      wrapper.appendChild(
-        bubble
-      );
-
-
-      wrapper.appendChild(
-        meta
-      );
-
-
-      container.appendChild(
-        wrapper
-      );
-
+      return id;
     }
 
+    function removeChatMessage(id) {
+      const element =
+        document.getElementById(id);
 
-    // -----------------------------------------
-    // LOAD CHAT HISTORY
-    // -----------------------------------------
-
-    function loadChatHistory() {
-
-      const container =
-        document.getElementById(
-          'chatMessages'
-        );
-
-
-      if (!container) {
-
-        return;
-
+      if (element) {
+        element.remove();
       }
-
-
-      container.innerHTML = "";
-
-
-      const history =
-        getChatHistory();
-
-
-      if (
-        history.length === 0
-      ) {
-
-        const welcomeMessage = {
-
-          role:
-            "assistant",
-
-          text:
-
-            "Halo! Saya **ALL-I Assistant**, asisten pendukung pembelajaran dan konsultasi untuk Platform Kediklatan Widyaiswara.\n\nSaya dapat membantu Anda terkait:\n\n- Pengembangan Kompetensi ASN\n- Materi dan proses kediklatan\n- Widyaiswara dan pembelajaran\n- Kepemimpinan dan manajemen pemerintahan\n- Konsultasi aktualisasi\n\nSilakan tuliskan pertanyaan Anda.",
-
-          time:
-            new Date().toISOString()
-
-        };
-
-
-        renderChatMessage(
-          welcomeMessage
-        );
-
-
-        return;
-
-      }
-
-
-      history.forEach(
-
-        message => {
-
-          renderChatMessage(
-            message
-          );
-
-        }
-
-      );
-
-
-      scrollChatToBottom();
-
     }
 
-
-    // -----------------------------------------
-    // TOGGLE CHATBOT
-    // -----------------------------------------
-
-    function toggleChatbot() {
-
-      const chatbot =
+    async function checkHealth() {
+      const badge =
         document.getElementById(
-          'chatbotBox'
+          "healthStatusBadge"
         );
 
-
-      chatbot.classList.toggle(
-        'hidden'
-      );
-
-
-      if (
-
-        !chatbot.classList.contains(
-          'hidden'
-        )
-
-      ) {
-
-        loadChatHistory();
-
-
-        setTimeout(
-
-          () => {
-
-            document
-              .getElementById(
-                'chatInput'
-              )
-              .focus();
-
-          },
-
-          150
-
-        );
-
-      }
-
-    }
-
-
-    // -----------------------------------------
-    // START NEW CHAT
-    // -----------------------------------------
-
-    function startNewChat() {
-
-      const confirmed =
-        confirm(
-
-          "Mulai percakapan baru? Riwayat chat sebelumnya akan dihapus."
-
-        );
-
-
-      if (!confirmed) {
-
-        return;
-
-      }
-
-
-      localStorage.removeItem(
-        CHAT_STORAGE_KEY
-      );
-
-
-      loadChatHistory();
-
-    }
-
-
-    // -----------------------------------------
-    // SHOW TYPING INDICATOR
-    // -----------------------------------------
-
-    function showTypingIndicator() {
-
-      const container =
-        document.getElementById(
-          'chatMessages'
-        );
-
-
-      const typing =
-        document.createElement(
-          "div"
-        );
-
-
-      typing.id =
-        "allITypingIndicator";
-
-
-      typing.className =
-        "chat-bubble flex items-start";
-
-
-      typing.innerHTML =
-
-        `
-        <div
-          class="
-            bg-white
-            border
-            border-purple-100
-            shadow-sm
-            px-4
-            py-3
-            rounded-2xl
-            rounded-bl-md
-            flex
-            items-center
-            gap-2
-          "
-        >
-
-          <i
-            class="
-              fa-solid
-              fa-robot
-              text-purple-500
-            "
-          ></i>
-
-
-          <span
-            class="
-              flex
-              gap-1
-              items-center
-            "
-          >
-
-            <span
-              class="typing-dot"
-            ></span>
-
-            <span
-              class="typing-dot"
-            ></span>
-
-            <span
-              class="typing-dot"
-            ></span>
-
-          </span>
-
-
-          <span
-            class="
-              text-[10px]
-              text-gray-500
-              ml-1
-            "
-          >
-            ALL-I sedang menyiapkan jawaban...
-          </span>
-
-        </div>
-        `;
-
-
-      container.appendChild(
-        typing
-      );
-
-
-      scrollChatToBottom();
-
-    }
-
-
-    // -----------------------------------------
-    // REMOVE TYPING INDICATOR
-    // -----------------------------------------
-
-    function removeTypingIndicator() {
-
-      const typing =
-        document.getElementById(
-          "allITypingIndicator"
-        );
-
-
-      if (typing) {
-
-        typing.remove();
-
-      }
-
-    }
-
-
-    // -----------------------------------------
-    // AUTO RESIZE TEXTAREA
-    // -----------------------------------------
-
-    function autoResizeChatInput() {
-
-      const input =
-        document.getElementById(
-          "chatInput"
-        );
-
-
-      if (!input) {
-
-        return;
-
-      }
-
-
-      input.style.height =
-        "auto";
-
-
-      input.style.height =
-
-        Math.min(
-
-          input.scrollHeight,
-
-          110
-
-        )
-
-        +
-
-        "px";
-
-    }
-
-
-    // -----------------------------------------
-    // SEND CHAT MESSAGE
-    // -----------------------------------------
-
-    async function sendChatMessage() {
-
-      if (chatSending) {
-
-        return;
-
-      }
-
-
-      const input =
-        document.getElementById(
-          'chatInput'
-        );
-
-
-      const prompt =
-        input.value.trim();
-
-
-      if (!prompt) {
-
-        input.focus();
-
-        return;
-
-      }
-
-
-      const sendButton =
-        document.getElementById(
-          "chatSendButton"
-        );
-
-
-      chatSending =
-        true;
-
-
-      input.disabled =
-        true;
-
-
-      sendButton.disabled =
-        true;
-
-
-      sendButton.innerHTML =
-        `
-        <i
-          class="
-            fa-solid
-            fa-spinner
-            animate-spin
-          "
-        ></i>
-        `;
-
-
-      const userMessage = {
-
-        role:
-          "user",
-
-        text:
-          prompt,
-
-        time:
-          new Date().toISOString()
-
-      };
-
-
-      renderChatMessage(
-        userMessage
-      );
-
-
-      addMessageToHistory(
-        "user",
-        prompt
-      );
-
-
-      input.value =
-        "";
-
-
-      autoResizeChatInput();
-
-
-      showTypingIndicator();
-
+      badge.textContent = "Memeriksa...";
+      badge.className =
+        "rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-500";
 
       try {
+        const result = await getData("health");
 
-        const res =
-          await fetch(
-
-            API_URL,
-
-            {
-
-              method:
-                "POST",
-
-              body:
-
-                JSON.stringify({
-
-                  action:
-                    "askGeminiAI",
-
-                  prompt:
-                    prompt
-
-                })
-
-            }
-
-          );
-
-
-        const json =
-          await res.json();
-
-
-        removeTypingIndicator();
-
-
-        if (
-
-          json.status ===
-          "success"
-
-          &&
-
-          json.reply
-
-        ) {
-
-          const aiMessage = {
-
-            role:
-              "assistant",
-
-            text:
-              json.reply,
-
-            time:
-              new Date().toISOString()
-
-          };
-
-
-          renderChatMessage(
-            aiMessage
-          );
-
-
-          addMessageToHistory(
-
-            "assistant",
-
-            json.reply
-
-          );
-
+        if (result.status === "success") {
+          badge.textContent = "Online";
+          badge.className =
+            "rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700";
+        } else {
+          throw new Error("Backend error");
         }
-
-        else {
-
-          const errorText =
-
-            json.message ||
-
-            "Maaf, ALL-I belum dapat memberikan respons saat ini. Silakan coba kembali beberapa saat lagi.";
-
-
-          const errorMessage = {
-
-            role:
-              "assistant",
-
-            text:
-              `**Terjadi kendala sementara.**\n\n${errorText}`,
-
-            time:
-              new Date().toISOString()
-
-          };
-
-
-          renderChatMessage(
-            errorMessage
-          );
-
-        }
-
+      } catch (error) {
+        badge.textContent = "Offline";
+        badge.className =
+          "rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-700";
       }
-
-      catch (err) {
-
-        removeTypingIndicator();
-
-
-        const errorMessage = {
-
-          role:
-            "assistant",
-
-          text:
-
-            "**Koneksi ke ALL-I sedang mengalami kendala.**\n\nSilakan periksa koneksi internet Anda dan coba kirimkan pertanyaan kembali.",
-
-          time:
-            new Date().toISOString()
-
-        };
-
-
-        renderChatMessage(
-          errorMessage
-        );
-
-      }
-
-      finally {
-
-        chatSending =
-          false;
-
-
-        input.disabled =
-          false;
-
-
-        sendButton.disabled =
-          false;
-
-
-        sendButton.innerHTML =
-          `
-          <i
-            class="
-              fa-solid
-              fa-paper-plane
-            "
-          ></i>
-          `;
-
-
-        input.focus();
-
-
-        scrollChatToBottom();
-
-      }
-
     }
 
+    function showPage(pageName) {
+      document
+        .querySelectorAll(".page-content")
+        .forEach(function (page) {
+          page.classList.add("hidden");
+        });
 
-    // =========================================
-    // CHAT KEYBOARD EVENT
-    // ENTER = SEND
-    // SHIFT + ENTER = NEW LINE
-    // =========================================
+      const selectedPage =
+        document.getElementById(
+          "page" +
+          pageName.charAt(0).toUpperCase() +
+          pageName.slice(1)
+        );
 
-    document.addEventListener(
-
-      "DOMContentLoaded",
-
-      () => {
-
-        const chatInput =
-          document.getElementById(
-            "chatInput"
-          );
-
-
-        if (chatInput) {
-
-          chatInput.addEventListener(
-
-            "keydown",
-
-            function(e) {
-
-              if (
-
-                e.key === "Enter"
-
-                &&
-
-                !e.shiftKey
-
-              ) {
-
-                e.preventDefault();
-
-
-                sendChatMessage();
-
-              }
-
-            }
-
-          );
-
-
-          chatInput.addEventListener(
-
-            "input",
-
-            autoResizeChatInput
-
-          );
-
-        }
-
+      if (selectedPage) {
+        selectedPage.classList.remove("hidden");
       }
 
-    );
+      document
+        .querySelectorAll(".sidebar-item")
+        .forEach(function (item) {
+          item.classList.remove("active");
 
-
-    // =========================================
-    // AUTO CHECK LOGIN STATUS
-    // =========================================
-
-    window.addEventListener(
-
-      'DOMContentLoaded',
-
-      () => {
-
-        const savedUser =
-          localStorage.getItem(
-            "user_all_i"
-          );
-
-
-        if (savedUser) {
-
-          try {
-
-            initDashboard(
-
-              JSON.parse(
-                savedUser
-              )
-
-            );
-
+          if (
+            item.dataset.page === pageName
+          ) {
+            item.classList.add("active");
           }
+        });
 
-          catch (err) {
+      const titles = {
+        executiveSummary: "Executive Summary",
+        materials: "Materi Diklat",
+        chatbot: "AI Assistant"
+      };
 
-            localStorage.removeItem(
-              "user_all_i"
-            );
+      document.getElementById(
+        "pageTitle"
+      ).textContent =
+        titles[pageName] || "ALL-I HUB";
 
-          }
+      closeSidebar();
 
-        }
-
+      if (
+        pageName === "executiveSummary" &&
+        !summaryLoaded
+      ) {
+        fetchExecutiveSummary();
       }
 
-    );
+      if (pageName === "materials") {
+        fetchMaterials();
+      }
+    }
 
+    function toggleSidebar() {
+      const sidebar =
+        document.getElementById("sidebar");
+
+      const overlay =
+        document.getElementById(
+          "mobileOverlay"
+        );
+
+      sidebar.classList.toggle("open");
+      overlay.classList.toggle("hidden");
+    }
+
+    function closeSidebar() {
+      const sidebar =
+        document.getElementById("sidebar");
+
+      const overlay =
+        document.getElementById(
+          "mobileOverlay"
+        );
+
+      sidebar.classList.remove("open");
+      overlay.classList.add("hidden");
+    }
+
+    async function getData(action) {
+      const response = await fetch(
+        API_URL +
+        "?action=" +
+        encodeURIComponent(action) +
+        "&t=" +
+        Date.now(),
+        {
+          method: "GET",
+          cache: "no-store"
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          "HTTP error " + response.status
+        );
+      }
+
+      return await response.json();
+    }
+
+    async function postData(payload) {
+      const response = await fetch(
+        API_URL,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify(payload)
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          "HTTP error " + response.status
+        );
+      }
+
+      return await response.json();
+    }
+
+    function formatNumber(value) {
+      return new Intl.NumberFormat("id-ID").format(
+        Number(value) || 0
+      );
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function escapeAttribute(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    function showToast(message, type) {
+      const toast =
+        document.getElementById("toast");
+
+      toast.textContent = message;
+      toast.classList.remove(
+        "hidden",
+        "bg-emerald-600",
+        "bg-red-600",
+        "text-white"
+      );
+
+      if (type === "error") {
+        toast.classList.add(
+          "bg-red-600",
+          "text-white"
+        );
+      } else {
+        toast.classList.add(
+          "bg-emerald-600",
+          "text-white"
+        );
+      }
+
+      setTimeout(function () {
+        toast.classList.add("hidden");
+      }, 3500);
+    }
   </script>
-
 </body>
 </html>
