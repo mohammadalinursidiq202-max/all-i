@@ -2346,6 +2346,21 @@
 
     }
 
+  
+    .profile-toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
+    .profile-search{flex:1;min-width:240px;padding:12px 14px;border:1px solid #d9e1ea;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box}
+    .profile-filter{padding:12px 14px;border:1px solid #d9e1ea;border-radius:10px;font-size:14px;background:#fff;min-width:180px}
+    .profile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+    .profile-card{border:1px solid #e5eaf0;border-radius:16px;padding:18px;background:#fff;box-shadow:0 5px 18px rgba(31,41,55,.06);transition:transform .2s ease,box-shadow .2s ease}
+    .profile-card:hover{transform:translateY(-2px);box-shadow:0 9px 24px rgba(31,41,55,.10)}
+    .profile-card-top{display:flex;gap:14px;align-items:center}
+    .profile-photo{width:72px;height:72px;border-radius:50%;object-fit:cover;background:#eef3f8;flex:0 0 72px}
+    .profile-photo-placeholder{display:flex;align-items:center;justify-content:center;font-size:28px;color:#7b8a9a}
+    .profile-name{font-weight:700;font-size:16px;line-height:1.35}.profile-role{margin-top:4px;font-size:13px;color:#667085}
+    .profile-badge{display:inline-block;margin-top:7px;padding:4px 8px;border-radius:999px;background:#eef6ff;color:#2166b1;font-size:11px;font-weight:600}
+    .profile-info{margin-top:16px;display:grid;gap:8px}.profile-info-row{display:flex;gap:8px;font-size:12px;line-height:1.45}.profile-info-label{min-width:92px;color:#7a8795}.profile-info-value{color:#344054;font-weight:500}
+    .profile-empty{grid-column:1/-1;text-align:center;padding:40px 20px;color:#667085}.profile-count{font-size:13px;color:#667085;margin-bottom:14px}
+
   </style>
 </head>
 
@@ -2666,6 +2681,15 @@
 
       </button>
 
+
+      <button
+        class="menu-item profile"
+        data-page="profile"
+        onclick="showPage('profile', this)"
+      >
+        <i class="fa-solid fa-user-tie"></i>
+        <span>Profil Widyaiswara</span>
+      </button>
 
       <button
         class="menu-item repository"
@@ -3069,6 +3093,36 @@
 
         </div>
 
+      </section>
+
+
+      <!-- =================================
+           PROFIL WIDYAISWARA
+      ================================= -->
+      <section id="page-profile" class="page-section">
+        <div class="content-card">
+          <div class="content-card-header">
+            <div class="content-card-title">
+              <i class="fa-solid fa-user-tie" style="color:#2166b1"></i>
+              Profil Widyaiswara
+            </div>
+            <button class="primary-button" onclick="loadProfilWidyaiswara()">
+              <i class="fa-solid fa-rotate"></i> Refresh
+            </button>
+          </div>
+
+          <div class="profile-toolbar">
+            <input id="profileSearch" class="profile-search" type="text" placeholder="Cari nama, unit kerja, bidang keahlian, spesialisasi..." oninput="renderProfilWidyaiswara()">
+            <select id="profileJenjangFilter" class="profile-filter" onchange="renderProfilWidyaiswara()">
+              <option value="">Semua Jenjang</option>
+            </select>
+          </div>
+
+          <div id="profileCount" class="profile-count">Memuat profil...</div>
+          <div id="profileGrid" class="profile-grid">
+            <div class="profile-empty">Memuat data Profil Widyaiswara...</div>
+          </div>
+        </div>
       </section>
 
 
@@ -3741,6 +3795,8 @@ Silakan ajukan pertanyaan Anda.
 
   let allAlumniMarkers = [];
 
+  let allProfilWidyaiswara = [];
+
 
   /* =========================================
      API HELPER
@@ -4165,6 +4221,9 @@ Silakan ajukan pertanyaan Anda.
       summary:
         "Executive Summary Profil",
 
+      profile:
+        "Profil Widyaiswara",
+
       repository:
         "Repositori Bahan Ajar",
 
@@ -4208,6 +4267,10 @@ Silakan ajukan pertanyaan Anda.
     }
 
 
+    if (page === "profile") {
+      loadProfilWidyaiswara();
+    }
+
     if (page === "repository") {
       loadMaterials();
     }
@@ -4219,6 +4282,65 @@ Silakan ajukan pertanyaan Anda.
 
   }
 
+
+  /* =========================================
+     PROFIL WIDYAISWARA
+  ========================================= */
+
+  async function loadProfilWidyaiswara() {
+    const grid = document.getElementById("profileGrid");
+    const count = document.getElementById("profileCount");
+    if (!grid) return;
+
+    grid.innerHTML = '<div class="profile-empty">Memuat data Profil Widyaiswara...</div>';
+
+    try {
+      const result = await apiGet("getProfilWidyaiswara");
+      if (result.status !== "success") throw new Error(result.message || "Data profil tidak dapat dimuat.");
+      allProfilWidyaiswara = Array.isArray(result.data) ? result.data : [];
+      populateProfilJenjangFilter();
+      renderProfilWidyaiswara();
+    } catch (error) {
+      console.error("Profil Widyaiswara Error:", error);
+      grid.innerHTML = '<div class="profile-empty">Gagal memuat Profil Widyaiswara.</div>';
+      if (count) count.textContent = "Data profil tidak dapat dimuat.";
+    }
+  }
+
+  function populateProfilJenjangFilter() {
+    const select = document.getElementById("profileJenjangFilter");
+    if (!select) return;
+    const currentValue = select.value;
+    const values = [...new Set(allProfilWidyaiswara.map(function(p){return String(p.Jenjang_Widyaiswara || "").trim();}).filter(Boolean))].sort(function(a,b){return a.localeCompare(b,"id");});
+    select.innerHTML = '<option value="">Semua Jenjang</option>' + values.map(function(v){return '<option value="'+escapeAttribute(v)+'">'+escapeHtml(v)+'</option>';}).join("");
+    if (values.indexOf(currentValue) !== -1) select.value = currentValue;
+  }
+
+  function renderProfilWidyaiswara() {
+    const grid = document.getElementById("profileGrid");
+    const count = document.getElementById("profileCount");
+    const search = String((document.getElementById("profileSearch") || {}).value || "").trim().toLowerCase();
+    const jenjang = String((document.getElementById("profileJenjangFilter") || {}).value || "").trim().toLowerCase();
+
+    const filtered = allProfilWidyaiswara.filter(function(p){
+      const searchable = [p.Nama,p.Gelar_Depan,p.Gelar_Belakang,p.Jabatan,p.Jenjang_Widyaiswara,p.Pangkat_Golongan,p.Unit_Kerja,p.Bidang_Keahlian,p.Spesialisasi,p.Pendidikan_Terakhir,p.Program_Studi,p.Perguruan_Tinggi].join(" ").toLowerCase();
+      return (!search || searchable.indexOf(search) !== -1) && (!jenjang || String(p.Jenjang_Widyaiswara || "").toLowerCase() === jenjang);
+    });
+
+    if (count) count.textContent = filtered.length + " profil ditampilkan dari " + allProfilWidyaiswara.length + " profil.";
+    if (!filtered.length) { grid.innerHTML = '<div class="profile-empty">Tidak ada profil yang sesuai dengan pencarian.</div>'; return; }
+    grid.innerHTML = filtered.map(renderProfilCard).join("");
+  }
+
+  function renderProfilCard(p) {
+    const nama = [p.Gelar_Depan,p.Nama,p.Gelar_Belakang].filter(function(v){return String(v || "").trim();}).join(" ");
+    const foto = String(p.Foto_URL || "").trim();
+    const photo = foto ? '<img class="profile-photo" src="'+escapeAttribute(foto)+'" alt="Foto" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"><div class="profile-photo profile-photo-placeholder" style="display:none"><i class="fa-solid fa-user"></i></div>' : '<div class="profile-photo profile-photo-placeholder"><i class="fa-solid fa-user"></i></div>';
+    const rows=[];
+    function row(label,value){if(String(value || "").trim()) rows.push('<div class="profile-info-row"><div class="profile-info-label">'+escapeHtml(label)+'</div><div class="profile-info-value">'+escapeHtml(value)+'</div></div>');}
+    row("Unit Kerja",p.Unit_Kerja); row("Bidang",p.Bidang_Keahlian); row("Spesialisasi",p.Spesialisasi); row("Pendidikan",p.Pendidikan_Terakhir);
+    return '<div class="profile-card"><div class="profile-card-top">'+photo+'<div><div class="profile-name">'+escapeHtml(nama || "Nama belum diisi")+'</div><div class="profile-role">'+escapeHtml(p.Jabatan || "Widyaiswara")+'</div>'+(p.Jenjang_Widyaiswara?'<span class="profile-badge">'+escapeHtml(p.Jenjang_Widyaiswara)+'</span>':'')+'</div></div><div class="profile-info">'+rows.join("")+'</div></div>';
+  }
 
   /* =========================================
      EXECUTIVE SUMMARY
