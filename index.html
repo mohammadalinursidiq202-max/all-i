@@ -2350,16 +2350,30 @@
     .profile-toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
     .profile-search{flex:1;min-width:240px;padding:12px 14px;border:1px solid #d9e1ea;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box}
     .profile-filter{padding:12px 14px;border:1px solid #d9e1ea;border-radius:10px;font-size:14px;background:#fff;min-width:180px}
-    .profile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
-    .profile-card{border:1px solid #e5eaf0;border-radius:16px;padding:18px;background:#fff;box-shadow:0 5px 18px rgba(31,41,55,.06);transition:transform .2s ease,box-shadow .2s ease}
+    .profile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+    .profile-card{border:1px solid #e5eaf0;border-radius:16px;padding:18px;background:#fff;box-shadow:0 5px 18px rgba(31,41,55,.06);transition:transform .2s ease,box-shadow .2s ease;display:flex;flex-direction:column}
     .profile-card:hover{transform:translateY(-2px);box-shadow:0 9px 24px rgba(31,41,55,.10)}
-    .profile-card-top{display:flex;gap:14px;align-items:center}
-    .profile-photo{width:72px;height:72px;border-radius:50%;object-fit:cover;background:#eef3f8;flex:0 0 72px}
-    .profile-photo-placeholder{display:flex;align-items:center;justify-content:center;font-size:28px;color:#7b8a9a}
-    .profile-name{font-weight:700;font-size:16px;line-height:1.35}.profile-role{margin-top:4px;font-size:13px;color:#667085}
+    .profile-card-top{display:flex;gap:15px;align-items:center}
+    .profile-photo{width:88px;height:88px;border-radius:50%;object-fit:cover;background:#eef3f8;flex:0 0 88px;border:3px solid #fff;box-shadow:0 3px 12px rgba(31,41,55,.10)}
+    .profile-photo-placeholder{display:flex;align-items:center;justify-content:center;font-size:30px;color:#7b8a9a}
+    .profile-name{font-weight:700;font-size:16px;line-height:1.35;color:#19365d}.profile-role{margin-top:5px;font-size:13px;color:#667085}
     .profile-badge{display:inline-block;margin-top:7px;padding:4px 8px;border-radius:999px;background:#eef6ff;color:#2166b1;font-size:11px;font-weight:600}
-    .profile-info{margin-top:16px;display:grid;gap:8px}.profile-info-row{display:flex;gap:8px;font-size:12px;line-height:1.45}.profile-info-label{min-width:92px;color:#7a8795}.profile-info-value{color:#344054;font-weight:500}
+    .profile-info{margin-top:16px;display:grid;gap:8px}.profile-info-row{display:flex;gap:10px;font-size:12px;line-height:1.45}.profile-info-label{min-width:105px;color:#7a8795}.profile-info-value{color:#344054;font-weight:500;overflow-wrap:anywhere}
+    .profile-card-actions{margin-top:16px;padding-top:14px;border-top:1px solid #edf1f5}
+    .profile-detail-button{width:100%;border:0;border-radius:10px;padding:10px 12px;background:#2166b1;color:#fff;font-weight:600;cursor:pointer;font-size:13px}
+    .profile-detail-button:hover{filter:brightness(.96)}
     .profile-empty{grid-column:1/-1;text-align:center;padding:40px 20px;color:#667085}.profile-count{font-size:13px;color:#667085;margin-bottom:14px}
+    .profile-modal{position:fixed;inset:0;background:rgba(15,35,62,.58);display:none;align-items:center;justify-content:center;padding:24px;z-index:9999;box-sizing:border-box}
+    .profile-modal.active{display:flex}
+    .profile-modal-card{width:min(980px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:20px;box-shadow:0 25px 70px rgba(0,0,0,.25);position:relative}
+    .profile-modal-close{position:absolute;right:16px;top:16px;width:38px;height:38px;border:0;border-radius:50%;background:#eef2f6;color:#344054;cursor:pointer;font-size:17px;z-index:2}
+    .profile-modal-hero{display:flex;gap:22px;align-items:center;padding:30px 32px;background:linear-gradient(135deg,#f5f9ff,#eef5fb);border-bottom:1px solid #e5ebf2}
+    .profile-modal-photo{width:150px;height:150px;border-radius:18px;object-fit:cover;background:#e7edf4;flex:0 0 150px;box-shadow:0 8px 25px rgba(31,41,55,.12)}
+    .profile-modal-photo-placeholder{display:flex;align-items:center;justify-content:center;font-size:52px;color:#7b8a9a}
+    .profile-modal-name{font-size:26px;font-weight:800;line-height:1.25;color:#17375f}.profile-modal-role{font-size:15px;color:#667085;margin-top:8px}.profile-modal-unit{font-size:14px;color:#2166b1;margin-top:5px}
+    .profile-modal-body{padding:28px 32px 32px}.profile-section{margin-bottom:26px}.profile-section:last-child{margin-bottom:0}.profile-section-title{font-size:15px;font-weight:800;color:#19365d;border-bottom:2px solid #e9eef4;padding-bottom:9px;margin-bottom:13px;display:flex;align-items:center;gap:8px}.profile-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 22px}.profile-detail-item{padding:10px 0;border-bottom:1px solid #f0f2f5}.profile-detail-label{font-size:11px;color:#7a8795;text-transform:uppercase;letter-spacing:.35px;margin-bottom:4px}.profile-detail-value{font-size:13px;color:#344054;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}.profile-detail-full{grid-column:1/-1}
+    .profile-link{color:#2166b1;text-decoration:none;font-weight:600}.profile-link:hover{text-decoration:underline}
+    @media (max-width:700px){.profile-grid{grid-template-columns:1fr}.profile-modal{padding:10px}.profile-modal-hero{padding:24px 20px;flex-direction:column;text-align:center}.profile-modal-photo{width:125px;height:125px;flex-basis:125px}.profile-modal-body{padding:22px 20px}.profile-detail-grid{grid-template-columns:1fr}.profile-detail-full{grid-column:auto}.profile-modal-name{font-size:21px}}
 
   </style>
 </head>
@@ -3124,6 +3138,15 @@
           </div>
         </div>
       </section>
+
+      <div id="profileModal" class="profile-modal" onclick="handleProfilModalBackdrop(event)">
+        <div id="profileModalCard" class="profile-modal-card" role="dialog" aria-modal="true" aria-label="Detail Profil Widyaiswara">
+          <button class="profile-modal-close" type="button" onclick="closeProfilModal()" aria-label="Tutup">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <div id="profileModalContent"></div>
+        </div>
+      </div>
 
 
       <!-- =================================
@@ -4323,24 +4346,143 @@ Silakan ajukan pertanyaan Anda.
     const jenjang = String((document.getElementById("profileJenjangFilter") || {}).value || "").trim().toLowerCase();
 
     const filtered = allProfilWidyaiswara.filter(function(p){
-      const searchable = [p.Nama,p.Gelar_Depan,p.Gelar_Belakang,p.Jabatan,p.Jenjang_Widyaiswara,p.Pangkat_Golongan,p.Unit_Kerja,p.Bidang_Keahlian,p.Spesialisasi,p.Pendidikan_Terakhir,p.Program_Studi,p.Perguruan_Tinggi].join(" ").toLowerCase();
-      return (!search || searchable.indexOf(search) !== -1) && (!jenjang || String(p.Jenjang_Widyaiswara || "").toLowerCase() === jenjang);
+      const searchable = [
+        p.NIP,p.Nama,p.Gelar_Depan,p.Gelar_Belakang,p.Jabatan,p.Jenjang_Widyaiswara,
+        p.Pangkat_Golongan,p.Unit_Kerja,p.Bidang_Keahlian,p.Spesialisasi,p.Pendidikan_Terakhir,
+        p.Program_Studi,p.Perguruan_Tinggi,p.Tahun_Lulus,p.Sertifikasi,p.Diklat_Diampu,
+        p.Mata_Diklat,p.Pengalaman_Mengajar,p.Pengalaman_Kerja,p.Pengalaman_Narasumber,
+        p.Pengalaman_CBM,p.Publikasi,p.Bio_Singkat,p.Email,p.Telepon
+      ].join(" ").toLowerCase();
+      return (!search || searchable.indexOf(search) !== -1) &&
+             (!jenjang || String(p.Jenjang_Widyaiswara || "").toLowerCase() === jenjang);
     });
 
     if (count) count.textContent = filtered.length + " profil ditampilkan dari " + allProfilWidyaiswara.length + " profil.";
-    if (!filtered.length) { grid.innerHTML = '<div class="profile-empty">Tidak ada profil yang sesuai dengan pencarian.</div>'; return; }
-    grid.innerHTML = filtered.map(renderProfilCard).join("");
+    if (!filtered.length) {
+      grid.innerHTML = '<div class="profile-empty">Tidak ada profil yang sesuai dengan pencarian.</div>';
+      return;
+    }
+    grid.innerHTML = filtered.map(function(p, index){ return renderProfilCard(p, index); }).join("");
   }
 
-  function renderProfilCard(p) {
+  function getProfilPhotoUrl(value) {
+    const raw = String(value || "").trim();
+    if (!raw) return "";
+
+    // URL gambar langsung
+    if (/^https?:\/\//i.test(raw) && !/drive\.google\.com/i.test(raw)) return raw;
+
+    // Google Drive: /file/d/ID/view, open?id=ID, uc?id=ID, atau thumbnail?id=ID
+    let match = raw.match(/drive\.google\.com\/file\/d\/([^/]+)/i);
+    if (!match) match = raw.match(/[?&]id=([^&]+)/i);
+    if (match && match[1]) {
+      return "https://drive.google.com/thumbnail?id=" + encodeURIComponent(match[1]) + "&sz=w800";
+    }
+
+    return raw;
+  }
+
+  function renderProfilPhoto(value, className, placeholderClass) {
+    const url = getProfilPhotoUrl(value);
+    const safeUrl = escapeAttribute(url);
+    const cls = className || "profile-photo";
+    const pcls = placeholderClass || "profile-photo-placeholder";
+    if (!url) return '<div class="' + pcls + ' ' + cls + '"><i class="fa-solid fa-user"></i></div>';
+    return '<img class="' + cls + '" src="' + safeUrl + '" alt="Foto Widyaiswara" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"><div class="' + pcls + ' ' + cls + '" style="display:none"><i class="fa-solid fa-user"></i></div>';
+  }
+
+  function renderProfilCard(p, index) {
     const nama = [p.Gelar_Depan,p.Nama,p.Gelar_Belakang].filter(function(v){return String(v || "").trim();}).join(" ");
-    const foto = String(p.Foto_URL || "").trim();
-    const photo = foto ? '<img class="profile-photo" src="'+escapeAttribute(foto)+'" alt="Foto" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"><div class="profile-photo profile-photo-placeholder" style="display:none"><i class="fa-solid fa-user"></i></div>' : '<div class="profile-photo profile-photo-placeholder"><i class="fa-solid fa-user"></i></div>';
+    const foto = renderProfilPhoto(p.Foto_URL, "profile-photo", "profile-photo-placeholder");
     const rows=[];
     function row(label,value){if(String(value || "").trim()) rows.push('<div class="profile-info-row"><div class="profile-info-label">'+escapeHtml(label)+'</div><div class="profile-info-value">'+escapeHtml(value)+'</div></div>');}
-    row("Unit Kerja",p.Unit_Kerja); row("Bidang",p.Bidang_Keahlian); row("Spesialisasi",p.Spesialisasi); row("Pendidikan",p.Pendidikan_Terakhir);
-    return '<div class="profile-card"><div class="profile-card-top">'+photo+'<div><div class="profile-name">'+escapeHtml(nama || "Nama belum diisi")+'</div><div class="profile-role">'+escapeHtml(p.Jabatan || "Widyaiswara")+'</div>'+(p.Jenjang_Widyaiswara?'<span class="profile-badge">'+escapeHtml(p.Jenjang_Widyaiswara)+'</span>':'')+'</div></div><div class="profile-info">'+rows.join("")+'</div></div>';
+    row("Jabatan",p.Jabatan);
+    row("Pangkat/Gol.",p.Pangkat_Golongan);
+    row("Unit Kerja",p.Unit_Kerja);
+    row("Bidang Keahlian",p.Bidang_Keahlian);
+    row("Spesialisasi",p.Spesialisasi);
+    row("Pendidikan",p.Pendidikan_Terakhir);
+    return '<div class="profile-card">' +
+      '<div class="profile-card-top">' + foto + '<div style="min-width:0"><div class="profile-name">' + escapeHtml(nama || "Nama belum diisi") + '</div>' +
+      '<div class="profile-role">' + escapeHtml(p.Jabatan || "Widyaiswara") + '</div>' +
+      (p.Jenjang_Widyaiswara ? '<span class="profile-badge">' + escapeHtml(p.Jenjang_Widyaiswara) + '</span>' : '') +
+      '</div></div>' +
+      '<div class="profile-info">' + rows.join("") + '</div>' +
+      '<div class="profile-card-actions"><button class="profile-detail-button" type="button" onclick="openProfilDetail(' + index + ', \'filtered\')"><i class="fa-solid fa-id-card"></i> Lihat Profil Lengkap</button></div>' +
+      '</div>';
   }
+
+  function getProfilFilteredData() {
+    const search = String((document.getElementById("profileSearch") || {}).value || "").trim().toLowerCase();
+    const jenjang = String((document.getElementById("profileJenjangFilter") || {}).value || "").trim().toLowerCase();
+    return allProfilWidyaiswara.filter(function(p){
+      const searchable = [p.NIP,p.Nama,p.Gelar_Depan,p.Gelar_Belakang,p.Jabatan,p.Jenjang_Widyaiswara,p.Pangkat_Golongan,p.Unit_Kerja,p.Bidang_Keahlian,p.Spesialisasi,p.Pendidikan_Terakhir,p.Program_Studi,p.Perguruan_Tinggi,p.Tahun_Lulus,p.Sertifikasi,p.Diklat_Diampu,p.Mata_Diklat,p.Pengalaman_Mengajar,p.Pengalaman_Kerja,p.Pengalaman_Narasumber,p.Pengalaman_CBM,p.Publikasi,p.Bio_Singkat,p.Email,p.Telepon].join(" ").toLowerCase();
+      return (!search || searchable.indexOf(search) !== -1) && (!jenjang || String(p.Jenjang_Widyaiswara || "").toLowerCase() === jenjang);
+    });
+  }
+
+  function openProfilDetail(index, mode) {
+    const data = mode === "filtered" ? getProfilFilteredData() : allProfilWidyaiswara;
+    const p = data[index];
+    if (!p) return;
+
+    const modal = document.getElementById("profileModal");
+    const content = document.getElementById("profileModalContent");
+    if (!modal || !content) return;
+
+    const nama = [p.Gelar_Depan,p.Nama,p.Gelar_Belakang].filter(function(v){return String(v || "").trim();}).join(" ");
+    const foto = renderProfilPhoto(p.Foto_URL, "profile-modal-photo", "profile-modal-photo-placeholder");
+
+    function item(label, value, full) {
+      const text = String(value || "").trim();
+      if (!text) return "";
+      return '<div class="profile-detail-item' + (full ? ' profile-detail-full' : '') + '"><div class="profile-detail-label">' + escapeHtml(label) + '</div><div class="profile-detail-value">' + escapeHtml(text) + '</div></div>';
+    }
+    function section(title, icon, items) {
+      const body = items.filter(Boolean).join("");
+      if (!body) return "";
+      return '<div class="profile-section"><div class="profile-section-title"><i class="fa-solid ' + icon + '"></i>' + escapeHtml(title) + '</div><div class="profile-detail-grid">' + body + '</div></div>';
+    }
+
+    let contactItems = [item("Email", p.Email, false), item("Telepon", p.Telepon, false)];
+    if (String(p.LinkedIn_URL || "").trim()) {
+      const linked = escapeAttribute(String(p.LinkedIn_URL).trim());
+      contactItems.push('<div class="profile-detail-item"><div class="profile-detail-label">LinkedIn</div><div class="profile-detail-value"><a class="profile-link" href="' + linked + '" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> Buka Profil LinkedIn</a></div></div>');
+    }
+
+    content.innerHTML =
+      '<div class="profile-modal-hero">' + foto + '<div><div class="profile-modal-name">' + escapeHtml(nama || "Nama belum diisi") + '</div>' +
+      '<div class="profile-modal-role">' + escapeHtml(p.Jabatan || "Widyaiswara") + '</div>' +
+      '<div class="profile-modal-unit">' + escapeHtml(p.Unit_Kerja || "") + '</div>' +
+      (p.Jenjang_Widyaiswara ? '<span class="profile-badge">' + escapeHtml(p.Jenjang_Widyaiswara) + '</span>' : '') +
+      '</div></div>' +
+      '<div class="profile-modal-body">' +
+      section("Identitas & Kedinasan", "fa-user-tie", [item("NIP",p.NIP),item("Nama",p.Nama),item("Gelar Depan",p.Gelar_Depan),item("Gelar Belakang",p.Gelar_Belakang),item("Jabatan",p.Jabatan),item("Jenjang Widyaiswara",p.Jenjang_Widyaiswara),item("Pangkat/Golongan",p.Pangkat_Golongan),item("Unit Kerja",p.Unit_Kerja)]) +
+      section("Keahlian Profesional", "fa-bullseye", [item("Bidang Keahlian",p.Bidang_Keahlian,true),item("Spesialisasi",p.Spesialisasi,true)]) +
+      section("Pendidikan", "fa-graduation-cap", [item("Pendidikan Terakhir",p.Pendidikan_Terakhir),item("Program Studi",p.Program_Studi),item("Perguruan Tinggi",p.Perguruan_Tinggi),item("Tahun Lulus",p.Tahun_Lulus)]) +
+      section("Sertifikasi & Kediklatan", "fa-certificate", [item("Sertifikasi",p.Sertifikasi,true),item("Diklat Diampu",p.Diklat_Diampu,true),item("Mata Diklat",p.Mata_Diklat,true)]) +
+      section("Pengalaman", "fa-briefcase", [item("Pengalaman Mengajar",p.Pengalaman_Mengajar,true),item("Pengalaman Kerja",p.Pengalaman_Kerja,true),item("Pengalaman Narasumber",p.Pengalaman_Narasumber,true),item("Pengalaman CBM",p.Pengalaman_CBM,true)]) +
+      section("Publikasi & Profil Profesional", "fa-book-open", [item("Publikasi",p.Publikasi,true),item("Bio Singkat",p.Bio_Singkat,true)]) +
+      section("Kontak", "fa-address-card", contactItems) +
+      '</div>';
+
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeProfilModal() {
+    const modal = document.getElementById("profileModal");
+    if (modal) modal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  function handleProfilModalBackdrop(event) {
+    if (event.target && event.target.id === "profileModal") closeProfilModal();
+  }
+
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") closeProfilModal();
+  });
 
   /* =========================================
      EXECUTIVE SUMMARY
