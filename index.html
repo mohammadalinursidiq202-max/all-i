@@ -2535,7 +2535,17 @@
     @media (max-width:700px){.profile-grid{grid-template-columns:1fr}.profile-card-body{padding:13px 16px 3px}.profile-info{grid-template-columns:1fr}.profile-modal{padding:10px}.profile-modal-hero{padding:28px 20px;grid-template-columns:1fr;text-align:center}.profile-modal-photo{width:145px;height:145px;flex-basis:145px;margin:0 auto}.profile-modal-name{font-size:23px;padding-right:0}.profile-modal-meta{justify-content:center}.profile-modal-body{padding:20px 16px 26px}.profile-modal-summary{grid-template-columns:1fr 1fr;gap:9px}.profile-section{padding:17px 16px}.profile-detail-grid{grid-template-columns:1fr}.profile-detail-full{grid-column:auto}}
 
 
-  </style>
+  
+
+    .refresh-all-menu:disabled{
+      opacity:.72;
+      cursor:wait;
+    }
+
+    .refresh-all-menu.refreshing{
+      font-weight:800;
+    }
+</style>
 </head>
 
 
@@ -2949,6 +2959,22 @@
 
         <span>
           AI Widyaiswara
+        </span>
+
+      </button>
+
+
+      <button
+        class="menu-item refresh-all-menu"
+        type="button"
+        onclick="refreshAllData()"
+        title="Refresh seluruh data ALL-I"
+      >
+
+        <i class="fa-solid fa-arrows-rotate"></i>
+
+        <span>
+          Refresh Semua Data
         </span>
 
       </button>
@@ -6196,6 +6222,110 @@ Silakan ajukan pertanyaan Anda.
       .replace(/"/g, "&quot;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;");
+
+  }
+
+
+  /* =========================================
+     REFRESH SELURUH DATA
+     Menyegarkan semua sumber data yang digunakan
+     oleh menu ALL-I tanpa mengubah fungsi lama.
+  ========================================= */
+
+  async function refreshAllData() {
+
+    const button =
+      document.querySelector(
+        ".refresh-all-menu"
+      );
+
+    const icon = button
+      ? button.querySelector("i")
+      : null;
+
+
+    if (button) {
+      button.disabled = true;
+      button.classList.add(
+        "refreshing"
+      );
+    }
+
+
+    if (icon) {
+      icon.classList.add(
+        "fa-spin"
+      );
+    }
+
+
+    try {
+
+      showToast(
+        "Menyegarkan seluruh data ALL-I...",
+        "info"
+      );
+
+
+      const results =
+        await Promise.allSettled([
+          loadExecutiveSummary(),
+          loadAlumniMapData(),
+          loadMaterials(),
+          loadSharedMaterials(),
+          loadProfilWidyaiswara()
+        ]);
+
+
+      const failed =
+        results.filter(
+          function(result) {
+            return result.status === "rejected";
+          }
+        );
+
+
+      if (failed.length === 0) {
+        showToast(
+          "Seluruh data ALL-I berhasil diperbarui.",
+          "success"
+        );
+      } else {
+        showToast(
+          "Sebagian data gagal diperbarui. Silakan coba lagi.",
+          "error"
+        );
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Refresh seluruh data error:",
+        error
+      );
+
+      showToast(
+        "Gagal menyegarkan data ALL-I.",
+        "error"
+      );
+
+    } finally {
+
+      if (button) {
+        button.disabled = false;
+        button.classList.remove(
+          "refreshing"
+        );
+      }
+
+
+      if (icon) {
+        icon.classList.remove(
+          "fa-spin"
+        );
+      }
+
+    }
 
   }
 
