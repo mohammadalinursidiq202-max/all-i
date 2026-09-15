@@ -5091,35 +5091,19 @@ Silakan ajukan pertanyaan Anda.
 
     try {
 
-      const requestId =
-        (window.__alliExecutiveFilterRequestId || 0) + 1;
-
-      window.__alliExecutiveFilterRequestId = requestId;
-
       const params =
         "&province=" + encodeURIComponent(province || "") +
         "&diklat=" + encodeURIComponent(diklat || "") +
-        "&year=" + encodeURIComponent(year || "") +
-        "&_=" + new Date().getTime();
+        "&year=" + encodeURIComponent(year || "");
 
       const response =
         await fetch(
           API_URL +
           "?action=getExecutiveSummary" +
-          params,
-          { cache: "no-store" }
+          params
         );
 
       const result = await response.json();
-
-      // Abaikan response lama bila user mengganti filter lagi
-      // sebelum request sebelumnya selesai.
-      if (
-        requestId !==
-        window.__alliExecutiveFilterRequestId
-      ) {
-        return;
-      }
 
       if (result.status !== "success") {
         return;
@@ -5161,6 +5145,7 @@ Silakan ajukan pertanyaan Anda.
     }
 
   }
+
 
   function renderMapMarkers(markers) {
 
