@@ -1118,6 +1118,159 @@
       z-index:
         100;
 
+      overflow:
+        visible;
+
+      transition:
+        width .3s ease,
+        padding .3s ease;
+
+    }
+
+
+    /* =========================================
+       SIDEBAR COLLAPSE TOGGLE
+    ========================================= */
+
+    .sidebar-toggle {
+
+      position:
+        absolute;
+
+      top:
+        18px;
+
+      right:
+        -17px;
+
+      width:
+        34px;
+
+      height:
+        34px;
+
+      border:
+        2px solid rgba(255,255,255,.9);
+
+      border-radius:
+        50%;
+
+      background:
+        #315fb8;
+
+      color:
+        white;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      cursor:
+        pointer;
+
+      box-shadow:
+        0 5px 16px rgba(0,0,0,.22);
+
+      z-index:
+        220;
+
+      transition:
+        transform .2s ease,
+        background .2s ease,
+        left .3s ease;
+
+    }
+
+
+    .sidebar-toggle:hover {
+
+      background:
+        #3f72cc;
+
+      transform:
+        scale(1.08);
+
+    }
+
+
+    .sidebar-toggle i {
+
+      font-size:
+        13px;
+
+    }
+
+
+    .sidebar-brand,
+    .sidebar-menu,
+    .logout-button {
+
+      transition:
+        opacity .2s ease;
+
+    }
+
+
+    .dashboard-main {
+
+      transition:
+        margin-left .3s ease,
+        width .3s ease;
+
+    }
+
+
+    #dashboardApp.sidebar-collapsed .sidebar {
+
+      width:
+        0;
+
+      padding-left:
+        0;
+
+      padding-right:
+        0;
+
+    }
+
+
+    #dashboardApp.sidebar-collapsed .sidebar-brand,
+    #dashboardApp.sidebar-collapsed .sidebar-menu,
+    #dashboardApp.sidebar-collapsed .logout-button {
+
+      opacity:
+        0;
+
+      pointer-events:
+        none;
+
+    }
+
+
+    #dashboardApp.sidebar-collapsed .sidebar-toggle {
+
+      right:
+        auto;
+
+      left:
+        10px;
+
+    }
+
+
+    #dashboardApp.sidebar-collapsed .dashboard-main {
+
+      margin-left:
+        0;
+
+      width:
+        100%;
+
     }
 
 
@@ -2657,6 +2810,17 @@
 
   <aside class="sidebar">
 
+    <button
+      id="sidebarToggle"
+      class="sidebar-toggle"
+      type="button"
+      aria-label="Sembunyikan menu navigasi"
+      title="Sembunyikan menu navigasi"
+      onclick="toggleSidebar()"
+    >
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
     <div class="sidebar-brand">
 
       <div class="brand-icon">
@@ -4190,6 +4354,81 @@ Silakan ajukan pertanyaan Anda.
   /* =========================================
      NAVIGATION
   ========================================= */
+
+  /* =========================================
+     SIDEBAR TOGGLE
+  ========================================= */
+
+  function toggleSidebar() {
+
+    const dashboard =
+      document.getElementById("dashboardApp");
+
+    const toggle =
+      document.getElementById("sidebarToggle");
+
+    if (!dashboard || !toggle) {
+      return;
+    }
+
+    const collapsed =
+      dashboard.classList.toggle("sidebar-collapsed");
+
+    const icon =
+      toggle.querySelector("i");
+
+    if (icon) {
+      icon.className = collapsed
+        ? "fa-solid fa-chevron-right"
+        : "fa-solid fa-chevron-left";
+    }
+
+    toggle.setAttribute(
+      "aria-label",
+      collapsed
+        ? "Tampilkan menu navigasi"
+        : "Sembunyikan menu navigasi"
+    );
+
+    toggle.setAttribute(
+      "title",
+      collapsed
+        ? "Tampilkan menu navigasi"
+        : "Sembunyikan menu navigasi"
+    );
+
+    try {
+      localStorage.setItem(
+        "alliSidebarCollapsed",
+        collapsed ? "1" : "0"
+      );
+    } catch (error) {
+      console.warn(
+        "Sidebar state tidak dapat disimpan:",
+        error
+      );
+    }
+  }
+
+
+  function restoreSidebarState() {
+
+    try {
+      if (
+        localStorage.getItem(
+          "alliSidebarCollapsed"
+        ) === "1"
+      ) {
+        toggleSidebar();
+      }
+    } catch (error) {
+      console.warn(
+        "Sidebar state tidak dapat dipulihkan:",
+        error
+      );
+    }
+  }
+
 
   function showPage(
     page,
@@ -5968,6 +6207,8 @@ Silakan ajukan pertanyaan Anda.
   window.addEventListener(
     "DOMContentLoaded",
     function() {
+
+      restoreSidebarState();
 
       try {
 
