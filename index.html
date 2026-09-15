@@ -2350,30 +2350,37 @@
     .profile-toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
     .profile-search{flex:1;min-width:240px;padding:12px 14px;border:1px solid #d9e1ea;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box}
     .profile-filter{padding:12px 14px;border:1px solid #d9e1ea;border-radius:10px;font-size:14px;background:#fff;min-width:180px}
-    .profile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
-    .profile-card{border:1px solid #e5eaf0;border-radius:16px;padding:18px;background:#fff;box-shadow:0 5px 18px rgba(31,41,55,.06);transition:transform .2s ease,box-shadow .2s ease;display:flex;flex-direction:column}
-    .profile-card:hover{transform:translateY(-2px);box-shadow:0 9px 24px rgba(31,41,55,.10)}
-    .profile-card-top{display:flex;gap:15px;align-items:center}
-    .profile-photo{width:88px;height:88px;border-radius:50%;object-fit:cover;background:#eef3f8;flex:0 0 88px;border:3px solid #fff;box-shadow:0 3px 12px rgba(31,41,55,.10)}
+    .profile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:20px}
+    .profile-card{border:1px solid #e1e8f0;border-radius:18px;padding:0;background:#fff;box-shadow:0 6px 20px rgba(31,41,55,.07);transition:transform .2s ease,box-shadow .2s ease;display:flex;flex-direction:column;overflow:hidden;position:relative}
+    .profile-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(31,41,55,.13)}
+    .profile-card-top{display:flex;gap:16px;align-items:center;padding:20px 20px 17px;background:linear-gradient(135deg,#f7fbff,#eef6fd)}
+    .profile-photo{width:86px;height:86px;border-radius:16px;object-fit:cover;background:#eef3f8;flex:0 0 86px;border:3px solid #fff;box-shadow:0 4px 14px rgba(31,41,55,.13)}
     .profile-photo-placeholder{display:flex;align-items:center;justify-content:center;font-size:30px;color:#7b8a9a}
-    .profile-name{font-weight:700;font-size:16px;line-height:1.35;color:#19365d}.profile-role{margin-top:5px;font-size:13px;color:#667085}
-    .profile-badge{display:inline-block;margin-top:7px;padding:4px 8px;border-radius:999px;background:#eef6ff;color:#2166b1;font-size:11px;font-weight:600}
-    .profile-info{margin-top:16px;display:grid;gap:8px}.profile-info-row{display:flex;gap:10px;font-size:12px;line-height:1.45}.profile-info-label{min-width:105px;color:#7a8795}.profile-info-value{color:#344054;font-weight:500;overflow-wrap:anywhere}
-    .profile-card-actions{margin-top:16px;padding-top:14px;border-top:1px solid #edf1f5}
-    .profile-detail-button{width:100%;border:0;border-radius:10px;padding:10px 12px;background:#2166b1;color:#fff;font-weight:600;cursor:pointer;font-size:13px}
-    .profile-detail-button:hover{filter:brightness(.96)}
+    .profile-name{font-weight:800;font-size:16px;line-height:1.35;color:#19365d}.profile-role{margin-top:5px;font-size:13px;color:#667085}
+    .profile-badge{display:inline-block;margin-top:7px;padding:4px 9px;border-radius:999px;background:#e8f3ff;color:#176eb8;font-size:11px;font-weight:700}
+    .profile-card-divider{height:5px;background:linear-gradient(90deg,#176eb8 0%,#2c93d1 55%,#75c7e6 100%)}
+    .profile-card-body{padding:16px 20px 6px;background:#fff}
+    .profile-info{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:0 22px}.profile-info-row{display:block;padding:10px 0;border-bottom:1px solid #edf1f5;font-size:12px;line-height:1.45;min-width:0}.profile-info-row:last-child{border-bottom:0}.profile-info-label{font-size:9px;color:#8795a6;text-transform:uppercase;letter-spacing:.55px;font-weight:800;margin-bottom:4px}.profile-info-value{color:#344054;font-weight:600;overflow-wrap:anywhere}
+    .profile-info-row.profile-info-wide{grid-column:1/-1}
+    .profile-card-actions{margin:7px 20px 18px;padding-top:14px;border-top:1px solid #e7edf3}
+    .profile-detail-button{width:100%;border:0;border-radius:10px;padding:11px 12px;background:#2166b1;color:#fff;font-weight:700;cursor:pointer;font-size:13px;box-shadow:0 4px 10px rgba(33,102,177,.18)}
+    .profile-detail-button:hover{filter:brightness(.96);transform:translateY(-1px)}
     .profile-empty{grid-column:1/-1;text-align:center;padding:40px 20px;color:#667085}.profile-count{font-size:13px;color:#667085;margin-bottom:14px}
-    .profile-modal{position:fixed;inset:0;background:rgba(15,35,62,.58);display:none;align-items:center;justify-content:center;padding:24px;z-index:9999;box-sizing:border-box}
+    .profile-modal{position:fixed;inset:0;background:rgba(15,35,62,.62);display:none;align-items:center;justify-content:center;padding:24px;z-index:9999;box-sizing:border-box}
     .profile-modal.active{display:flex}
-    .profile-modal-card{width:min(980px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:20px;box-shadow:0 25px 70px rgba(0,0,0,.25);position:relative}
-    .profile-modal-close{position:absolute;right:16px;top:16px;width:38px;height:38px;border:0;border-radius:50%;background:#eef2f6;color:#344054;cursor:pointer;font-size:17px;z-index:2}
-    .profile-modal-hero{display:flex;gap:22px;align-items:center;padding:30px 32px;background:linear-gradient(135deg,#f5f9ff,#eef5fb);border-bottom:1px solid #e5ebf2}
-    .profile-modal-photo{width:150px;height:150px;border-radius:18px;object-fit:cover;background:#e7edf4;flex:0 0 150px;box-shadow:0 8px 25px rgba(31,41,55,.12)}
-    .profile-modal-photo-placeholder{display:flex;align-items:center;justify-content:center;font-size:52px;color:#7b8a9a}
-    .profile-modal-name{font-size:26px;font-weight:800;line-height:1.25;color:#17375f}.profile-modal-role{font-size:15px;color:#667085;margin-top:8px}.profile-modal-unit{font-size:14px;color:#2166b1;margin-top:5px}
-    .profile-modal-body{padding:28px 32px 32px}.profile-section{margin-bottom:26px}.profile-section:last-child{margin-bottom:0}.profile-section-title{font-size:15px;font-weight:800;color:#19365d;border-bottom:2px solid #e9eef4;padding-bottom:9px;margin-bottom:13px;display:flex;align-items:center;gap:8px}.profile-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 22px}.profile-detail-item{padding:10px 0;border-bottom:1px solid #f0f2f5}.profile-detail-label{font-size:11px;color:#7a8795;text-transform:uppercase;letter-spacing:.35px;margin-bottom:4px}.profile-detail-value{font-size:13px;color:#344054;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}.profile-detail-full{grid-column:1/-1}
-    .profile-link{color:#2166b1;text-decoration:none;font-weight:600}.profile-link:hover{text-decoration:underline}
-    @media (max-width:700px){.profile-grid{grid-template-columns:1fr}.profile-modal{padding:10px}.profile-modal-hero{padding:24px 20px;flex-direction:column;text-align:center}.profile-modal-photo{width:125px;height:125px;flex-basis:125px}.profile-modal-body{padding:22px 20px}.profile-detail-grid{grid-template-columns:1fr}.profile-detail-full{grid-column:auto}.profile-modal-name{font-size:21px}}
+    .profile-modal-card{width:min(1160px,100%);max-height:94vh;overflow:auto;background:#f5f8fb;border-radius:24px;box-shadow:0 28px 80px rgba(0,0,0,.30);position:relative;border:1px solid rgba(255,255,255,.8)}
+    .profile-modal-close{position:absolute;right:18px;top:18px;width:42px;height:42px;border:1px solid rgba(23,55,95,.10);border-radius:50%;background:rgba(255,255,255,.96);color:#17375f;cursor:pointer;font-size:17px;z-index:5;box-shadow:0 5px 18px rgba(16,42,67,.12)}
+    .profile-modal-hero{position:relative;display:grid;grid-template-columns:185px 1fr;gap:28px;align-items:center;padding:34px 40px 32px;background:linear-gradient(135deg,#0f4f91 0%,#176eb8 48%,#2f9bd1 100%);overflow:hidden}
+    .profile-modal-hero:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;right:-90px;top:-180px;background:rgba(255,255,255,.10)}
+    .profile-modal-photo{width:185px;height:185px;border-radius:23px;object-fit:cover;background:#e7edf4;flex:0 0 185px;box-shadow:0 15px 35px rgba(5,31,60,.28);border:5px solid #fff;position:relative;z-index:1}
+    .profile-modal-photo-placeholder{display:flex;align-items:center;justify-content:center;font-size:56px;color:#7b8a9a;background:#e7edf4}
+    .profile-modal-hero>div:last-child{position:relative;z-index:1}.profile-modal-name{font-size:30px;font-weight:850;line-height:1.22;color:#fff;padding-right:55px}.profile-modal-role{font-size:15px;color:rgba(255,255,255,.88);margin-top:10px}.profile-modal-unit{font-size:15px;color:#fff;margin-top:5px;font-weight:700}
+    .profile-modal-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.profile-modal-meta .profile-badge{background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.24);color:#fff}
+    .profile-modal-body{padding:24px 34px 34px;background:#f5f8fb}.profile-modal-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 22px}.profile-summary-chip{background:#fff;border:1px solid #e1e8f0;border-radius:14px;padding:13px 15px;box-shadow:0 4px 14px rgba(24,55,91,.05)}.profile-summary-chip-label{font-size:9px;text-transform:uppercase;letter-spacing:.65px;color:#8795a6;font-weight:800}.profile-summary-chip-value{font-size:13px;color:#17375f;font-weight:800;margin-top:5px;line-height:1.35;overflow-wrap:anywhere}
+    .profile-section{margin-bottom:18px;background:#fff;border:1px solid #e1e8f0;border-radius:16px;padding:19px 22px;box-shadow:0 4px 16px rgba(24,55,91,.045)}.profile-section:last-child{margin-bottom:0}.profile-section-title{font-size:15px;font-weight:850;color:#17375f;padding-bottom:11px;margin-bottom:3px;display:flex;align-items:center;gap:10px}.profile-section-title i{width:32px;height:32px;border-radius:9px;background:#eaf4ff;color:#176eb8;display:flex;align-items:center;justify-content:center;font-size:13px}.profile-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 30px}.profile-detail-item{padding:12px 0;border-bottom:1px solid #edf1f5;min-width:0}.profile-detail-label{font-size:9px;color:#8492a3;text-transform:uppercase;letter-spacing:.55px;margin-bottom:5px;font-weight:800}.profile-detail-value{font-size:13px;color:#344054;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}.profile-detail-full{grid-column:1/-1}.profile-detail-full .profile-detail-value{background:#f8fafc;border-radius:10px;padding:10px 13px;border-left:3px solid #2d8fd5}.profile-link{color:#176eb8;text-decoration:none;font-weight:800}.profile-link:hover{text-decoration:underline}
+    @media (max-width:900px){.profile-grid{grid-template-columns:1fr}.profile-modal-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:700px){.profile-grid{grid-template-columns:1fr}.profile-card-body{padding:13px 16px 3px}.profile-info{grid-template-columns:1fr}.profile-modal{padding:10px}.profile-modal-hero{padding:28px 20px;grid-template-columns:1fr;text-align:center}.profile-modal-photo{width:145px;height:145px;flex-basis:145px;margin:0 auto}.profile-modal-name{font-size:23px;padding-right:0}.profile-modal-meta{justify-content:center}.profile-modal-body{padding:20px 16px 26px}.profile-modal-summary{grid-template-columns:1fr 1fr;gap:9px}.profile-section{padding:17px 16px}.profile-detail-grid{grid-template-columns:1fr}.profile-detail-full{grid-column:auto}}
+
 
   </style>
 </head>
@@ -4394,20 +4401,23 @@ Silakan ajukan pertanyaan Anda.
   function renderProfilCard(p, index) {
     const nama = [p.Gelar_Depan,p.Nama,p.Gelar_Belakang].filter(function(v){return String(v || "").trim();}).join(" ");
     const foto = renderProfilPhoto(p.Foto_URL, "profile-photo", "profile-photo-placeholder");
-    const rows=[];
-    function row(label,value){if(String(value || "").trim()) rows.push('<div class="profile-info-row"><div class="profile-info-label">'+escapeHtml(label)+'</div><div class="profile-info-value">'+escapeHtml(value)+'</div></div>');}
-    row("Jabatan",p.Jabatan);
-    row("Pangkat/Gol.",p.Pangkat_Golongan);
-    row("Unit Kerja",p.Unit_Kerja);
-    row("Bidang Keahlian",p.Bidang_Keahlian);
-    row("Spesialisasi",p.Spesialisasi);
-    row("Pendidikan",p.Pendidikan_Terakhir);
+    function row(label,value,wide){
+      if(!String(value || "").trim()) return "";
+      return '<div class="profile-info-row' + (wide ? ' profile-info-wide' : '') + '">' +
+        '<div class="profile-info-label">'+escapeHtml(label)+'</div>'+
+        '<div class="profile-info-value">'+escapeHtml(value)+'</div></div>';
+    }
     return '<div class="profile-card">' +
       '<div class="profile-card-top">' + foto + '<div style="min-width:0"><div class="profile-name">' + escapeHtml(nama || "Nama belum diisi") + '</div>' +
       '<div class="profile-role">' + escapeHtml(p.Jabatan || "Widyaiswara") + '</div>' +
       (p.Jenjang_Widyaiswara ? '<span class="profile-badge">' + escapeHtml(p.Jenjang_Widyaiswara) + '</span>' : '') +
       '</div></div>' +
-      '<div class="profile-info">' + rows.join("") + '</div>' +
+      '<div class="profile-card-divider" aria-hidden="true"></div>' +
+      '<div class="profile-card-body"><div class="profile-info">' +
+      row("Jabatan",p.Jabatan) + row("Pangkat / Golongan",p.Pangkat_Golongan) +
+      row("Unit Kerja",p.Unit_Kerja) + row("Bidang Keahlian",p.Bidang_Keahlian) +
+      row("Spesialisasi",p.Spesialisasi,true) + row("Pendidikan",p.Pendidikan_Terakhir) +
+      '</div></div>' +
       '<div class="profile-card-actions"><button class="profile-detail-button" type="button" onclick="openProfilDetail(' + index + ', \'filtered\')"><i class="fa-solid fa-id-card"></i> Lihat Profil Lengkap</button></div>' +
       '</div>';
   }
@@ -4425,49 +4435,35 @@ Silakan ajukan pertanyaan Anda.
     const data = mode === "filtered" ? getProfilFilteredData() : allProfilWidyaiswara;
     const p = data[index];
     if (!p) return;
-
     const modal = document.getElementById("profileModal");
     const content = document.getElementById("profileModalContent");
     if (!modal || !content) return;
-
     const nama = [p.Gelar_Depan,p.Nama,p.Gelar_Belakang].filter(function(v){return String(v || "").trim();}).join(" ");
     const foto = renderProfilPhoto(p.Foto_URL, "profile-modal-photo", "profile-modal-photo-placeholder");
-
-    function item(label, value, full) {
-      const text = String(value || "").trim();
-      if (!text) return "";
-      return '<div class="profile-detail-item' + (full ? ' profile-detail-full' : '') + '"><div class="profile-detail-label">' + escapeHtml(label) + '</div><div class="profile-detail-value">' + escapeHtml(text) + '</div></div>';
+    function item(label,value,full){
+      const text=String(value || "").trim(); if(!text) return "";
+      return '<div class="profile-detail-item'+(full?' profile-detail-full':'')+'"><div class="profile-detail-label">'+escapeHtml(label)+'</div><div class="profile-detail-value">'+escapeHtml(text)+'</div></div>';
     }
-    function section(title, icon, items) {
-      const body = items.filter(Boolean).join("");
-      if (!body) return "";
-      return '<div class="profile-section"><div class="profile-section-title"><i class="fa-solid ' + icon + '"></i>' + escapeHtml(title) + '</div><div class="profile-detail-grid">' + body + '</div></div>';
-    }
-
-    let contactItems = [item("Email", p.Email, false), item("Telepon", p.Telepon, false)];
-    if (String(p.LinkedIn_URL || "").trim()) {
-      const linked = escapeAttribute(String(p.LinkedIn_URL).trim());
-      contactItems.push('<div class="profile-detail-item"><div class="profile-detail-label">LinkedIn</div><div class="profile-detail-value"><a class="profile-link" href="' + linked + '" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> Buka Profil LinkedIn</a></div></div>');
-    }
-
+    function section(title,icon,items){const body=items.filter(Boolean).join("");if(!body)return "";return '<div class="profile-section"><div class="profile-section-title"><i class="fa-solid '+icon+'"></i><span>'+escapeHtml(title)+'</span></div><div class="profile-detail-grid">'+body+'</div></div>';}
+    function chip(label,value){const text=String(value || "").trim();if(!text)return "";return '<div class="profile-summary-chip"><div class="profile-summary-chip-label">'+escapeHtml(label)+'</div><div class="profile-summary-chip-value">'+escapeHtml(text)+'</div></div>';}
+    let contacts=[item("Email",p.Email),item("Telepon",p.Telepon)];
+    if(String(p.LinkedIn_URL || "").trim()) contacts.push('<div class="profile-detail-item"><div class="profile-detail-label">LinkedIn</div><div class="profile-detail-value"><a class="profile-link" href="'+escapeAttribute(String(p.LinkedIn_URL).trim())+'" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> Buka Profil LinkedIn</a></div></div>');
     content.innerHTML =
-      '<div class="profile-modal-hero">' + foto + '<div><div class="profile-modal-name">' + escapeHtml(nama || "Nama belum diisi") + '</div>' +
-      '<div class="profile-modal-role">' + escapeHtml(p.Jabatan || "Widyaiswara") + '</div>' +
-      '<div class="profile-modal-unit">' + escapeHtml(p.Unit_Kerja || "") + '</div>' +
-      (p.Jenjang_Widyaiswara ? '<span class="profile-badge">' + escapeHtml(p.Jenjang_Widyaiswara) + '</span>' : '') +
-      '</div></div>' +
-      '<div class="profile-modal-body">' +
-      section("Identitas & Kedinasan", "fa-user-tie", [item("NIP",p.NIP),item("Nama",p.Nama),item("Gelar Depan",p.Gelar_Depan),item("Gelar Belakang",p.Gelar_Belakang),item("Jabatan",p.Jabatan),item("Jenjang Widyaiswara",p.Jenjang_Widyaiswara),item("Pangkat/Golongan",p.Pangkat_Golongan),item("Unit Kerja",p.Unit_Kerja)]) +
-      section("Keahlian Profesional", "fa-bullseye", [item("Bidang Keahlian",p.Bidang_Keahlian,true),item("Spesialisasi",p.Spesialisasi,true)]) +
-      section("Pendidikan", "fa-graduation-cap", [item("Pendidikan Terakhir",p.Pendidikan_Terakhir),item("Program Studi",p.Program_Studi),item("Perguruan Tinggi",p.Perguruan_Tinggi),item("Tahun Lulus",p.Tahun_Lulus)]) +
-      section("Sertifikasi & Kediklatan", "fa-certificate", [item("Sertifikasi",p.Sertifikasi,true),item("Diklat Diampu",p.Diklat_Diampu,true),item("Mata Diklat",p.Mata_Diklat,true)]) +
-      section("Pengalaman", "fa-briefcase", [item("Pengalaman Mengajar",p.Pengalaman_Mengajar,true),item("Pengalaman Kerja",p.Pengalaman_Kerja,true),item("Pengalaman Narasumber",p.Pengalaman_Narasumber,true),item("Pengalaman CBM",p.Pengalaman_CBM,true)]) +
-      section("Publikasi & Profil Profesional", "fa-book-open", [item("Publikasi",p.Publikasi,true),item("Bio Singkat",p.Bio_Singkat,true)]) +
-      section("Kontak", "fa-address-card", contactItems) +
-      '</div>';
-
-    modal.classList.add("active");
-    document.body.style.overflow = "hidden";
+      '<div class="profile-modal-hero">'+foto+'<div><div class="profile-modal-name">'+escapeHtml(nama || "Nama belum diisi")+'</div><div class="profile-modal-role">'+escapeHtml(p.Jabatan || "Widyaiswara")+'</div><div class="profile-modal-unit"><i class="fa-solid fa-building"></i> &nbsp;'+escapeHtml(p.Unit_Kerja || "")+'</div><div class="profile-modal-meta">'+
+      (p.NIP?'<span class="profile-badge"><i class="fa-solid fa-id-badge"></i>&nbsp; '+escapeHtml(p.NIP)+'</span>':'')+
+      (p.Jenjang_Widyaiswara?'<span class="profile-badge">'+escapeHtml(p.Jenjang_Widyaiswara)+'</span>':'')+
+      (p.Pangkat_Golongan?'<span class="profile-badge">'+escapeHtml(p.Pangkat_Golongan)+'</span>':'')+
+      '</div></div></div>'+
+      '<div class="profile-modal-body"><div class="profile-modal-summary">'+
+      chip("Jabatan",p.Jabatan)+chip("Jenjang Widyaiswara",p.Jenjang_Widyaiswara)+chip("Pangkat / Golongan",p.Pangkat_Golongan)+chip("Pendidikan Terakhir",p.Pendidikan_Terakhir)+
+      '</div>'+section("Identitas & Kedinasan","fa-user-tie",[item("NIP",p.NIP),item("Nama",p.Nama),item("Gelar Depan",p.Gelar_Depan),item("Gelar Belakang",p.Gelar_Belakang),item("Jabatan",p.Jabatan),item("Jenjang Widyaiswara",p.Jenjang_Widyaiswara),item("Pangkat/Golongan",p.Pangkat_Golongan),item("Unit Kerja",p.Unit_Kerja,true)])+
+      section("Keahlian Profesional","fa-bullseye",[item("Bidang Keahlian",p.Bidang_Keahlian,true),item("Spesialisasi",p.Spesialisasi,true)])+
+      section("Pendidikan","fa-graduation-cap",[item("Pendidikan Terakhir",p.Pendidikan_Terakhir),item("Program Studi",p.Program_Studi),item("Perguruan Tinggi",p.Perguruan_Tinggi),item("Tahun Lulus",p.Tahun_Lulus)])+
+      section("Sertifikasi & Kediklatan","fa-certificate",[item("Sertifikasi",p.Sertifikasi,true),item("Diklat Diampu",p.Diklat_Diampu,true),item("Mata Diklat",p.Mata_Diklat,true)])+
+      section("Pengalaman Profesional","fa-briefcase",[item("Pengalaman Mengajar",p.Pengalaman_Mengajar,true),item("Pengalaman Kerja",p.Pengalaman_Kerja,true),item("Pengalaman Narasumber",p.Pengalaman_Narasumber,true),item("Pengalaman CBM",p.Pengalaman_CBM,true)])+
+      section("Publikasi & Profil Profesional","fa-book-open",[item("Publikasi",p.Publikasi,true),item("Bio Singkat",p.Bio_Singkat,true)])+
+      section("Kontak","fa-address-card",contacts)+ '</div>';
+    modal.classList.add("active"); document.body.style.overflow="hidden";
   }
 
   function closeProfilModal() {
