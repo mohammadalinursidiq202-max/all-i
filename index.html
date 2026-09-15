@@ -5073,6 +5073,77 @@ Silakan ajukan pertanyaan Anda.
       .textContent =
         filtered.length;
 
+    // Filter yang sama juga diterapkan ke 4 kartu Executive Summary.
+    loadExecutiveSummaryWithFilters(
+      province,
+      diklat,
+      year
+    );
+
+  }
+
+
+  async function loadExecutiveSummaryWithFilters(
+    province,
+    diklat,
+    year
+  ) {
+
+    try {
+
+      const params =
+        "&province=" + encodeURIComponent(province || "") +
+        "&diklat=" + encodeURIComponent(diklat || "") +
+        "&year=" + encodeURIComponent(year || "");
+
+      const response =
+        await fetch(
+          API_URL +
+          "?action=getExecutiveSummary" +
+          params
+        );
+
+      const result = await response.json();
+
+      if (result.status !== "success") {
+        return;
+      }
+
+      const data = result.data || {};
+
+      document
+        .getElementById("totalJP")
+        .textContent =
+          formatNumber(data.totalJP || 0) +
+          " JP";
+
+      document
+        .getElementById("totalAlumni")
+        .textContent =
+          formatNumber(data.totalAlumni || 0) +
+          " ASN";
+
+      document
+        .getElementById("completedCBM")
+        .textContent =
+          formatNumber(data.completedCBMSessions || 0) +
+          " Sesi";
+
+      document
+        .getElementById("averageRating")
+        .textContent =
+          Number(data.averageRating || 0).toFixed(2) +
+          " / 5.0";
+
+    } catch (error) {
+
+      console.error(
+        "Executive Summary Filter Error:",
+        error
+      );
+
+    }
+
   }
 
 
