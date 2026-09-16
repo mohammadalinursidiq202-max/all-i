@@ -5374,7 +5374,8 @@ Silakan ajukan pertanyaan Anda.
     if (count) count.textContent = groups.length + " kelompok";
     grid.innerHTML = groups.map(function(group,index) {
       const accent = repositoryAccent(index);
-      return '<div class="repository-group-card" style="--repo-accent:'+accent[0]+';--repo-soft:'+accent[1]+'" role="button" tabindex="0" onclick="openRepositoryGroup('+JSON.stringify(group.name).replace(/</g,"\\u003c")+')" onkeydown="if(event.key===\'Enter\' || event.key===\' \'){openRepositoryGroup('+JSON.stringify(group.name).replace(/</g,"\\u003c")+');}">' +
+      const groupToken = encodeURIComponent(group.name);
+      return '<div class="repository-group-card" style="--repo-accent:'+accent[0]+';--repo-soft:'+accent[1]+'" role="button" tabindex="0" onclick="openRepositoryGroup(decodeURIComponent(\''+groupToken+'\'))" onkeydown="if(event.key===\'Enter\' || event.key===\' \'){openRepositoryGroup(decodeURIComponent(\''+groupToken+'\'));}">' +
         '<div class="repository-group-icon"><i class="fa-solid fa-layer-group"></i></div>' +
         '<div class="repository-group-title">'+escapeHtml(group.name)+'</div>' +
         '<div class="repository-group-meta"><span><strong>'+group.materials.length+'</strong> materi</span><span class="repository-group-open">Lihat Materi <i class="fa-solid fa-arrow-right"></i></span></div>' +
