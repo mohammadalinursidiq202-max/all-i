@@ -2504,33 +2504,33 @@
     .profile-search{flex:1;min-width:240px;padding:12px 14px;border:1px solid #d9e1ea;border-radius:10px;font-size:14px;outline:none;box-sizing:border-box}
     .profile-filter{padding:12px 14px;border:1px solid #d9e1ea;border-radius:10px;font-size:14px;background:#fff;min-width:180px}
     .profile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:20px}
-    .profile-card{border:1px solid #e1e8f0;border-radius:18px;padding:0;background:#fff;box-shadow:0 6px 20px rgba(31,41,55,.07);transition:transform .2s ease,box-shadow .2s ease;display:flex;flex-direction:column;overflow:hidden;position:relative}
+    .profile-card{--profile-primary:#2166b1;--profile-secondary:#2f9bd1;--profile-soft:#e8f3ff;--profile-ink:#176eb8;border:1px solid #e1e8f0;border-radius:18px;padding:0;background:#fff;box-shadow:0 6px 20px rgba(31,41,55,.07);transition:transform .2s ease,box-shadow .2s ease;display:flex;flex-direction:column;overflow:hidden;position:relative}
     .profile-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(31,41,55,.13)}
-    .profile-card-top{display:flex;gap:16px;align-items:center;padding:20px 20px 17px;background:linear-gradient(135deg,#f7fbff,#eef6fd)}
+    .profile-card-top{display:flex;gap:16px;align-items:center;padding:20px 20px 17px;background:linear-gradient(135deg,var(--profile-soft),#fff)}
     .profile-photo{width:86px;height:86px;border-radius:16px;object-fit:cover;background:#eef3f8;flex:0 0 86px;border:3px solid #fff;box-shadow:0 4px 14px rgba(31,41,55,.13)}
     .profile-photo-placeholder{display:flex;align-items:center;justify-content:center;font-size:30px;color:#7b8a9a}
     .profile-name{font-weight:800;font-size:16px;line-height:1.35;color:#19365d}.profile-role{margin-top:5px;font-size:13px;color:#667085}
-    .profile-badge{display:inline-block;margin-top:7px;padding:4px 9px;border-radius:999px;background:#e8f3ff;color:#176eb8;font-size:11px;font-weight:700}
-    .profile-card-divider{height:5px;background:linear-gradient(90deg,#176eb8 0%,#2c93d1 55%,#75c7e6 100%)}
+    .profile-badge{display:inline-block;margin-top:7px;padding:4px 9px;border-radius:999px;background:var(--profile-soft);color:var(--profile-ink);font-size:11px;font-weight:700}
+    .profile-card-divider{height:5px;background:linear-gradient(90deg,var(--profile-primary) 0%,var(--profile-secondary) 55%,var(--profile-soft) 100%)}
     .profile-card-body{padding:16px 20px 6px;background:#fff}
     .profile-info{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:0 22px}.profile-info-row{display:block;padding:10px 0;border-bottom:1px solid #edf1f5;font-size:12px;line-height:1.45;min-width:0}.profile-info-row:last-child{border-bottom:0}.profile-info-label{font-size:9px;color:#8795a6;text-transform:uppercase;letter-spacing:.55px;font-weight:800;margin-bottom:4px}.profile-info-value{color:#344054;font-weight:600;overflow-wrap:anywhere}
     .profile-info-row.profile-info-wide{grid-column:1/-1}
     .profile-card-actions{margin:7px 20px 18px;padding-top:14px;border-top:1px solid #e7edf3}
-    .profile-detail-button{width:100%;border:0;border-radius:10px;padding:11px 12px;background:#2166b1;color:#fff;font-weight:700;cursor:pointer;font-size:13px;box-shadow:0 4px 10px rgba(33,102,177,.18)}
+    .profile-detail-button{width:100%;border:0;border-radius:10px;padding:11px 12px;background:var(--profile-primary);color:#fff;font-weight:700;cursor:pointer;font-size:13px;box-shadow:0 4px 10px rgba(31,41,55,.16)}
     .profile-detail-button:hover{filter:brightness(.96);transform:translateY(-1px)}
     .profile-empty{grid-column:1/-1;text-align:center;padding:40px 20px;color:#667085}.profile-count{font-size:13px;color:#667085;margin-bottom:14px}
     .profile-modal{position:fixed;inset:0;background:rgba(15,35,62,.62);display:none;align-items:center;justify-content:center;padding:24px;z-index:9999;box-sizing:border-box}
     .profile-modal.active{display:flex}
     .profile-modal-card{width:min(1160px,100%);max-height:94vh;overflow:auto;background:#f5f8fb;border-radius:24px;box-shadow:0 28px 80px rgba(0,0,0,.30);position:relative;border:1px solid rgba(255,255,255,.8)}
     .profile-modal-close{position:absolute;right:18px;top:18px;width:42px;height:42px;border:1px solid rgba(23,55,95,.10);border-radius:50%;background:rgba(255,255,255,.96);color:#17375f;cursor:pointer;font-size:17px;z-index:5;box-shadow:0 5px 18px rgba(16,42,67,.12)}
-    .profile-modal-hero{position:relative;display:grid;grid-template-columns:185px 1fr;gap:28px;align-items:center;padding:34px 40px 32px;background:linear-gradient(135deg,#0f4f91 0%,#176eb8 48%,#2f9bd1 100%);overflow:hidden}
+    .profile-modal-hero{position:relative;display:grid;grid-template-columns:185px 1fr;gap:28px;align-items:center;padding:34px 40px 32px;background:linear-gradient(135deg,var(--profile-primary) 0%,var(--profile-ink) 48%,var(--profile-secondary) 100%);overflow:hidden}
     .profile-modal-hero:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;right:-90px;top:-180px;background:rgba(255,255,255,.10)}
     .profile-modal-photo{width:185px;height:185px;border-radius:23px;object-fit:cover;background:#e7edf4;flex:0 0 185px;box-shadow:0 15px 35px rgba(5,31,60,.28);border:5px solid #fff;position:relative;z-index:1}
     .profile-modal-photo-placeholder{display:flex;align-items:center;justify-content:center;font-size:56px;color:#7b8a9a;background:#e7edf4}
     .profile-modal-hero>div:last-child{position:relative;z-index:1}.profile-modal-name{font-size:30px;font-weight:850;line-height:1.22;color:#fff;padding-right:55px}.profile-modal-role{font-size:15px;color:rgba(255,255,255,.88);margin-top:10px}.profile-modal-unit{font-size:15px;color:#fff;margin-top:5px;font-weight:700}
     .profile-modal-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.profile-modal-meta .profile-badge{background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.24);color:#fff}
-    .profile-modal-body{padding:24px 34px 34px;background:#f5f8fb}.profile-modal-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 22px}.profile-summary-chip{background:#fff;border:1px solid #e1e8f0;border-radius:14px;padding:13px 15px;box-shadow:0 4px 14px rgba(24,55,91,.05)}.profile-summary-chip-label{font-size:9px;text-transform:uppercase;letter-spacing:.65px;color:#8795a6;font-weight:800}.profile-summary-chip-value{font-size:13px;color:#17375f;font-weight:800;margin-top:5px;line-height:1.35;overflow-wrap:anywhere}
-    .profile-section{margin-bottom:18px;background:#fff;border:1px solid #e1e8f0;border-radius:16px;padding:19px 22px;box-shadow:0 4px 16px rgba(24,55,91,.045)}.profile-section:last-child{margin-bottom:0}.profile-section-title{font-size:15px;font-weight:850;color:#17375f;padding-bottom:11px;margin-bottom:3px;display:flex;align-items:center;gap:10px}.profile-section-title i{width:32px;height:32px;border-radius:9px;background:#eaf4ff;color:#176eb8;display:flex;align-items:center;justify-content:center;font-size:13px}.profile-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 30px}.profile-detail-item{padding:12px 0;border-bottom:1px solid #edf1f5;min-width:0}.profile-detail-label{font-size:9px;color:#8492a3;text-transform:uppercase;letter-spacing:.55px;margin-bottom:5px;font-weight:800}.profile-detail-value{font-size:13px;color:#344054;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}.profile-detail-full{grid-column:1/-1}.profile-detail-full .profile-detail-value{background:#f8fafc;border-radius:10px;padding:10px 13px;border-left:3px solid #2d8fd5}.profile-link{color:#176eb8;text-decoration:none;font-weight:800}.profile-link:hover{text-decoration:underline}
+    .profile-modal-body{padding:24px 34px 34px;background:#f5f8fb}.profile-modal-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 22px}.profile-summary-chip{background:#fff;border:1px solid #e1e8f0;border-top:3px solid var(--profile-primary);border-radius:14px;padding:13px 15px;box-shadow:0 4px 14px rgba(24,55,91,.05)}.profile-summary-chip-label{font-size:9px;text-transform:uppercase;letter-spacing:.65px;color:#8795a6;font-weight:800}.profile-summary-chip-value{font-size:13px;color:#17375f;font-weight:800;margin-top:5px;line-height:1.35;overflow-wrap:anywhere}
+    .profile-section{margin-bottom:18px;background:#fff;border:1px solid #e1e8f0;border-radius:16px;padding:19px 22px;box-shadow:0 4px 16px rgba(24,55,91,.045)}.profile-section:last-child{margin-bottom:0}.profile-section-title{font-size:15px;font-weight:850;color:#17375f;padding-bottom:11px;margin-bottom:3px;display:flex;align-items:center;gap:10px}.profile-section-title i{width:32px;height:32px;border-radius:9px;background:var(--profile-soft);color:var(--profile-ink);display:flex;align-items:center;justify-content:center;font-size:13px}.profile-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 30px}.profile-detail-item{padding:12px 0;border-bottom:1px solid #edf1f5;min-width:0}.profile-detail-label{font-size:9px;color:#8492a3;text-transform:uppercase;letter-spacing:.55px;margin-bottom:5px;font-weight:800}.profile-detail-value{font-size:13px;color:#344054;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}.profile-detail-full{grid-column:1/-1}.profile-detail-full .profile-detail-value{background:var(--profile-soft);border-radius:10px;padding:10px 13px;border-left:3px solid var(--profile-secondary)}.profile-link{color:var(--profile-ink);text-decoration:none;font-weight:800}.profile-link:hover{text-decoration:underline}
     .profile-modal-actions{display:flex;gap:10px;justify-content:flex-end;align-items:center;padding:14px 34px;background:#fff;border-bottom:1px solid #e1e8f0;position:sticky;top:0;z-index:4}
     .profile-action-button{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:10px;padding:10px 15px;font-weight:700;font-size:13px;cursor:pointer;transition:.2s;box-shadow:0 4px 10px rgba(24,55,91,.10)}
     .profile-action-button:hover{transform:translateY(-1px);filter:brightness(.97)}
@@ -4674,6 +4674,28 @@ Silakan ajukan pertanyaan Anda.
     return '<img class="' + cls + '" src="' + safeUrl + '" alt="Foto Widyaiswara" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"><div class="' + pcls + ' ' + cls + '" style="display:none"><i class="fa-solid fa-user"></i></div>';
   }
 
+  function getProfilJenjangTheme(jenjang) {
+    const value = String(jenjang || "").trim().toLowerCase();
+    if (value.includes("ahli pertama")) {
+      return { primary: "#f59e0b", secondary: "#d97706", soft: "#fff4dc", ink: "#b45309" };
+    }
+    if (value.includes("ahli muda")) {
+      return { primary: "#16a34a", secondary: "#15803d", soft: "#eaf8ef", ink: "#15803d" };
+    }
+    if (value.includes("ahli madya")) {
+      return { primary: "#2563eb", secondary: "#1d4ed8", soft: "#eaf2ff", ink: "#1d4ed8" };
+    }
+    if (value.includes("ahli utama")) {
+      return { primary: "#dc2626", secondary: "#b91c1c", soft: "#fff0f0", ink: "#b91c1c" };
+    }
+    return { primary: "#2166b1", secondary: "#2f9bd1", soft: "#e8f3ff", ink: "#176eb8" };
+  }
+
+  function getProfilJenjangStyle(jenjang) {
+    const theme = getProfilJenjangTheme(jenjang);
+    return '--profile-primary:' + theme.primary + ';--profile-secondary:' + theme.secondary + ';--profile-soft:' + theme.soft + ';--profile-ink:' + theme.ink + ';';
+  }
+
   function renderProfilCard(p, index) {
     const nama = [p.Gelar_Depan,p.Nama,p.Gelar_Belakang].filter(function(v){return String(v || "").trim();}).join(" ");
     const foto = renderProfilPhoto(p.Foto_URL, "profile-photo", "profile-photo-placeholder");
@@ -4683,7 +4705,7 @@ Silakan ajukan pertanyaan Anda.
         '<div class="profile-info-label">'+escapeHtml(label)+'</div>'+
         '<div class="profile-info-value">'+escapeHtml(value)+'</div></div>';
     }
-    return '<div class="profile-card">' +
+    return '<div class="profile-card" style="' + getProfilJenjangStyle(p.Jenjang_Widyaiswara) + '">' +
       '<div class="profile-card-top">' + foto + '<div style="min-width:0"><div class="profile-name">' + escapeHtml(nama || "Nama belum diisi") + '</div>' +
       '<div class="profile-role">' + escapeHtml(p.Jabatan || "Widyaiswara") + '</div>' +
       (p.Jenjang_Widyaiswara ? '<span class="profile-badge">' + escapeHtml(p.Jenjang_Widyaiswara) + '</span>' : '') +
@@ -4714,6 +4736,8 @@ Silakan ajukan pertanyaan Anda.
     const modal = document.getElementById("profileModal");
     const content = document.getElementById("profileModalContent");
     if (!modal || !content) return;
+    const modalCard = document.getElementById("profileModalCard");
+    if (modalCard) modalCard.setAttribute("style", getProfilJenjangStyle(p.Jenjang_Widyaiswara));
     const nama = [p.Gelar_Depan,p.Nama,p.Gelar_Belakang].filter(function(v){return String(v || "").trim();}).join(" ");
     const foto = renderProfilPhoto(p.Foto_URL, "profile-modal-photo", "profile-modal-photo-placeholder");
     function item(label,value,full){
