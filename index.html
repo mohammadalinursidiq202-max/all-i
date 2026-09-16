@@ -2552,6 +2552,60 @@
     .refresh-all-menu.refreshing{
       font-weight:800;
     }
+
+
+    /* =========================================
+       REPOSITORY BAHAN AJAR - CARD VIEW
+       ========================================= */
+    .repository-intro{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:20px;flex-wrap:wrap}
+    .repository-heading{display:flex;align-items:center;gap:14px;min-width:0}
+    .repository-heading-icon{width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2166b1,#4da3dc);color:#fff;font-size:25px;box-shadow:0 10px 24px rgba(33,102,177,.20);flex:0 0 auto}
+    .repository-heading h2{margin:0;color:#18375b;font-size:25px;font-weight:800}
+    .repository-heading p{margin:4px 0 0;color:#718096;font-size:13px}
+    .repository-tools{display:flex;align-items:center;gap:10px;margin:4px 0 22px;flex-wrap:wrap}
+    .repository-search{position:relative;flex:1 1 360px}
+    .repository-search i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#7b8da5}
+    .repository-search input{width:100%;height:44px;border:1px solid #dbe5ef;border-radius:12px;padding:0 15px 0 43px;font-size:13px;outline:none;background:#fff;box-sizing:border-box;transition:.2s}
+    .repository-search input:focus{border-color:#4a8fd0;box-shadow:0 0 0 3px rgba(74,143,208,.10)}
+    .repository-count{font-size:13px;color:#718096;white-space:nowrap}
+    .repository-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .repository-group-card{position:relative;overflow:hidden;border:1px solid #e0e8f1;border-radius:18px;background:#fff;min-height:210px;padding:22px;cursor:pointer;box-shadow:0 8px 24px rgba(24,55,91,.07);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+    .repository-group-card:hover{transform:translateY(-4px);box-shadow:0 15px 32px rgba(24,55,91,.12);border-color:#cbdbea}
+    .repository-group-card:before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--repo-accent,#2166b1)}
+    .repository-group-icon{width:54px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:var(--repo-soft,#edf4ff);color:var(--repo-accent,#2166b1);font-size:23px;margin-bottom:17px}
+    .repository-group-title{font-size:17px;font-weight:800;color:#18375b;line-height:1.35;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .repository-group-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:17px;color:#718096;font-size:12px}
+    .repository-group-meta strong{color:var(--repo-accent,#2166b1);font-size:13px}
+    .repository-group-open{font-weight:700;color:var(--repo-accent,#2166b1)}
+    .repository-group-empty{grid-column:1/-1;padding:48px 20px;text-align:center;border:1px dashed #ccd8e5;border-radius:16px;color:#718096;background:#fbfdff}
+    .repository-detail-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+    .repository-back-button{display:inline-flex;align-items:center;gap:8px;border:1px solid #d7e3ef;background:#fff;color:#2166b1;border-radius:10px;padding:9px 13px;font-weight:700;font-size:13px;cursor:pointer;transition:.2s}
+    .repository-back-button:hover{background:#edf4ff}
+    .repository-detail-title{flex:1;min-width:220px}
+    .repository-detail-title h3{margin:0;color:#18375b;font-size:20px;font-weight:800;line-height:1.35}
+    .repository-detail-title p{margin:4px 0 0;color:#718096;font-size:12px}
+    .repository-material-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .repository-material-card{position:relative;display:flex;flex-direction:column;border:1px solid #e0e8f1;border-radius:17px;background:#fff;overflow:hidden;box-shadow:0 7px 22px rgba(24,55,91,.06);transition:transform .22s ease,box-shadow .22s ease}
+    .repository-material-card:hover{transform:translateY(-3px);box-shadow:0 13px 28px rgba(24,55,91,.11)}
+    .repository-material-top{display:flex;align-items:flex-start;gap:12px;padding:20px 20px 14px}
+    .repository-file-icon{width:46px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:#edf4ff;color:#2166b1;font-size:21px;flex:0 0 auto}
+    .repository-material-title{font-size:15px;font-weight:800;color:#18375b;line-height:1.42;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;min-width:0}
+    .repository-pdf-badge{margin-left:auto;background:#ffe8ed;color:#d94a63;border-radius:7px;padding:4px 7px;font-size:10px;font-weight:800;flex:0 0 auto}
+    .repository-material-description{padding:0 20px;color:#718096;font-size:12px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:56px}
+    .repository-material-stats{display:flex;align-items:center;gap:18px;padding:14px 20px;color:#708198;font-size:11px;border-top:1px solid #edf1f5;margin-top:14px}
+    .repository-material-stat{display:inline-flex;align-items:center;gap:6px}
+    .repository-material-stat i{color:#6f89a5}
+    .repository-material-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 20px 19px;margin-top:auto}
+    .repository-material-action{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:9px;padding:10px 9px;font-size:12px;font-weight:800;text-decoration:none;cursor:pointer;border:1px solid #d7e4ef;transition:.2s}
+    .repository-material-action:hover{transform:translateY(-1px);filter:brightness(.98)}
+    .repository-material-action-open{background:#edf4ff;color:#2166b1}
+    .repository-material-action-download{background:#2166b1;color:#fff;border-color:#2166b1}
+    .repository-material-action-disabled{opacity:.5;cursor:not-allowed}
+    .repository-material-empty{grid-column:1/-1;padding:48px 20px;text-align:center;border:1px dashed #ccd8e5;border-radius:16px;color:#718096;background:#fbfdff}
+    .repository-pagination-note{margin-top:20px;color:#718096;font-size:12px}
+    @media(max-width:1100px){.repository-grid,.repository-material-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:720px){.repository-grid,.repository-material-grid{grid-template-columns:1fr}.repository-heading h2{font-size:21px}.repository-actions{width:100%}.repository-tools{align-items:stretch}.repository-count{width:100%}}
+
 </style>
 </head>
 
@@ -3361,85 +3415,55 @@
            REPOSITORY
       ================================= -->
 
-      <section
-        id="page-repository"
-        class="page-section"
-      >
-
+      <section id="page-repository" class="page-section">
         <div class="content-card">
-
-          <div class="content-card-header">
-
-            <div class="content-card-title">
-
-              <i
-                class="fa-solid fa-folder-open"
-                style="color:#d39410"
-              ></i>
-
-              Repositori Bahan Ajar
-
+          <div class="repository-intro">
+            <div class="repository-heading">
+              <div class="repository-heading-icon"><i class="fa-solid fa-folder-open"></i></div>
+              <div>
+                <h2>Repositori Bahan Ajar</h2>
+                <p>Pusat berbagi dan akses bahan pembelajaran Widyaiswara</p>
+              </div>
             </div>
-
-
-            <button
-              class="primary-button"
-              onclick="loadMaterials()"
-            >
-
-              <i class="fa-solid fa-rotate"></i>
-
-              Refresh
-
+            <button class="primary-button" onclick="loadMaterials()" type="button">
+              <i class="fa-solid fa-rotate"></i> Refresh
             </button>
-
           </div>
 
-
-          <div style="overflow-x:auto">
-
-            <table class="data-table">
-
-              <thead>
-
-                <tr>
-
-                  <th>Judul</th>
-
-                  <th>Deskripsi</th>
-
-                  <th>File</th>
-
-                </tr>
-
-              </thead>
-
-              <tbody id="materialsTable">
-
-                <tr>
-
-                  <td colspan="3">
-
-                    Memuat bahan ajar...
-
-                  </td>
-
-                </tr>
-
-              </tbody>
-
-            </table>
-
+          <div id="repositoryGroupView">
+            <div class="repository-tools">
+              <div class="repository-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="repositoryGroupSearch" type="search" placeholder="Cari kelompok bahan ajar..." oninput="filterRepositoryGroups()" autocomplete="off">
+              </div>
+              <div id="repositoryGroupCount" class="repository-count">Memuat kelompok...</div>
+            </div>
+            <div id="materialsGroupGrid" class="repository-grid">
+              <div class="repository-group-empty"><i class="fa-solid fa-spinner fa-spin"></i> Memuat bahan ajar...</div>
+            </div>
           </div>
 
+          <div id="repositoryMaterialView" style="display:none">
+            <div class="repository-detail-head">
+              <button class="repository-back-button" type="button" onclick="showRepositoryGroups()">
+                <i class="fa-solid fa-arrow-left"></i> Kembali
+              </button>
+              <div class="repository-detail-title">
+                <h3 id="repositorySelectedGroup">Kelompok Bahan Ajar</h3>
+                <p id="repositorySelectedGroupMeta">Materi dalam kelompok</p>
+              </div>
+            </div>
+            <div class="repository-tools">
+              <div class="repository-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="repositoryMaterialSearch" type="search" placeholder="Cari materi bahan ajar..." oninput="filterRepositoryMaterials()" autocomplete="off">
+              </div>
+              <div id="repositoryMaterialCount" class="repository-count"></div>
+            </div>
+            <div id="materialsMaterialGrid" class="repository-material-grid"></div>
+          </div>
         </div>
-
       </section>
-
-
-      <!-- =================================
-           SHARING
-      ================================= -->
 
       <section
         id="page-sharing"
@@ -5269,143 +5293,205 @@ Silakan ajukan pertanyaan Anda.
 
 
   /* =========================================
-     MATERIALS
+     MATERIALS - REPOSITORY CARD VIEW
   ========================================= */
 
-  async function loadMaterials() {
+  let allRepositoryMaterials = [];
+  let repositoryGroups = [];
+  let selectedRepositoryGroup = "";
 
-    const table =
-      document.getElementById(
-        "materialsTable"
-      );
+  function getRepositoryMaterialTitle(item) {
+    return getFieldValue(item, ["Judul","judul","Title","Nama"]);
+  }
 
+  function getRepositoryMaterialDescription(item) {
+    return getFieldValue(item, ["Deskripsi","deskripsi","Description"]);
+  }
 
-    if (!table) {
+  function getRepositoryMaterialUrl(item) {
+    return getFieldValue(item, ["URL File","URL_File","File_URL","URL","Link"]);
+  }
+
+  function getRepositoryNumber(item, fields, fallback) {
+    const value = getFieldValue(item, fields);
+    const n = Number(String(value || "").replace(/[^0-9.-]/g, ""));
+    return Number.isFinite(n) && n >= 0 ? n : fallback;
+  }
+
+  function getRepositoryStorageKey(item, type) {
+    const title = getRepositoryMaterialTitle(item);
+    const url = getRepositoryMaterialUrl(item);
+    return "alli_repo_" + type + "_" + btoa(unescape(encodeURIComponent(title + "|" + url))).replace(/[^a-zA-Z0-9]/g, "").slice(0,100);
+  }
+
+  function getRepositoryCounter(item, type) {
+    const fields = type === "view"
+      ? ["Views","views","View","view","Jumlah_Dilihat","Jumlah Dilihat"]
+      : ["Downloads","downloads","Download","download","Jumlah_Download","Jumlah Download"];
+    const base = getRepositoryNumber(item, fields, 0);
+    let local = 0;
+    try { local = Number(localStorage.getItem(getRepositoryStorageKey(item, type)) || 0); } catch(e) {}
+    return base + (Number.isFinite(local) ? local : 0);
+  }
+
+  function repositoryAccent(index) {
+    const accents = [
+      ["#2166b1","#edf4ff"],
+      ["#159a78","#eaf9f4"],
+      ["#e18a12","#fff5e6"],
+      ["#7b4bd1","#f2edff"],
+      ["#d94a63","#fff0f3"],
+      ["#149aa8","#e9f9fb"]
+    ];
+    return accents[index % accents.length];
+  }
+
+  function repositoryGroupKey(value) {
+    return String(value || "").trim().replace(/\s+/g," ").toLowerCase();
+  }
+
+  function buildRepositoryGroups() {
+    const map = {};
+    allRepositoryMaterials.forEach(function(item) {
+      const description = getRepositoryMaterialDescription(item).trim() || "Bahan Ajar Lainnya";
+      const key = repositoryGroupKey(description);
+      if (!map[key]) map[key] = {name: description, materials: []};
+      map[key].materials.push(item);
+    });
+    repositoryGroups = Object.keys(map).map(function(key){ return map[key]; });
+    repositoryGroups.sort(function(a,b){ return a.name.localeCompare(b.name,"id"); });
+  }
+
+  function renderRepositoryGroups(groups) {
+    const grid = document.getElementById("materialsGroupGrid");
+    const count = document.getElementById("repositoryGroupCount");
+    if (!grid) return;
+    if (!groups.length) {
+      grid.innerHTML = '<div class="repository-group-empty"><i class="fa-solid fa-folder-open"></i><br><br>Tidak ada kelompok bahan ajar yang sesuai.</div>';
+      if (count) count.textContent = "0 kelompok";
       return;
     }
+    if (count) count.textContent = groups.length + " kelompok";
+    grid.innerHTML = groups.map(function(group,index) {
+      const accent = repositoryAccent(index);
+      return '<div class="repository-group-card" style="--repo-accent:'+accent[0]+';--repo-soft:'+accent[1]+'" role="button" tabindex="0" onclick="openRepositoryGroup('+JSON.stringify(group.name).replace(/</g,"\\u003c")+')" onkeydown="if(event.key===\'Enter\' || event.key===\' \'){openRepositoryGroup('+JSON.stringify(group.name).replace(/</g,"\\u003c")+');}">' +
+        '<div class="repository-group-icon"><i class="fa-solid fa-layer-group"></i></div>' +
+        '<div class="repository-group-title">'+escapeHtml(group.name)+'</div>' +
+        '<div class="repository-group-meta"><span><strong>'+group.materials.length+'</strong> materi</span><span class="repository-group-open">Lihat Materi <i class="fa-solid fa-arrow-right"></i></span></div>' +
+      '</div>';
+    }).join("");
+  }
 
+  function filterRepositoryGroups() {
+    const input = document.getElementById("repositoryGroupSearch");
+    const q = String(input ? input.value : "").trim().toLowerCase();
+    const filtered = repositoryGroups.filter(function(group){ return group.name.toLowerCase().includes(q); });
+    renderRepositoryGroups(filtered);
+  }
 
-    try {
+  function openRepositoryGroup(groupName) {
+    selectedRepositoryGroup = groupName;
+    const group = repositoryGroups.find(function(g){ return g.name === groupName; });
+    if (!group) return;
+    const groupView = document.getElementById("repositoryGroupView");
+    const materialView = document.getElementById("repositoryMaterialView");
+    if (groupView) groupView.style.display = "none";
+    if (materialView) materialView.style.display = "block";
+    const title = document.getElementById("repositorySelectedGroup");
+    const meta = document.getElementById("repositorySelectedGroupMeta");
+    if (title) title.textContent = group.name;
+    if (meta) meta.textContent = group.materials.length + " materi bahan ajar dalam kelompok ini";
+    const search = document.getElementById("repositoryMaterialSearch");
+    if (search) search.value = "";
+    renderRepositoryMaterials(group.materials);
+  }
 
-      const result =
-        await apiGet(
-          "getMaterials"
-        );
+  function showRepositoryGroups() {
+    selectedRepositoryGroup = "";
+    const groupView = document.getElementById("repositoryGroupView");
+    const materialView = document.getElementById("repositoryMaterialView");
+    if (groupView) groupView.style.display = "block";
+    if (materialView) materialView.style.display = "none";
+    filterRepositoryGroups();
+  }
 
-
-      const materials =
-        result.data || [];
-
-
-      if (
-        materials.length === 0
-      ) {
-
-        table.innerHTML =
-          `
-            <tr>
-              <td colspan="3">
-                Belum ada bahan ajar.
-              </td>
-            </tr>
-          `;
-
-        return;
-
-      }
-
-
-      table.innerHTML =
-        materials
-          .map(
-            function(item) {
-
-              const title =
-                getFieldValue(
-                  item,
-                  [
-                    "Judul",
-                    "judul",
-                    "Title",
-                    "Nama"
-                  ]
-                );
-
-
-              const description =
-                getFieldValue(
-                  item,
-                  [
-                    "Deskripsi",
-                    "deskripsi",
-                    "Description"
-                  ]
-                );
-
-
-              const url =
-                getFieldValue(
-                  item,
-                  [
-                    "URL File",
-                    "URL_File",
-                    "File_URL",
-                    "URL",
-                    "Link"
-                  ]
-                );
-
-
-              return `
-                <tr>
-
-                  <td>
-                    ${escapeHtml(title)}
-                  </td>
-
-                  <td>
-                    ${escapeHtml(description)}
-                  </td>
-
-                  <td>
-
-                    ${
-                      url
-                        ?
-                        `<a
-                          href="${escapeAttribute(url)}"
-                          target="_blank"
-                        >
-                          <i class="fa-solid fa-file"></i>
-                          Buka
-                        </a>`
-                        :
-                        "-"
-                    }
-
-                  </td>
-
-                </tr>
-              `;
-
-            }
-          )
-          .join("");
-
-
-    } catch (error) {
-
-      table.innerHTML =
-        `
-          <tr>
-            <td colspan="3">
-              Gagal memuat bahan ajar.
-            </td>
-          </tr>
-        `;
-
+  function renderRepositoryMaterials(materials) {
+    const grid = document.getElementById("materialsMaterialGrid");
+    const count = document.getElementById("repositoryMaterialCount");
+    if (!grid) return;
+    if (count) count.textContent = materials.length + " materi";
+    if (!materials.length) {
+      grid.innerHTML = '<div class="repository-material-empty"><i class="fa-solid fa-file-circle-xmark"></i><br><br>Tidak ada materi yang sesuai.</div>';
+      return;
     }
+    grid.innerHTML = materials.map(function(item) {
+      const title = getRepositoryMaterialTitle(item) || "Materi tanpa judul";
+      const description = getRepositoryMaterialDescription(item);
+      const url = getRepositoryMaterialUrl(item);
+      const views = getRepositoryCounter(item,"view");
+      const downloads = getRepositoryCounter(item,"download");
+      const safeUrl = escapeAttribute(url);
+      const disabled = !url;
+      return '<div class="repository-material-card">' +
+        '<div class="repository-material-top">' +
+          '<div class="repository-file-icon"><i class="fa-solid fa-file-pdf"></i></div>' +
+          '<div class="repository-material-title">'+escapeHtml(title)+'</div>' +
+          '<span class="repository-pdf-badge">PDF</span>' +
+        '</div>' +
+        '<div class="repository-material-description">'+escapeHtml(description || "Bahan ajar Widyaiswara")+'</div>' +
+        '<div class="repository-material-stats">' +
+          '<span class="repository-material-stat"><i class="fa-regular fa-eye"></i> '+views+' dilihat</span>' +
+          '<span class="repository-material-stat"><i class="fa-solid fa-download"></i> '+downloads+' download</span>' +
+        '</div>' +
+        '<div class="repository-material-actions">' +
+          (url ? '<a class="repository-material-action repository-material-action-open" href="'+safeUrl+'" target="_blank" rel="noopener noreferrer" onclick="registerRepositoryView('+JSON.stringify(title)+')"><i class="fa-solid fa-eye"></i> Buka</a>' : '<span class="repository-material-action repository-material-action-open repository-material-action-disabled"><i class="fa-solid fa-eye-slash"></i> Tidak tersedia</span>') +
+          (url ? '<a class="repository-material-action repository-material-action-download" href="'+safeUrl+'" download onclick="registerRepositoryDownload('+JSON.stringify(title)+')"><i class="fa-solid fa-download"></i> Download</a>' : '<span class="repository-material-action repository-material-action-download repository-material-action-disabled"><i class="fa-solid fa-ban"></i> Tidak tersedia</span>') +
+        '</div>' +
+      '</div>';
+    }).join("");
+  }
 
+  function filterRepositoryMaterials() {
+    const input = document.getElementById("repositoryMaterialSearch");
+    const q = String(input ? input.value : "").trim().toLowerCase();
+    const group = repositoryGroups.find(function(g){ return g.name === selectedRepositoryGroup; });
+    if (!group) return;
+    const filtered = group.materials.filter(function(item){
+      const title = getRepositoryMaterialTitle(item).toLowerCase();
+      return title.includes(q);
+    });
+    renderRepositoryMaterials(filtered);
+  }
+
+  function registerRepositoryView(title) {
+    const item = allRepositoryMaterials.find(function(m){ return getRepositoryMaterialTitle(m) === title && getRepositoryMaterialDescription(m) === selectedRepositoryGroup; });
+    if (!item) return;
+    const key = getRepositoryStorageKey(item,"view");
+    try { localStorage.setItem(key, String(Number(localStorage.getItem(key) || 0) + 1)); } catch(e) {}
+    setTimeout(function(){ filterRepositoryMaterials(); }, 50);
+  }
+
+  function registerRepositoryDownload(title) {
+    const item = allRepositoryMaterials.find(function(m){ return getRepositoryMaterialTitle(m) === title && getRepositoryMaterialDescription(m) === selectedRepositoryGroup; });
+    if (!item) return;
+    const key = getRepositoryStorageKey(item,"download");
+    try { localStorage.setItem(key, String(Number(localStorage.getItem(key) || 0) + 1)); } catch(e) {}
+    setTimeout(function(){ filterRepositoryMaterials(); }, 50);
+  }
+
+  async function loadMaterials() {
+    const grid = document.getElementById("materialsGroupGrid");
+    if (!grid) return;
+    try {
+      grid.innerHTML = '<div class="repository-group-empty"><i class="fa-solid fa-spinner fa-spin"></i> Memuat bahan ajar...</div>';
+      const result = await apiGet("getMaterials");
+      allRepositoryMaterials = result.data || [];
+      buildRepositoryGroups();
+      showRepositoryGroups();
+    } catch (error) {
+      console.error("Gagal memuat repository bahan ajar:", error);
+      grid.innerHTML = '<div class="repository-group-empty"><i class="fa-solid fa-triangle-exclamation"></i><br><br>Gagal memuat bahan ajar. Silakan coba Refresh.</div>';
+    }
   }
 
 
