@@ -2563,7 +2563,7 @@
     .repository-heading h2{margin:0;color:#18375b;font-size:25px;font-weight:800}
     .repository-heading p{margin:4px 0 0;color:#718096;font-size:13px}
     
-    .repository-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:4px 0 22px}
+    .repository-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 20px}
     .repository-summary-card{position:relative;display:flex;align-items:center;gap:14px;min-height:92px;padding:17px 19px;border:1px solid #e1e8f1;border-radius:16px;background:#fff;box-shadow:0 7px 20px rgba(24,55,91,.055);overflow:hidden}
     .repository-summary-card:after{content:"";position:absolute;right:-22px;bottom:-28px;width:92px;height:92px;border-radius:50%;background:var(--summary-soft,#edf4ff);opacity:.7}
     .repository-summary-icon{position:relative;z-index:1;width:48px;height:48px;flex:0 0 48px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:var(--summary-soft,#edf4ff);color:var(--summary-accent,#2166b1);font-size:21px}
@@ -3427,6 +3427,32 @@
       ================================= -->
 
       <section id="page-repository" class="page-section">
+          <div id="repositorySummary" class="repository-summary">
+            <div class="repository-summary-card" style="--summary-accent:#2166b1;--summary-soft:#edf4ff">
+              <div class="repository-summary-icon"><i class="fa-solid fa-book-open"></i></div>
+              <div class="repository-summary-text">
+                <div class="repository-summary-label">Total Bahan Ajar</div>
+                <div id="repositoryTotalMaterials" class="repository-summary-value">—</div>
+                <div class="repository-summary-sub">Materi tersedia</div>
+              </div>
+            </div>
+            <div class="repository-summary-card" style="--summary-accent:#159a78;--summary-soft:#eaf9f4">
+              <div class="repository-summary-icon"><i class="fa-solid fa-layer-group"></i></div>
+              <div class="repository-summary-text">
+                <div class="repository-summary-label">Jumlah Kelompok Materi</div>
+                <div id="repositoryTotalGroups" class="repository-summary-value">—</div>
+                <div class="repository-summary-sub">Kelompok berdasarkan Deskripsi</div>
+              </div>
+            </div>
+            <div class="repository-summary-card" style="--summary-accent:#7b4bd1;--summary-soft:#f2edff">
+              <div class="repository-summary-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+              <div class="repository-summary-text">
+                <div class="repository-summary-label">Terakhir Diperbarui</div>
+                <div id="repositoryLastUpdated" class="repository-summary-value">—</div>
+                <div class="repository-summary-sub">Data repository terbaru</div>
+              </div>
+            </div>
+          </div>
         <div class="content-card">
           <div class="repository-intro">
             <div class="repository-heading">
@@ -3442,32 +3468,6 @@
           </div>
 
           <div id="repositoryGroupView">
-            <div id="repositorySummary" class="repository-summary">
-              <div class="repository-summary-card" style="--summary-accent:#2166b1;--summary-soft:#edf4ff">
-                <div class="repository-summary-icon"><i class="fa-solid fa-book-open"></i></div>
-                <div class="repository-summary-text">
-                  <div class="repository-summary-label">Total Bahan Ajar</div>
-                  <div id="repositoryTotalMaterials" class="repository-summary-value">—</div>
-                  <div class="repository-summary-sub">Materi tersedia</div>
-                </div>
-              </div>
-              <div class="repository-summary-card" style="--summary-accent:#159a78;--summary-soft:#eaf9f4">
-                <div class="repository-summary-icon"><i class="fa-solid fa-layer-group"></i></div>
-                <div class="repository-summary-text">
-                  <div class="repository-summary-label">Jumlah Kelompok Materi</div>
-                  <div id="repositoryTotalGroups" class="repository-summary-value">—</div>
-                  <div class="repository-summary-sub">Kelompok berdasarkan Deskripsi</div>
-                </div>
-              </div>
-              <div class="repository-summary-card" style="--summary-accent:#7b4bd1;--summary-soft:#f2edff">
-                <div class="repository-summary-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
-                <div class="repository-summary-text">
-                  <div class="repository-summary-label">Terakhir Diperbarui</div>
-                  <div id="repositoryLastUpdated" class="repository-summary-value">—</div>
-                  <div class="repository-summary-sub">Data repository terbaru</div>
-                </div>
-              </div>
-            </div>
             <div class="repository-tools">
               <div class="repository-search">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -5479,8 +5479,10 @@ Silakan ajukan pertanyaan Anda.
     if (!group) return;
     const groupView = document.getElementById("repositoryGroupView");
     const materialView = document.getElementById("repositoryMaterialView");
+    const summary = document.getElementById("repositorySummary");
     if (groupView) groupView.style.display = "none";
     if (materialView) materialView.style.display = "block";
+    if (summary) summary.style.display = "none";
     const title = document.getElementById("repositorySelectedGroup");
     const meta = document.getElementById("repositorySelectedGroupMeta");
     if (title) title.textContent = group.name;
@@ -5494,8 +5496,10 @@ Silakan ajukan pertanyaan Anda.
     selectedRepositoryGroup = "";
     const groupView = document.getElementById("repositoryGroupView");
     const materialView = document.getElementById("repositoryMaterialView");
+    const summary = document.getElementById("repositorySummary");
     if (groupView) groupView.style.display = "block";
     if (materialView) materialView.style.display = "none";
+    if (summary) summary.style.display = "grid";
     filterRepositoryGroups();
   }
 
