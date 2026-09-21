@@ -2635,7 +2635,15 @@
     .repository-material-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
     .repository-material-card{position:relative;display:flex;flex-direction:column;border:1px solid #d8eee1;border-radius:17px;background:#f3fbf6;overflow:hidden;box-shadow:0 7px 22px rgba(24,55,91,.06);transition:transform .22s ease,box-shadow .22s ease}
     .repository-material-card:hover{transform:translateY(-3px);box-shadow:0 13px 28px rgba(24,55,91,.11);border-color:#c7e5d3}
-    .repository-material-top{display:flex;align-items:flex-start;gap:12px;padding:20px 20px 14px}
+    .repository-material-highlight{position:relative;width:100%;height:150px;background:linear-gradient(135deg,#eaf4ff,#f3fbf6);overflow:hidden;border-bottom:1px solid #dcebe2}
+    .repository-material-highlight img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .3s ease}
+    .repository-material-card:hover .repository-material-highlight img{transform:scale(1.035)}
+    .repository-material-highlight:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,39,71,0) 48%,rgba(12,39,71,.18) 100%);pointer-events:none}
+    .repository-material-highlight-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:#2166b1;background:linear-gradient(135deg,#edf5ff,#f4fbf6)}
+    .repository-material-highlight-fallback i{font-size:34px}
+    .repository-material-highlight-fallback span{font-size:10px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:#718096}
+    .repository-material-highlight-badge{position:absolute;left:12px;bottom:10px;z-index:2;padding:5px 8px;border-radius:8px;background:rgba(255,255,255,.92);color:#2166b1;font-size:10px;font-weight:800;box-shadow:0 4px 10px rgba(24,55,91,.10)}
+    .repository-material-top{display:flex;align-items:flex-start;gap:12px;padding:18px 20px 14px}
     .repository-file-icon{width:46px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:#edf4ff;color:#2166b1;font-size:21px;flex:0 0 auto}
     .repository-material-title{font-size:15px;font-weight:800;color:#18375b;line-height:1.42;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;min-width:0}
     .repository-pdf-badge{margin-left:auto;background:#ffe8ed;color:#d94a63;border-radius:7px;padding:4px 7px;font-size:10px;font-weight:800;flex:0 0 auto}
@@ -5386,6 +5394,26 @@ Silakan ajukan pertanyaan Anda.
     return getFieldValue(item, ["URL File","URL_File","File_URL","URL","Link"]);
   }
 
+  function getRepositoryHighlightUrl(url) {
+    const raw = String(url || "").trim();
+    if (!raw) return "";
+    if (/^data:image\//i.test(raw)) return raw;
+    if (/\.(?:png|jpe?g|webp|gif|svg)(?:[?#].*)?$/i.test(raw)) return raw;
+    try {
+      const normalized = /^https?:\/\//i.test(raw) ? raw : "https://" + raw;
+      return "https://image.thum.io/get/width/1200/crop/650/noanimate/" + normalized;
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function handleRepositoryHighlightError(img) {
+    if (!img) return;
+    img.style.display = "none";
+    const fallback = img.parentElement ? img.parentElement.querySelector(".repository-material-highlight-fallback") : null;
+    if (fallback) fallback.style.display = "flex";
+  }
+
   function getRepositoryNumber(item, fields, fallback) {
     const value = getFieldValue(item, fields);
     const n = Number(String(value || "").replace(/[^0-9.-]/g, ""));
@@ -5556,8 +5584,17 @@ Silakan ajukan pertanyaan Anda.
       const views = getRepositoryCounter(item,"view");
       const downloads = getRepositoryCounter(item,"download");
       const safeUrl = escapeAttribute(url);
+      const highlightUrl = getRepositoryHighlightUrl(url);
+      const safeHighlightUrl = escapeAttribute(highlightUrl);
       const disabled = !url;
       return '<div class="repository-material-card">' +
+        '<div class="repository-material-highlight">' +
+          (highlightUrl
+            ? '<img src="'+safeHighlightUrl+'" alt="Highlight '+escapeAttribute(title)+'" loading="lazy" referrerpolicy="no-referrer" onerror="handleRepositoryHighlightError(this)">'
+            : '') +
+          '<div class="repository-material-highlight-fallback" style="display:'+(highlightUrl ? 'none' : 'flex')+'"><i class="fa-solid fa-file-lines"></i><span>Preview bahan ajar</span></div>' +
+          '<span class="repository-material-highlight-badge"><i class="fa-solid fa-link"></i> Link Bahan Ajar</span>' +
+        '</div>' +
         '<div class="repository-material-top">' +
           '<div class="repository-file-icon"><i class="fa-solid fa-file-pdf"></i></div>' +
           '<div class="repository-material-title">'+escapeHtml(title)+'</div>' +
