@@ -321,12 +321,16 @@
       align-items:
         center;
 
+      position:
+        relative;
+
       background:
         linear-gradient(
-          180deg,
-          #2e567b 0%,
-          #315f87 48%,
-          #294c6e 100%
+          135deg,
+          #061fae 0%,
+          #123ed1 42%,
+          #0a56e8 72%,
+          #0874f2 100%
         );
 
       color:
@@ -337,6 +341,79 @@
 
       overflow:
         hidden;
+
+      isolation:
+        isolate;
+
+    }
+
+
+    /* Decorative bubble / curved shapes inspired by the
+       Satu Data Perdagangan landing-page visual language. */
+
+    #landingPage::before {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      inset:
+        0;
+
+      z-index:
+        0;
+
+      pointer-events:
+        none;
+
+      background:
+        radial-gradient(circle at 8% 12%, rgba(255,255,255,.10) 0 105px, transparent 107px),
+        radial-gradient(circle at 93% 10%, rgba(35,151,255,.26) 0 190px, transparent 192px),
+        radial-gradient(circle at 82% 86%, rgba(0,31,166,.30) 0 250px, transparent 252px),
+        radial-gradient(circle at 17% 91%, rgba(0,34,166,.28) 0 190px, transparent 192px),
+        radial-gradient(circle at 55% 40%, rgba(255,255,255,.055) 0 145px, transparent 147px);
+
+    }
+
+
+    #landingPage::after {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        780px;
+
+      height:
+        780px;
+
+      right:
+        -300px;
+
+      bottom:
+        -420px;
+
+      border-radius:
+        50%;
+
+      border:
+        1px solid rgba(255,255,255,.16);
+
+      box-shadow:
+        0 0 0 55px rgba(255,255,255,.035),
+        0 0 0 115px rgba(255,255,255,.025),
+        0 0 0 180px rgba(255,255,255,.018);
+
+      z-index:
+        0;
+
+      pointer-events:
+        none;
 
     }
 
@@ -349,10 +426,23 @@
       width:
         100%;
 
+      position:
+        relative;
+
+      z-index:
+        2;
+
     }
 
 
     .landing-title {
+
+      position:
+        relative;
+
+      z-index:
+        2;
+
 
       font-size:
         clamp(42px, 5vw, 64px);
@@ -384,10 +474,11 @@
         center;
 
       background:
-        #f3f3f5;
+        linear-gradient(135deg, #8ee51f, #68c915);
 
       color:
-        #2d477e;
+        #ffffff;
+
 
       padding:
         6px 20px;
@@ -399,7 +490,10 @@
         16px;
 
       box-shadow:
-        0 8px 20px rgba(0,0,0,.12);
+        0 10px 25px rgba(62,126,7,.28);
+
+      border:
+        1px solid rgba(255,255,255,.28);
 
     }
 
@@ -442,17 +536,16 @@
         30px;
 
       background:
-        linear-gradient(
-          90deg,
-          rgba(46,83,153,.9),
-          rgba(39,56,111,.9)
-        );
+        linear-gradient(135deg, #8ee51f, #68c915);
 
       border:
-        1px solid rgba(255,255,255,.2);
+        1px solid rgba(255,255,255,.30);
 
       color:
-        #e9eef7;
+        #ffffff;
+
+      box-shadow:
+        0 10px 24px rgba(62,126,7,.24);
 
       font-size:
         15px;
@@ -468,6 +561,12 @@
 
       flex:
         1;
+
+      position:
+        relative;
+
+      z-index:
+        2;
 
       width:
         100%;
