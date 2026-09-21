@@ -309,6 +309,12 @@
 
     #landingPage {
 
+      position:
+        relative;
+
+      isolation:
+        isolate;
+
       min-height:
         100vh;
 
@@ -321,17 +327,13 @@
       align-items:
         center;
 
-      position:
-        relative;
-
       background:
-        linear-gradient(
-          135deg,
-          #061fae 0%,
-          #123ed1 42%,
-          #0a56e8 72%,
-          #0874f2 100%
-        );
+        radial-gradient(circle at 12% 18%, rgba(67,145,255,.72) 0 6%, transparent 6.4%),
+        radial-gradient(circle at 88% 14%, rgba(52,128,255,.55) 0 10%, transparent 10.4%),
+        radial-gradient(circle at 78% 78%, rgba(0,73,205,.46) 0 15%, transparent 15.5%),
+        radial-gradient(circle at 20% 84%, rgba(31,117,239,.38) 0 12%, transparent 12.5%),
+        radial-gradient(circle at 50% 50%, rgba(46,139,255,.18) 0 24%, transparent 24.5%),
+        linear-gradient(145deg, #0736b2 0%, #124cc8 48%, #0759df 100%);
 
       color:
         white;
@@ -342,83 +344,39 @@
       overflow:
         hidden;
 
-      isolation:
-        isolate;
-
     }
 
 
-    /* Decorative bubble / curved shapes inspired by the
-       Satu Data Perdagangan landing-page visual language. */
+    #landingPage::before,
+    #landingPage::after {
+      content:"";
+      position:absolute;
+      inset:-8%;
+      pointer-events:none;
+      z-index:0;
+    }
 
     #landingPage::before {
-
-      content:
-        "";
-
-      position:
-        absolute;
-
-      inset:
-        0;
-
-      z-index:
-        0;
-
-      pointer-events:
-        none;
-
       background:
-        radial-gradient(circle at 8% 12%, rgba(255,255,255,.10) 0 105px, transparent 107px),
-        radial-gradient(circle at 93% 10%, rgba(35,151,255,.26) 0 190px, transparent 192px),
-        radial-gradient(circle at 82% 86%, rgba(0,31,166,.30) 0 250px, transparent 252px),
-        radial-gradient(circle at 17% 91%, rgba(0,34,166,.28) 0 190px, transparent 192px),
-        radial-gradient(circle at 55% 40%, rgba(255,255,255,.055) 0 145px, transparent 147px);
-
+        radial-gradient(circle at 8% 30%, rgba(255,255,255,.10) 0 7%, transparent 7.5%),
+        radial-gradient(circle at 93% 42%, rgba(255,255,255,.09) 0 9%, transparent 9.5%),
+        radial-gradient(circle at 38% 95%, rgba(255,255,255,.07) 0 8%, transparent 8.5%),
+        radial-gradient(circle at 62% 7%, rgba(255,255,255,.06) 0 6%, transparent 6.5%);
+      filter:blur(1px);
     }
-
 
     #landingPage::after {
-
-      content:
-        "";
-
-      position:
-        absolute;
-
-      width:
-        780px;
-
-      height:
-        780px;
-
-      right:
-        -300px;
-
-      bottom:
-        -420px;
-
-      border-radius:
-        50%;
-
-      border:
-        1px solid rgba(255,255,255,.16);
-
-      box-shadow:
-        0 0 0 55px rgba(255,255,255,.035),
-        0 0 0 115px rgba(255,255,255,.025),
-        0 0 0 180px rgba(255,255,255,.018);
-
-      z-index:
-        0;
-
-      pointer-events:
-        none;
-
+      background:
+        radial-gradient(circle at 18% 52%, rgba(255,255,255,.12) 0 2.2%, transparent 2.5%),
+        radial-gradient(circle at 83% 67%, rgba(255,255,255,.10) 0 2.8%, transparent 3.1%),
+        radial-gradient(circle at 69% 25%, rgba(255,255,255,.09) 0 1.7%, transparent 2%),
+        radial-gradient(circle at 31% 13%, rgba(255,255,255,.08) 0 2%, transparent 2.3%);
     }
 
-
     .landing-header {
+
+      position:relative;
+      z-index:2;
 
       text-align:
         center;
@@ -426,23 +384,10 @@
       width:
         100%;
 
-      position:
-        relative;
-
-      z-index:
-        2;
-
     }
 
 
     .landing-title {
-
-      position:
-        relative;
-
-      z-index:
-        2;
-
 
       font-size:
         clamp(42px, 5vw, 64px);
@@ -474,11 +419,10 @@
         center;
 
       background:
-        linear-gradient(135deg, #8ee51f, #68c915);
+        #69d42f;
 
       color:
         #ffffff;
-
 
       padding:
         6px 20px;
@@ -490,10 +434,7 @@
         16px;
 
       box-shadow:
-        0 10px 25px rgba(62,126,7,.28);
-
-      border:
-        1px solid rgba(255,255,255,.28);
+        0 8px 20px rgba(0,0,0,.12);
 
     }
 
@@ -536,16 +477,16 @@
         30px;
 
       background:
-        linear-gradient(135deg, #8ee51f, #68c915);
+        linear-gradient(90deg, #69d42f, #58c923);
 
       border:
-        1px solid rgba(255,255,255,.30);
+        1px solid rgba(255,255,255,.35);
 
       color:
         #ffffff;
 
-      box-shadow:
-        0 10px 24px rgba(62,126,7,.24);
+      font-weight:
+        800;
 
       font-size:
         15px;
@@ -559,14 +500,11 @@
 
     .landing-main {
 
+      position:relative;
+      z-index:2;
+
       flex:
         1;
-
-      position:
-        relative;
-
-      z-index:
-        2;
 
       width:
         100%;
